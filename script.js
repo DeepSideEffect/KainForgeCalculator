@@ -22,28 +22,47 @@ class Objet {
 
 function calculerCoutCaracteristique(actuel, souhaite, caracteristiques) {
     if (actuel.nom === souhaite.nom) {
-        return 0;
+        return { coutPE: 0, nbMvts: 0 };
     }
 
-    let cout = 0;
-    let indexActuel = caracteristiques.findIndex(c => c.nom === actuel.nom);
-    let indexSouhaite = caracteristiques.findIndex(c => c.nom === souhaite.nom);
+    const indexActuel = caracteristiques.findIndex(c => c.nom === actuel.nom);
+    const indexSouhaite = caracteristiques.findIndex(c => c.nom === souhaite.nom);
 
-    for (let i = indexActuel + 1; i <= indexSouhaite; i++) {
-        cout += caracteristiques[i].pe;
+    let nbMvts = 0;
+    let coutPE = 0;
+
+    if (indexActuel < indexSouhaite) {
+        for (let i = indexActuel + 1; i <= indexSouhaite; i++) {
+            coutPE += caracteristiques[i].pe;
+            nbMvts++;
+        }
+    } else {
+        for (let i = indexActuel - 1; i >= indexSouhaite; i--) {
+            coutPE += caracteristiques[i].pe;
+            nbMvts++;
+        }
     }
 
-    return cout;
+    return { coutPE, nbMvts };
 }
 
 function calculerCoutTotal(objetActuel, objetSouhaite, caracteristiquesSupport, caracteristiquesPrefixe, caracteristiquesSuffixe) {
-    let coutTotal = 0;
+    let coutTotalPE = 0;
+    let conbMvtsTotal = 0;
 
-    coutTotal += calculerCoutCaracteristique(objetActuel.support, objetSouhaite.support, caracteristiquesSupport);
-    coutTotal += calculerCoutCaracteristique(objetActuel.prefixe, objetSouhaite.prefixe, caracteristiquesPrefixe);
-    coutTotal += calculerCoutCaracteristique(objetActuel.suffixe, objetSouhaite.suffixe, caracteristiquesSuffixe);
+	const resultatSupport = calculerCoutCaracteristique(objetActuel.support, objetSouhaite.support, caracteristiquesSupport);
+	const resultatPrefixe = calculerCoutCaracteristique(objetActuel.prefixe, objetSouhaite.prefixe, caracteristiquesPrefixe);
+	const resultatSuffixe = calculerCoutCaracteristique(objetActuel.suffixe, objetSouhaite.suffixe, caracteristiquesSuffixe);
 
-    return coutTotal;
+    coutTotalPE += resultatSupport.coutPE;
+    coutTotalPE += resultatPrefixe.coutPE;
+    coutTotalPE += resultatSuffixe.coutPE;
+
+	conbMvtsTotal += resultatSupport.nbMvts;
+	conbMvtsTotal += resultatPrefixe.nbMvts;
+	conbMvtsTotal += resultatSuffixe.nbMvts;
+
+    return { coutTotalPE, conbMvtsTotal };
 }
 
 //#endregion Logique
@@ -118,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const objetSouhaite = new Objet(type, caracteristiques[type].support[supportSouhaite], caracteristiques[type].prefixe[prefixeSouhaite], caracteristiques[type].suffixe[suffixeSouhaite]);
 
         const coutTotal = calculerCoutTotal(objetActuel, objetSouhaite, caracteristiques[type].support, caracteristiques[type].prefixe, caracteristiques[type].suffixe);
-        document.getElementById("resultat").textContent = `Le coût total en points d'évolution (PE) pour modifier l'objet est de : ${coutTotal}`;
+        document.getElementById("resultat").textContent = `Pour modifier l'objet, le coût total en points d'évolution est de ${coutTotal.coutTotalPE} (PE) et ${coutTotal.conbMvtsTotal} runes.`;
     });
 });
 
