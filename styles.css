@@ -6,3 +6,20 @@
     display: inline-block;
     margin-right: 20px;
 }
+
+h1.title {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+#version {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    font-style: italic;
+    font-size: small;
+}
+
+button#calculer {
+    margin-left: 45%;
+}
