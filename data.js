@@ -70,8 +70,62 @@ const casqueCaracteristiques = {
 };
 //#endregion Les casques
 
-// Les armures
-// Les armures
+//#region Les armures
+const armureCaracteristiques = {
+	support: [
+		new Caracteristique("T-shirt", 15),
+		new Caracteristique("Veste", 15),
+		new Caracteristique("Veston", 30),
+		new Caracteristique("Gilet", 30),
+		new Caracteristique("Corset", 45),
+		new Caracteristique("Smoking", 45),
+		new Caracteristique("Haubert", 45),
+		new Caracteristique("Cape", 60),
+		new Caracteristique("Armure En Plate", 60),
+		new Caracteristique("Pleine Armure", 75)
+	],
+	prefixe: [
+		new Caracteristique("Renforcé", 15),
+		new Caracteristique("Dominateur", 15),
+		new Caracteristique("Clouté", 15),
+		new Caracteristique("Léger", 30),
+		new Caracteristique("Pare-balles", 30),
+		new Caracteristique("Écailleux", 30),
+		new Caracteristique("Flexible", 45),
+		new Caracteristique("En Plate", 45),
+		new Caracteristique("Chamaniste", 45),
+		new Caracteristique("Chasseur", 60),
+		new Caracteristique("Elfe", 60),
+		new Caracteristique("Guerrier", 60),
+		new Caracteristique("Tigre", 75),
+		new Caracteristique("Mortel", 75),
+		new Caracteristique("Sanglant", 75),
+		new Caracteristique("Runique", 75)
+	],
+	suffixe: [
+		new Caracteristique("Du Toxicomane", 15),
+		new Caracteristique("Du Voleur", 15),
+		new Caracteristique("Du Garde", 15),
+		new Caracteristique("De L'Athlète", 15),
+		new Caracteristique("Du Gardien", 30),
+		new Caracteristique("De L'Adepte", 30),
+		new Caracteristique("De L'Adrénaline", 30),
+		new Caracteristique("De Carapace De Tortue", 30),
+		new Caracteristique("Du Tueur", 45),
+		new Caracteristique("Du Cobra", 45),
+		new Caracteristique("D'Esquive", 45),
+		new Caracteristique("Du Centurion", 45),
+		new Caracteristique("Du Maître D'Épée", 45),
+		new Caracteristique("De Caligula", 60),
+		new Caracteristique("De La Résistance", 60),
+		new Caracteristique("Du Pillard", 60),
+		new Caracteristique("Du Maître", 60),
+		new Caracteristique("De L'Orchidée", 75),
+		new Caracteristique("Du Semeur De La Mort", 75),
+		new Caracteristique("De La Vitesse", 75)
+	]
+};
+//#endregion Les armures
 
 // Les pantalons
 // Les pantalons
@@ -100,5 +154,6 @@ const casqueCaracteristiques = {
 // Forge de Kain
 const caracteristiques = {
     1: casqueCaracteristiques,
+	2: armureCaracteristiques,
     // TODO: Ajoute les caractéristiques pour les autres types d'objets ici
 };
