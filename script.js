@@ -48,7 +48,7 @@ function calculerCoutCaracteristique(actuel, souhaite, caracteristiques) {
 
 function calculerCoutTotal(objetActuel, objetSouhaite, caracteristiquesSupport, caracteristiquesPrefixe, caracteristiquesSuffixe) {
     let coutTotalPE = 0;
-    let conbMvtsTotal = 0;
+    let nbMvtsTotal = 0;
 
 	const resultatSupport = calculerCoutCaracteristique(objetActuel.support, objetSouhaite.support, caracteristiquesSupport);
 	const resultatPrefixe = calculerCoutCaracteristique(objetActuel.prefixe, objetSouhaite.prefixe, caracteristiquesPrefixe);
@@ -58,11 +58,11 @@ function calculerCoutTotal(objetActuel, objetSouhaite, caracteristiquesSupport, 
     coutTotalPE += resultatPrefixe.coutPE;
     coutTotalPE += resultatSuffixe.coutPE;
 
-	conbMvtsTotal += resultatSupport.nbMvts;
-	conbMvtsTotal += resultatPrefixe.nbMvts;
-	conbMvtsTotal += resultatSuffixe.nbMvts;
+	nbMvtsTotal += resultatSupport.nbMvts;
+	nbMvtsTotal += resultatPrefixe.nbMvts;
+	nbMvtsTotal += resultatSuffixe.nbMvts;
 
-    return { coutTotalPE, conbMvtsTotal };
+    return { coutTotalPE, nbMvtsTotal };
 }
 
 //#endregion Logique
@@ -137,7 +137,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const objetSouhaite = new Objet(type, caracteristiques[type].support[supportSouhaite], caracteristiques[type].prefixe[prefixeSouhaite], caracteristiques[type].suffixe[suffixeSouhaite]);
 
         const coutTotal = calculerCoutTotal(objetActuel, objetSouhaite, caracteristiques[type].support, caracteristiques[type].prefixe, caracteristiques[type].suffixe);
-        document.getElementById("resultat").textContent = `Pour modifier l'objet, le coût total en points d'évolution est de ${coutTotal.coutTotalPE} (PE) et ${coutTotal.conbMvtsTotal} runes.`;
+		const coutEnPiecesEpiques = coutTotal.nbMvtsTotal * typesObjets[type].piecesEpiques;
+		const nbRunes = coutTotal.nbMvtsTotal * typesObjets[type].nbRunes;
+		const libelleRunes = typesObjets[type].libelleRunes;
+		
+        document.getElementById("resultat").textContent = `Pour modifier l'objet, le coût total est de ${coutTotal.coutTotalPE} points d'évolution, ${coutEnPiecesEpiques} pièces épiques et ${nbRunes} rune${nbRunes > 1 ? 's' : ''} ${libelleRunes}.`;
+		document.getElementById("coutTotalPE").textContent = coutTotal.coutTotalPE;
+		document.getElementById("coutEnPiecesEpiques").textContent = coutEnPiecesEpiques;
+		document.getElementById("nbRunes").textContent = nbRunes;
+		document.getElementById("libelleRunes").textContent = "rune".concat(nbRunes > 1 ? 's' : '').concat(' ').concat(libelleRunes);
+		document.getElementById("libelleRunes").style.color = typesObjets[type].color;
+		document.getElementById("resultatV2").style.visibility = "visible";
     });
 });
 
