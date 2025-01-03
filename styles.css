@@ -24,6 +24,24 @@ h1.title {
 
 button#calculer {
     margin-left: calc(50% - 150px);
+    margin-bottom: 3rem;
     padding: 5px 50px;
     cursor: pointer;
+}
+
+span.numberResult {
+    font-weight: bold;
+}
+
+#resultat {
+    margin-bottom: 2rem;
+}
+
+#resultatV2 > span {
+    font-style: italic;
+    text-decoration: underline;
+}
+
+#resultatV2 {
+    visibility: collapse;
 }
