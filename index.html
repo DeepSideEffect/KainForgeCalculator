@@ -4,32 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculatrice de Points d'Évolution</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
     <script src="data.js" defer></script>
 </head>
 <body>
     <h1>Calculatrice de Points d'Évolution</h1>
     <form>
-        <label for="type">Type d'objet :</label>
-        <select id="type" name="type"></select><br><br>
+        <div class="form-group">
+            <label for="type">Type d'objet :</label>
+            <select id="type" name="type"></select>
+        </div>
+        <br>
 
-        <label for="supportActuel">Support actuel :</label>
-        <select id="supportActuel" name="supportActuel"></select><br><br>
+        <div class="form-group">
+            <div class="form-row">
+                <label for="supportActuel">Support actuel :</label>
+                <select id="supportActuel" name="supportActuel"></select>
+            </div>
+            <div class="form-row">
+                <label for="prefixeActuel">Préfixe actuel :</label>
+                <select id="prefixeActuel" name="prefixeActuel"></select>
+            </div>
+            <div class="form-row">
+                <label for="suffixeActuel">Suffixe actuel :</label>
+                <select id="suffixeActuel" name="suffixeActuel"></select>
+            </div>
+        </div>
+        <br>
 
-        <label for="prefixeActuel">Préfixe actuel :</label>
-        <select id="prefixeActuel" name="prefixeActuel"></select><br><br>
-
-        <label for="suffixeActuel">Suffixe actuel :</label>
-        <select id="suffixeActuel" name="suffixeActuel"></select><br><br>
-
-        <label for="supportSouhaite">Support souhaité :</label>
-        <select id="supportSouhaite" name="supportSouhaite"></select><br><br>
-
-        <label for="prefixeSouhaite">Préfixe souhaité :</label>
-        <select id="prefixeSouhaite" name="prefixeSouhaite"></select><br><br>
-
-        <label for="suffixeSouhaite">Suffixe souhaité :</label>
-        <select id="suffixeSouhaite" name="suffixeSouhaite"></select><br><br>
+        <div class="form-group">
+            <div class="form-row">
+                <label for="supportSouhaite">Support souhaité :</label>
+                <select id="supportSouhaite" name="supportSouhaite"></select>
+            </div>
+            <div class="form-row">
+                <label for="prefixeSouhaite">Préfixe souhaité :</label>
+                <select id="prefixeSouhaite" name="prefixeSouhaite"></select>
+            </div>
+            <div class="form-row">
+                <label for="suffixeSouhaite">Suffixe souhaité :</label>
+                <select id="suffixeSouhaite" name="suffixeSouhaite"></select>
+            </div>
+        </div>
+        <br>
 
         <button type="button" id="calculer">Calculer</button>
     </form>

@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
         typeSelect.appendChild(option);
     });
 
-    typeSelect.addEventListener("change", () => {
+    const updateCaracteristiques = () => {
         const typeId = typeSelect.value;
         const supportActuelSelect = document.getElementById("supportActuel");
         const prefixeActuelSelect = document.getElementById("prefixeActuel");
@@ -88,7 +88,12 @@ document.addEventListener("DOMContentLoaded", () => {
             suffixeActuelSelect.appendChild(option);
             suffixeSouhaiteSelect.appendChild(option.cloneNode(true));
         });
-    });
+    };
+
+    typeSelect.addEventListener("change", updateCaracteristiques);
+
+    // Déclencher l'événement change lors du chargement de la page
+    typeSelect.dispatchEvent(new Event("change"));
 
     document.getElementById("calculer").addEventListener("click", () => {
         const type = document.getElementById("type").value;
