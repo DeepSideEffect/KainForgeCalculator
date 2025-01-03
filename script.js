@@ -41,23 +41,13 @@ function calculerCoutTotal(objetActuel, objetSouhaite, caracteristiquesSupport, 
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const caracteristiquesSupport = [
-        new Caracteristique("Support1", 10),
-        new Caracteristique("Support2", 15),
-        new Caracteristique("Support3", 20)
-    ];
-
-    const caracteristiquesPrefixe = [
-        new Caracteristique("Prefixe1", 5),
-        new Caracteristique("Prefixe2", 8),
-        new Caracteristique("Prefixe3", 12)
-    ];
-
-    const caracteristiquesSuffixe = [
-        new Caracteristique("Suffixe1", 7),
-        new Caracteristique("Suffixe2", 12),
-        new Caracteristique("Suffixe3", 18)
-    ];
+    const typeSelect = document.getElementById("type");
+    typesObjets.forEach(type => {
+        const option = document.createElement("option");
+        option.value = type.id;
+        option.textContent = type.nom;
+        typeSelect.appendChild(option);
+    });
 
     document.getElementById("calculer").addEventListener("click", () => {
         const type = document.getElementById("type").value;
