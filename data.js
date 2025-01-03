@@ -15,19 +15,57 @@ const typesObjets = [
 // Les casques
 const casqueCaracteristiques = {
 	support: [
-		new Caracteristique("Support1", 10),
-		new Caracteristique("Support2", 15),
-		new Caracteristique("Support3", 20)
+		new Caracteristique("Casquette", 15),
+		new Caracteristique("Casque", 15),
+		new Caracteristique("Cagoule", 30),
+		new Caracteristique("Chapeau", 30),
+		new Caracteristique("Casque Militaire", 45),
+		new Caracteristique("Diadème", 45),
+		new Caracteristique("Fronteau", 60),
+		new Caracteristique("Bandana", 60),
+		new Caracteristique("Masque", 60),
+		new Caracteristique("Couronne", 75)
 	],
 	prefixe: [
-		new Caracteristique("Prefixe1", 5),
-		new Caracteristique("Prefixe2", 8),
-		new Caracteristique("Prefixe3", 12)
+		new Caracteristique("Chic", 15),
+		new Caracteristique("Endurci", 15),
+		new Caracteristique("Élégant", 15),
+		new Caracteristique("Serviable", 30),
+		new Caracteristique("Splendide", 30),
+		new Caracteristique("Renforcé", 30),
+		new Caracteristique("Magnétique", 30),
+		new Caracteristique("Cornu", 45),
+		new Caracteristique("Guerrier", 45),
+		new Caracteristique("Malicieux", 45),
+		new Caracteristique("Paresseux", 45),
+		new Caracteristique("Pare-balles", 45),
+		new Caracteristique("D'Assaut", 45),
+		new Caracteristique("Chamaniste", 60),
+		new Caracteristique("Runique", 60),
+		new Caracteristique("Sanglant", 75),
+		new Caracteristique("Tigre", 75),
+		new Caracteristique("Mortel", 75),
+		new Caracteristique("Rituel", 75)
 	],
 	suffixe: [
-		new Caracteristique("Suffixe1", 7),
-		new Caracteristique("Suffixe2", 12),
-		new Caracteristique("Suffixe3", 18)
+		new Caracteristique("De La Miss", 15),
+		new Caracteristique("Du Mister", 15),
+		new Caracteristique("De L'Explorateur", 15),
+		new Caracteristique("De La Précaution", 15),
+		new Caracteristique("D'Endurance", 15),
+		new Caracteristique("De La Protection", 15),
+		new Caracteristique("Des Sens", 30),
+		new Caracteristique("Du Toxicomane", 30),
+		new Caracteristique("Du Gladiateur", 30),
+		new Caracteristique("Du Prophète", 45),
+		new Caracteristique("D'Écaille de dragon", 45),
+		new Caracteristique("De La Puissance", 45),
+		new Caracteristique("De La Punition", 45),
+		new Caracteristique("Du Berger", 60),
+		new Caracteristique("Du Sang", 60),
+		new Caracteristique("De La Magie", 60),
+		new Caracteristique("De l'Adrénaline", 75),
+		new Caracteristique("De La Précognition", 75)
 	]
 };
 
