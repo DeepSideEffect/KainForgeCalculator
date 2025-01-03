@@ -11,20 +11,23 @@ const typesObjets = [
     { id: 10, nom: "Les armes de Corps À Corps à 2 Mains" }
 ];
 
-const caracteristiquesSupport = [
-    new Caracteristique("Support1", 10),
-    new Caracteristique("Support2", 15),
-    new Caracteristique("Support3", 20)
-];
-
-const caracteristiquesPrefixe = [
-    new Caracteristique("Prefixe1", 5),
-    new Caracteristique("Prefixe2", 8),
-    new Caracteristique("Prefixe3", 12)
-];
-
-const caracteristiquesSuffixe = [
-    new Caracteristique("Suffixe1", 7),
-    new Caracteristique("Suffixe2", 12),
-    new Caracteristique("Suffixe3", 18)
-];
+const caracteristiques = {
+    1: {
+        support: [
+            new Caracteristique("Support1", 10),
+            new Caracteristique("Support2", 15),
+            new Caracteristique("Support3", 20)
+        ],
+        prefixe: [
+            new Caracteristique("Prefixe1", 5),
+            new Caracteristique("Prefixe2", 8),
+            new Caracteristique("Prefixe3", 12)
+        ],
+        suffixe: [
+            new Caracteristique("Suffixe1", 7),
+            new Caracteristique("Suffixe2", 12),
+            new Caracteristique("Suffixe3", 18)
+        ]
+    },
+    // Ajoute les caractéristiques pour les autres types d'objets ici
+};
