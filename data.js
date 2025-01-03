@@ -12,7 +12,7 @@ const typesObjets = [
     { id: 10, nom: "Les armes de Corps À Corps à 2 Mains" }
 ];
 
-// Les casques
+//#region Les casques
 const casqueCaracteristiques = {
 	support: [
 		new Caracteristique("Casquette", 15),
@@ -68,23 +68,33 @@ const casqueCaracteristiques = {
 		new Caracteristique("De La Précognition", 75)
 	]
 };
+//#endregion Les casques
 
+// Les armures
 // Les armures
 
 // Les pantalons
+// Les pantalons
 
+// Les amulettes
 // Les amulettes
 
 // Les anneaux
+// Les anneaux
 
+// Les armes à feu à 1 main
 // Les armes à feu à 1 main
 
 // Les armes à feu à 2 mains
+// Les armes à feu à 2 mains
 
+// Les Armes À Distance
 // Les Armes À Distance
 
 // Les armes de Corps À Corps à 1 Main
+// Les armes de Corps À Corps à 1 Main
 
+// Les armes de Corps À Corps à 2 Mains
 // Les armes de Corps À Corps à 2 Mains
 
 // Forge de Kain

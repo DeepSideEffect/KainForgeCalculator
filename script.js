@@ -1,3 +1,5 @@
+//#region Model
+
 class Caracteristique {
     constructor(nom, pe) {
         this.nom = nom;
@@ -13,6 +15,10 @@ class Objet {
         this.suffixe = suffixe;
     }
 }
+
+//#endregion Model
+
+//#region Logique
 
 function calculerCoutCaracteristique(actuel, souhaite, caracteristiques) {
     if (actuel.nom === souhaite.nom) {
@@ -39,6 +45,10 @@ function calculerCoutTotal(objetActuel, objetSouhaite, caracteristiquesSupport, 
 
     return coutTotal;
 }
+
+//#endregion Logique
+
+//#region Evenements et DOM
 
 document.addEventListener("DOMContentLoaded", () => {
     const typeSelect = document.getElementById("type");
@@ -111,3 +121,5 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("resultat").textContent = `Le coût total en points d'évolution (PE) pour modifier l'objet est de : ${coutTotal}`;
     });
 });
+
+//#endregion Evenements et DOM
