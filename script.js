@@ -49,6 +49,47 @@ document.addEventListener("DOMContentLoaded", () => {
         typeSelect.appendChild(option);
     });
 
+    typeSelect.addEventListener("change", () => {
+        const typeId = typeSelect.value;
+        const supportActuelSelect = document.getElementById("supportActuel");
+        const prefixeActuelSelect = document.getElementById("prefixeActuel");
+        const suffixeActuelSelect = document.getElementById("suffixeActuel");
+        const supportSouhaiteSelect = document.getElementById("supportSouhaite");
+        const prefixeSouhaiteSelect = document.getElementById("prefixeSouhaite");
+        const suffixeSouhaiteSelect = document.getElementById("suffixeSouhaite");
+
+        supportActuelSelect.innerHTML = "";
+        prefixeActuelSelect.innerHTML = "";
+        suffixeActuelSelect.innerHTML = "";
+        supportSouhaiteSelect.innerHTML = "";
+        prefixeSouhaiteSelect.innerHTML = "";
+        suffixeSouhaiteSelect.innerHTML = "";
+
+        caracteristiques[typeId].support.forEach((caracteristique, index) => {
+            const option = document.createElement("option");
+            option.value = index;
+            option.textContent = caracteristique.nom;
+            supportActuelSelect.appendChild(option);
+            supportSouhaiteSelect.appendChild(option.cloneNode(true));
+        });
+
+        caracteristiques[typeId].prefixe.forEach((caracteristique, index) => {
+            const option = document.createElement("option");
+            option.value = index;
+            option.textContent = caracteristique.nom;
+            prefixeActuelSelect.appendChild(option);
+            prefixeSouhaiteSelect.appendChild(option.cloneNode(true));
+        });
+
+        caracteristiques[typeId].suffixe.forEach((caracteristique, index) => {
+            const option = document.createElement("option");
+            option.value = index;
+            option.textContent = caracteristique.nom;
+            suffixeActuelSelect.appendChild(option);
+            suffixeSouhaiteSelect.appendChild(option.cloneNode(true));
+        });
+    });
+
     document.getElementById("calculer").addEventListener("click", () => {
         const type = document.getElementById("type").value;
         const supportActuel = document.getElementById("supportActuel").value;
@@ -58,10 +99,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const prefixeSouhaite = document.getElementById("prefixeSouhaite").value;
         const suffixeSouhaite = document.getElementById("suffixeSouhaite").value;
 
-        const objetActuel = new Objet(type, caracteristiquesSupport[supportActuel], caracteristiquesPrefixe[prefixeActuel], caracteristiquesSuffixe[suffixeActuel]);
-        const objetSouhaite = new Objet(type, caracteristiquesSupport[supportSouhaite], caracteristiquesPrefixe[prefixeSouhaite], caracteristiquesSuffixe[suffixeSouhaite]);
+        const objetActuel = new Objet(type, caracteristiques[type].support[supportActuel], caracteristiques[type].prefixe[prefixeActuel], caracteristiques[type].suffixe[suffixeActuel]);
+        const objetSouhaite = new Objet(type, caracteristiques[type].support[supportSouhaite], caracteristiques[type].prefixe[prefixeSouhaite], caracteristiques[type].suffixe[suffixeSouhaite]);
 
-        const coutTotal = calculerCoutTotal(objetActuel, objetSouhaite, caracteristiquesSupport, caracteristiquesPrefixe, caracteristiquesSuffixe);
+        const coutTotal = calculerCoutTotal(objetActuel, objetSouhaite, caracteristiques[type].support, caracteristiques[type].prefixe, caracteristiques[type].suffixe);
         document.getElementById("resultat").textContent = `Le coût total en points d'évolution (PE) pour modifier l'objet est de : ${coutTotal}`;
     });
 });
