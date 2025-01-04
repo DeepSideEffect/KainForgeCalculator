@@ -12,6 +12,7 @@
 }
 
 h1.title {
+    color: #540d11;
     margin-bottom: 3rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -23,7 +24,7 @@ h1.title {
     font-style: italic;
     font-size: small;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-    color: #7021b5;
+    color: #b96167;
 }
 
 button#calculer {
@@ -53,7 +54,7 @@ div.result > span {
     text-decoration: underline;
 }
 
-#resultat {
+#resultatV1 {
     margin-bottom: 2rem;
 }
 
@@ -62,6 +63,22 @@ div.result > span {
     text-decoration: underline;
 }
 
-#resultatV2 {
+#resultat {
     visibility: collapse;
+}
+
+body { 
+    background:
+        linear-gradient(to right, #540d11, #ffffff) 0 0 / 16.67% 100% no-repeat,
+        linear-gradient(to right, #ffffff, #540d11) 100% 0 / 16.67% 100% no-repeat,
+        #ffffff;
+    height: 100vh; /* Assure que le fond couvre toute la hauteur de la fenêtre */
+    width: 100%;
+    margin: 0;
+}
+
+#layout {
+    max-width: 66%;
+    margin-right: auto;
+    margin-left: auto;
 }

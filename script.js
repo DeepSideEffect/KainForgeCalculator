@@ -69,6 +69,26 @@ function calculerCoutTotal(objetActuel, objetSouhaite, caracteristiquesSupport, 
 
 //#region Evenements et DOM
 
+function changementCaracteristique() {
+	document.getElementById("calculer").disabled = false;
+	document.getElementById("resultat").style.visibility = "collapse";
+}
+
+function createOption(index, nom, actuelSelect, souhaiteSelect) {
+	const option = document.createElement("option");
+	option.value = index;
+	option.textContent = nom;
+	actuelSelect.appendChild(option);
+	souhaiteSelect.appendChild(option.cloneNode(true));
+}
+
+function caracteristiqueInit(selectHtmlId) {
+	const select = document.getElementById(selectHtmlId);
+	select.innerHTML = "";
+	select.addEventListener("change", changementCaracteristique);
+	return select;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const typeSelect = document.getElementById("type");
     typesObjets.forEach(type => {
@@ -80,43 +100,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const updateCaracteristiques = () => {
         const typeId = typeSelect.value;
-        const supportActuelSelect = document.getElementById("supportActuel");
-        const prefixeActuelSelect = document.getElementById("prefixeActuel");
-        const suffixeActuelSelect = document.getElementById("suffixeActuel");
-        const supportSouhaiteSelect = document.getElementById("supportSouhaite");
-        const prefixeSouhaiteSelect = document.getElementById("prefixeSouhaite");
-        const suffixeSouhaiteSelect = document.getElementById("suffixeSouhaite");
-
-        supportActuelSelect.innerHTML = "";
-        prefixeActuelSelect.innerHTML = "";
-        suffixeActuelSelect.innerHTML = "";
-        supportSouhaiteSelect.innerHTML = "";
-        prefixeSouhaiteSelect.innerHTML = "";
-        suffixeSouhaiteSelect.innerHTML = "";
+        const supportActuelSelect = caracteristiqueInit("supportActuel");
+        const prefixeActuelSelect = caracteristiqueInit("prefixeActuel");
+        const suffixeActuelSelect = caracteristiqueInit("suffixeActuel");
+        const supportSouhaiteSelect = caracteristiqueInit("supportSouhaite");
+        const prefixeSouhaiteSelect = caracteristiqueInit("prefixeSouhaite");
+        const suffixeSouhaiteSelect = caracteristiqueInit("suffixeSouhaite");
 
         caracteristiques[typeId].support.forEach((caracteristique, index) => {
-            const option = document.createElement("option");
-            option.value = index;
-            option.textContent = caracteristique.nom;
-            supportActuelSelect.appendChild(option);
-            supportSouhaiteSelect.appendChild(option.cloneNode(true));
+			createOption(index, caracteristique.nom, supportActuelSelect, supportSouhaiteSelect);
         });
 
         caracteristiques[typeId].prefixe.forEach((caracteristique, index) => {
-            const option = document.createElement("option");
-            option.value = index;
-            option.textContent = caracteristique.nom;
-            prefixeActuelSelect.appendChild(option);
-            prefixeSouhaiteSelect.appendChild(option.cloneNode(true));
+			createOption(index, caracteristique.nom, prefixeActuelSelect, prefixeSouhaiteSelect);
         });
 
         caracteristiques[typeId].suffixe.forEach((caracteristique, index) => {
-            const option = document.createElement("option");
-            option.value = index;
-            option.textContent = caracteristique.nom;
-            suffixeActuelSelect.appendChild(option);
-            suffixeSouhaiteSelect.appendChild(option.cloneNode(true));
+			createOption(index, caracteristique.nom, suffixeActuelSelect, suffixeSouhaiteSelect);
         });
+
+		document.getElementById("resultat").style.visibility = "collapse";
+		document.getElementById("calculer").disabled = true;
     };
 
     typeSelect.addEventListener("change", updateCaracteristiques);
@@ -142,13 +146,14 @@ document.addEventListener("DOMContentLoaded", () => {
 		const nbRunes = coutTotal.nbMvtsTotal * typeObjetCourant.nbRunes;
 		const libelleRunes = typeObjetCourant.libelleRunes;
 
-        document.getElementById("resultat").textContent = `Pour modifier l'objet, le coût total est de ${coutTotal.coutTotalPE} points d'évolution, ${coutEnPiecesEpiques} pièces épiques et ${nbRunes} rune${nbRunes > 1 ? 's' : ''} ${libelleRunes}.`;
+		document.getElementById("resultatV1-text").style.color = typeObjetCourant.color;
+        document.getElementById("resultatV1-text").textContent = `${coutTotal.coutTotalPE} points d'évolution, ${coutEnPiecesEpiques} pièces épiques et ${nbRunes} rune${nbRunes > 1 ? 's' : ''} ${libelleRunes}.`;
 		document.getElementById("coutTotalPE").textContent = coutTotal.coutTotalPE;
 		document.getElementById("coutEnPiecesEpiques").textContent = coutEnPiecesEpiques;
 		document.getElementById("nbRunes").textContent = nbRunes;
 		document.getElementById("libelleRunes").textContent = "rune".concat(nbRunes > 1 ? 's' : '').concat(' ').concat(libelleRunes);
 		document.getElementById("libelleRunes").style.color = typeObjetCourant.color;
-		document.getElementById("resultatV2").style.visibility = "visible";
+		document.getElementById("resultat").style.visibility = "visible";
     });
 });
 
