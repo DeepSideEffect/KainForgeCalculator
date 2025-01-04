@@ -87,9 +87,11 @@ function gererLesCRLF(text) {
 
 //#region Evenements et DOM
 
-function changementCaracteristique() {
-	document.getElementById("calculer").disabled = false;
+function changementCaracteristique(desactiverBtn) {
+	document.getElementById("calculer").disabled = desactiverBtn;
 	document.getElementById("resultat").style.visibility = "collapse";
+    document.getElementById("ref-audio-applause").pause();
+    document.getElementById("ref-audio-kick").play();
 }
 
 function createOption(index, nom, actuelSelect, souhaiteSelect) {
@@ -103,7 +105,7 @@ function createOption(index, nom, actuelSelect, souhaiteSelect) {
 function caracteristiqueInit(selectHtmlId) {
 	const select = document.getElementById(selectHtmlId);
 	select.innerHTML = "";
-	select.addEventListener("change", changementCaracteristique);
+	select.addEventListener("change", () => changementCaracteristique(false));
 	return select;
 }
 
@@ -119,6 +121,7 @@ function copyToClipboard(htmlId) {
 }
 
 function showNotification(message) {
+    document.getElementById("ref-audio-copy2").play();
     document.getElementById("notification-container").classList.add("show");
     document.getElementById("notification").textContent = message;
     document.getElementById("notification").classList.add("show");
@@ -134,6 +137,15 @@ function intro() {
     document.getElementById("layout").classList.remove("intro");
     document.getElementById("data-sources").classList.remove("intro");
     document.getElementById("version").classList.remove("intro");
+}
+
+function declancherSonAuChargement() {
+    const audio = document.getElementById("ref-audio-applause");
+    audio.play().catch(error => {
+        console.error("Erreur lors de la lecture de l'audio : ", error);
+    });
+
+    document.removeEventListener("click", declancherSonAuChargement);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -166,8 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			createOption(index, caracteristique.nom, suffixeActuelSelect, suffixeSouhaiteSelect);
         });
 
-		document.getElementById("resultat").style.visibility = "collapse";
-		document.getElementById("calculer").disabled = true;
+        changementCaracteristique(true)
     };
 
     typeSelect.addEventListener("change", updateCaracteristiques);
@@ -206,6 +217,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		document.getElementById("libelleRunes").textContent = "rune".concat(nbRunes > 1 ? 's' : '').concat(' ').concat(libelleRunes);
 		document.getElementById("libelleRunes").style.color = typeObjetCourant.color;
 		document.getElementById("resultat").style.visibility = "visible";
+        
+        document.getElementById("ref-audio-copy").play();
     });
 
 	document.body.addEventListener("keydown", function(event) {
@@ -215,6 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	});
 
+    document.addEventListener("click", declancherSonAuChargement);
     setTimeout(() => intro(), 75);
 });
 

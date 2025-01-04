@@ -92,6 +92,10 @@ button.mini-bouton {
     margin: 3rem 0;
 }
 
+audio {
+    display: none;
+}
+
 span.numberResult {
     font-weight: bold;
 }
