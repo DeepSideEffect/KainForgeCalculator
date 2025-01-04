@@ -2,8 +2,12 @@
     text-align: center;
 }
 
+.left {
+    text-align: left;
+}
+
 .form-group {
-    margin-bottom: 20px;
+    margin: 3rem 0;
 }
 
 .form-row {
@@ -13,7 +17,6 @@
 
 h1.title {
     color: #540d11;
-    margin-bottom: 3rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -27,15 +30,53 @@ h1.title {
     color: #b96167;
 }
 
+#data-sources {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+#data-sources a {
+    text-decoration: none;
+    color: #ebbfbf;
+}
+
+#data-sources a:hover {
+    text-decoration: underline;
+    color: #68c5bf !important;
+}
+
+#data-sources a:visited {
+    color: #b96167;
+}
+
+button {
+    cursor: pointer;
+    border-width: thin;
+    border-radius: 25px;
+    border-style: outset;
+    font-weight: bold;
+    font-family: cursive;
+}
+
+button:not(:disabled) {
+    background-color: #b96167;
+    color: aliceblue;
+}
+
 button#calculer {
     padding: 5px 50px;
-    cursor: pointer;
+}
+
+button.mini-bouton {
+    margin-left: 3rem;
 }
 
 .button-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 3rem;
+    margin: 3rem 0;
 }
 
 span.numberResult {
@@ -43,10 +84,10 @@ span.numberResult {
 }
 
 div.result {
-    text-align: left;
     width: 40vw;
     display: inline-block;
     background-color: aliceblue;
+    padding-bottom: 10px;
 }
 
 div.result > span {
@@ -67,13 +108,19 @@ div.result > span {
     visibility: collapse;
 }
 
+#recapModification > p {
+    margin: 0;
+    font-size: 1.6rem;
+    color: #b96167;
+}
+
 body { 
     background:
-        linear-gradient(to right, #540d11, #ffffff) 0 0 / 16.67% 100% no-repeat,
-        linear-gradient(to right, #ffffff, #540d11) 100% 0 / 16.67% 100% no-repeat,
+        linear-gradient(to right, #540d11, #ffffff) 0 0 / 16.67% 100% repeat-y,
+        linear-gradient(to right, #ffffff, #540d11) 100% 0 / 16.67% 100% repeat-y,
         #ffffff;
-    height: 100vh; /* Assure que le fond couvre toute la hauteur de la fenêtre */
-    width: 100%;
+    height: calc(100vh - 2rem); /* Ajuste la hauteur pour éviter le débordement affichant la scroll-bar verticale inutilement tout en gardant la possibilité de scroller */
+    width: 100%; /* Assure que le fond couvre toute la largeur de la fenêtre sans l'épaisseur de la scroll-bar verticale */
     margin: 0;
 }
 
