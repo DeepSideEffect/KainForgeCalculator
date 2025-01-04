@@ -1,6 +1,6 @@
 :root { 
     --default-font-size: 16px;
-    --mobile-phone-font-size: calc(var(--default-font-size) - 2px);
+    --mobile-phone-font-size: calc(var(--default-font-size) - 4px);
     --primary-color: #540d11;
     --secondary-color: #21b530;
     --ease-function: ease-in-out;
