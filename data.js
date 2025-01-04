@@ -176,7 +176,7 @@ const pantalonCaracteristiques = {
 //#region Les amulettes
 const amuletteCaracteristiques = {
 	support: [
-		new Caracteristique("Amulette", 0),
+		new Caracteristique("Amulette", 40),
 		new Caracteristique("Collier", 120),
 		new Caracteristique("Cravate", 120),
 		new Caracteristique("Foulard", 120),
