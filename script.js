@@ -96,10 +96,23 @@ function caracteristiqueInit(selectHtmlId) {
 function copyToClipboard(htmlId) {
     const textToCopy = document.getElementById(htmlId).innerText;
     navigator.clipboard.writeText(textToCopy).then(() => {
-        alert("Texte copié dans le presse-papiers !");
+        showNotification("Texte copié dans le presse-papiers !");
     }).catch(err => { 
-        console.error("Erreur lors de la copie : ", err); 
+        console.error("Erreur lors de la copie : ", err);
+        const errMsg = "Erreur lors de la copie : ".concat(err?.message);
+        showNotification(errMsg);
     });
+}
+
+function showNotification(message) {
+    document.getElementById("notification-container").classList.add("show");
+    document.getElementById("notification").textContent = message;
+    document.getElementById("notification").classList.add("show");
+
+    setTimeout(() => {
+        document.getElementById("notification").classList.remove("show");
+        setTimeout(() => document.getElementById("notification-container").classList.remove("show"), 800);
+    }, 3500);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
