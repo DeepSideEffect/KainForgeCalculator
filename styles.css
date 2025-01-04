@@ -41,6 +41,18 @@ span.numberResult {
     font-weight: bold;
 }
 
+div.result {
+    text-align: left;
+    width: 40vw;
+    display: inline-block;
+    background-color: aliceblue;
+}
+
+div.result > span {
+    font-style: italic;
+    text-decoration: underline;
+}
+
 #resultat {
     margin-bottom: 2rem;
 }
