@@ -129,6 +129,13 @@ function showNotification(message) {
     }, 3500);
 }
 
+function intro() {
+    document.getElementById("notification-container").classList.remove("intro");
+    document.getElementById("layout").classList.remove("intro");
+    document.getElementById("data-sources").classList.remove("intro");
+    document.getElementById("version").classList.remove("intro");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const typeSelect = document.getElementById("type");
     typesObjets.forEach(type => {
@@ -207,6 +214,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			document.getElementById("calculer").click();
 		}
 	});
+
+    setTimeout(() => intro(), 500);
 });
 
 //#endregion Evenements et DOM

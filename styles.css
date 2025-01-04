@@ -1,3 +1,11 @@
+:root { 
+    --primary-color: #540d11;
+    --secondary-color: #21b530;
+    --ease-function: ease-in-out;
+    --transition-duration: 2s;
+    --small-transition-duration: calc(var(--transition-duration) - 0.5s);
+}
+
 .center {
     text-align: center;
 }
@@ -16,11 +24,12 @@
 }
 
 h1.title {
-    color: #540d11;
+    color: var(--primary-color);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 #version {
+    transition: all var(--transition-duration) var(--ease-function); 
     position: fixed;
     bottom: 2rem;
     right: 2rem;
@@ -31,6 +40,7 @@ h1.title {
 }
 
 #data-sources {
+    transition: all var(--transition-duration) var(--ease-function); 
     position: fixed;
     bottom: 2rem;
     left: 2rem;
@@ -38,6 +48,7 @@ h1.title {
 }
 
 #data-sources a {
+    transition: all var(--transition-duration) var(--ease-function); 
     text-decoration: none;
     color: #ebbfbf;
 }
@@ -121,24 +132,28 @@ div.result > span {
 
 body { 
     background:
-        linear-gradient(to right, #540d11, #ffffff) 0 0 / 16.67% 100% repeat-y,
-        linear-gradient(to right, #ffffff, #540d11) 100% 0 / 16.67% 100% repeat-y,
+        linear-gradient(to right, var(--primary-color), #ffffff) 0 0 / 16.67% 100% repeat-y,
+        linear-gradient(to right, #ffffff, var(--primary-color)) 100% 0 / 16.67% 100% repeat-y,
         #ffffff;
     height: calc(100vh - 2rem); /* Ajuste la hauteur pour éviter le débordement affichant la scroll-bar verticale inutilement tout en gardant la possibilité de scroller */
     width: 100%; /* Assure que le fond couvre toute la largeur de la fenêtre sans l'épaisseur de la scroll-bar verticale */
-    margin: 0;
+    margin: 0 auto;
 }
 
 #layout {
     max-width: 66%;
     margin-right: auto;
     margin-left: auto;
+    transition: all var(--small-transition-duration) var(--ease-function);
+    transform: scaleX(1);
+    background-color: transparent;
+    color: black;
 }
 
 /* Notifications */
 
 #notification-container {
-    transition: all 1.5s ease-in-out; 
+    transition: all var(--small-transition-duration) var(--ease-function); 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -156,8 +171,8 @@ body {
 }
 
 #notification {
-    color: #21b530;
-    transition: all 2s ease-in-out;
+    color: var(--secondary-color);
+    transition: all var(--transition-duration) var(--ease-function);
     opacity: 0;
     border: 5px solid #ebbfbf;
     border-radius: 1rem;
@@ -168,4 +183,33 @@ body {
 
 #notification.show {
     opacity: 1;
+}
+
+/* Intro */
+
+#notification-container.intro {
+    background-color: var(--primary-color);
+}
+
+#layout.intro {
+    transform: scaleX(0);
+    color: var(--primary-color);
+}
+
+#version.intro {
+    right: 0;
+    bottom: 0;
+    color: var(--primary-color);
+    text-shadow: none;
+}
+
+#data-sources.intro {
+    left: 0;
+    bottom: 0;
+    color: var(--primary-color);
+    text-shadow: none;
+}
+
+#data-sources.intro a {
+    color: var(--primary-color);
 }
