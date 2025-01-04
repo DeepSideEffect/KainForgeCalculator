@@ -21,7 +21,7 @@ class Objet {
 //#region Logique
 
 function calculerCoutCaracteristique(actuel, souhaite, caracteristiques) {
-    if (actuel.nom === souhaite.nom) {
+    if (actuel?.nom === souhaite?.nom) {
         return { coutPE: 0, nbMvts: 0 };
     }
 
@@ -137,16 +137,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const objetSouhaite = new Objet(type, caracteristiques[type].support[supportSouhaite], caracteristiques[type].prefixe[prefixeSouhaite], caracteristiques[type].suffixe[suffixeSouhaite]);
 
         const coutTotal = calculerCoutTotal(objetActuel, objetSouhaite, caracteristiques[type].support, caracteristiques[type].prefixe, caracteristiques[type].suffixe);
-		const coutEnPiecesEpiques = coutTotal.nbMvtsTotal * typesObjets[type].piecesEpiques;
-		const nbRunes = coutTotal.nbMvtsTotal * typesObjets[type].nbRunes;
-		const libelleRunes = typesObjets[type].libelleRunes;
-		
+		const typeObjetCourant = typesObjets[type - 1];
+		const coutEnPiecesEpiques = coutTotal.nbMvtsTotal * typeObjetCourant.piecesEpiques;
+		const nbRunes = coutTotal.nbMvtsTotal * typeObjetCourant.nbRunes;
+		const libelleRunes = typeObjetCourant.libelleRunes;
+
         document.getElementById("resultat").textContent = `Pour modifier l'objet, le coût total est de ${coutTotal.coutTotalPE} points d'évolution, ${coutEnPiecesEpiques} pièces épiques et ${nbRunes} rune${nbRunes > 1 ? 's' : ''} ${libelleRunes}.`;
 		document.getElementById("coutTotalPE").textContent = coutTotal.coutTotalPE;
 		document.getElementById("coutEnPiecesEpiques").textContent = coutEnPiecesEpiques;
 		document.getElementById("nbRunes").textContent = nbRunes;
 		document.getElementById("libelleRunes").textContent = "rune".concat(nbRunes > 1 ? 's' : '').concat(' ').concat(libelleRunes);
-		document.getElementById("libelleRunes").style.color = typesObjets[type].color;
+		document.getElementById("libelleRunes").style.color = typeObjetCourant.color;
 		document.getElementById("resultatV2").style.visibility = "visible";
     });
 });
