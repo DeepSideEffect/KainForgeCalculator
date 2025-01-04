@@ -1,3 +1,7 @@
+.center {
+    text-align: center;
+}
+
 .form-group {
     margin-bottom: 20px;
 }
@@ -9,24 +13,28 @@
 
 h1.title {
     margin-bottom: 3rem;
-    text-align: center;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 #version {
     position: fixed;
-    top: 2rem;
+    bottom: 2rem;
     right: 2rem;
     font-style: italic;
     font-size: small;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    color: #7021b5;
 }
 
 button#calculer {
-    margin-left: calc(50% - 150px);
-    margin-bottom: 3rem;
     padding: 5px 50px;
     cursor: pointer;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
 }
 
 span.numberResult {
