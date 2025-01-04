@@ -65,6 +65,10 @@ function calculerCoutTotal(objetActuel, objetSouhaite, caracteristiquesSupport, 
     return { coutTotalPE, nbMvtsTotal };
 }
 
+function nomCompletObjet(objet) {
+    return `Epique ${objet?.support?.nom ?? ''} ${objet?.prefixe?.nom ?? ''} ${objet?.suffixe?.nom ?? ''}`;
+}
+
 //#endregion Logique
 
 //#region Evenements et DOM
@@ -87,6 +91,15 @@ function caracteristiqueInit(selectHtmlId) {
 	select.innerHTML = "";
 	select.addEventListener("change", changementCaracteristique);
 	return select;
+}
+
+function copyToClipboard(htmlId) {
+    const textToCopy = document.getElementById(htmlId).innerText;
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("Texte copié dans le presse-papiers !");
+    }).catch(err => { 
+        console.error("Erreur lors de la copie : ", err); 
+    });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -139,6 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const objetActuel = new Objet(type, caracteristiques[type].support[supportActuel], caracteristiques[type].prefixe[prefixeActuel], caracteristiques[type].suffixe[suffixeActuel]);
         const objetSouhaite = new Objet(type, caracteristiques[type].support[supportSouhaite], caracteristiques[type].prefixe[prefixeSouhaite], caracteristiques[type].suffixe[suffixeSouhaite]);
+        const recapModification = `${nomCompletObjet(objetActuel)} vers ${nomCompletObjet(objetSouhaite)}`;
 
         const coutTotal = calculerCoutTotal(objetActuel, objetSouhaite, caracteristiques[type].support, caracteristiques[type].prefixe, caracteristiques[type].suffixe);
 		const typeObjetCourant = typesObjets[type - 1];
@@ -146,8 +160,12 @@ document.addEventListener("DOMContentLoaded", () => {
 		const nbRunes = coutTotal.nbMvtsTotal * typeObjetCourant.nbRunes;
 		const libelleRunes = typeObjetCourant.libelleRunes;
 
+        // Une seule ligne
 		document.getElementById("resultatV1-text").style.color = typeObjetCourant.color;
         document.getElementById("resultatV1-text").textContent = `${coutTotal.coutTotalPE} points d'évolution, ${coutEnPiecesEpiques} pièces épiques et ${nbRunes} rune${nbRunes > 1 ? 's' : ''} ${libelleRunes}.`;
+        document.getElementById("resultatV1-modif").textContent = recapModification;
+        // Formaté
+        document.getElementById("recapModification").innerHTML = `${recapModification.replace("vers", "<p>==></p>")}`;
 		document.getElementById("coutTotalPE").textContent = coutTotal.coutTotalPE;
 		document.getElementById("coutEnPiecesEpiques").textContent = coutEnPiecesEpiques;
 		document.getElementById("nbRunes").textContent = nbRunes;
@@ -159,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	document.body.addEventListener("keydown", function(event) {
 		if (event.key === "Enter") {
 			event.preventDefault(); // Empêche le comportement par défaut de la touche "Entrée"
-			document.getElementById("calculer").click(); // Déclenche le clic du bouton
+			document.getElementById("calculer").click();
 		}
 	});
 });

@@ -11,15 +11,13 @@
     <body>
         <h1 class="title center">Calculatrice de la forge de Kain</h1>
 
-        <!-- Layout principal -->
         <div id="layout">
-            <!-- Saisie -->
+
             <form>
                 <div class="form-group center">
                     <label for="type">Type d'objet :</label>
                     <select id="type" name="type"></select>
                 </div>
-                <br>
 
                 <h3>Caractéristiques Actuelles</h2>
                 <div class="form-group center">
@@ -36,7 +34,6 @@
                         <select id="suffixeActuel" name="suffixeActuel"></select>
                     </div>
                 </div>
-                <br>
 
                 <h3>Caractéristiques Souhaitées</h2>
                 <div class="form-group center">
@@ -53,20 +50,24 @@
                         <select id="suffixeSouhaite" name="suffixeSouhaite"></select>
                     </div>
                 </div>
-                <br>
 
                 <div class="button-container">
-                    <button type="button" id="calculer">Calculer</button>
+                    <button type="button" id="calculer" title="Cliquer ou appuyer sur 'entrée' pour calculer le coût total de la modification de l'objet">Calculer</button>
                 </div>
             </form>
 
-            <!-- Résultat -->
             <div id="resultat">
                 <div id="resultatV1" title="résultat en ligne">
-                    Pour modifier l'objet, le coût total est de <span id="resultatV1-text"></span>
+                    <span id="resultatV1-display">
+                        Pour modifier l'objet de <span id="resultatV1-modif"></span>,<br />
+                        le coût total est de <span id="resultatV1-text"></span>
+                    </span>
+                    <button type="button" class="mini-bouton" onclick="copyToClipboard('resultatV1-display')" title="Copier l'affichage en ligne dans le presse-papier">Copier</button>
                 </div>
+
                 <div id="resultatV2" title="résultat formaté" class="center">
-                    <div class="result">
+                    <div class="result" id="recapModification"></div>
+                    <div class="result left">
                         <span>Coût total :</span>
                         <ul>
                             <li><span class="numberResult" id="coutTotalPE">0</span> points d'évolution</li>
@@ -75,11 +76,17 @@
                         </ul>
                     </div>
                 </div>
+                <div class="center">
+                    <div class="result">
+                        <button type="button" class="result" onclick="copyToClipboard('resultatV2')" title="Copier l'affichage formaté dans le presse-papier">Copier</button>
+                    </div>
+                </div>
             </div>
 
         </div>
+
+        <div id="data-sources" title="Sources des données depuis le wiki Bloodwars"><a target="_blank" href="https://wiki.fr.bloodwars.net/index.php?title=La_Forge_de_Kain_sur_UT">Sources des données</a></div>
         
-        <!-- Copyright -->
-        <div id="version" title="ouais, gros !">v1.0.0 © Deep 2025</div>
+        <div id="version" title="ouais, gros !">v1.0.1 © Deep 2025</div>
     </body>
 </html>
