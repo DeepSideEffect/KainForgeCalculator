@@ -155,6 +155,13 @@ document.addEventListener("DOMContentLoaded", () => {
 		document.getElementById("libelleRunes").style.color = typeObjetCourant.color;
 		document.getElementById("resultat").style.visibility = "visible";
     });
+
+	document.body.addEventListener("keydown", function(event) {
+		if (event.key === "Enter") {
+			event.preventDefault(); // Empêche le comportement par défaut de la touche "Entrée"
+			document.getElementById("calculer").click(); // Déclenche le clic du bouton
+		}
+	});
 });
 
 //#endregion Evenements et DOM
