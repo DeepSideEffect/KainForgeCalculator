@@ -1,4 +1,6 @@
 :root { 
+    --default-font-size: 16px;
+    --mobile-phone-font-size: calc(var(--default-font-size) - 2px);
     --primary-color: #540d11;
     --secondary-color: #21b530;
     --ease-function: ease-in-out;
@@ -138,6 +140,14 @@ body {
     height: calc(100vh - 2rem); /* Ajuste la hauteur pour éviter le débordement affichant la scroll-bar verticale inutilement tout en gardant la possibilité de scroller */
     width: 100%; /* Assure que le fond couvre toute la largeur de la fenêtre sans l'épaisseur de la scroll-bar verticale */
     margin: 0 auto;
+    font-size: var(--default-font-size);
+}
+
+/* Styles spécifiques aux téléphones */
+@media (max-width: 600px) {
+    body {
+        font-size: var(--mobile-phone-font-size);
+    }
 }
 
 #layout {
