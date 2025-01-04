@@ -134,3 +134,38 @@ body {
     margin-right: auto;
     margin-left: auto;
 }
+
+/* Notifications */
+
+#notification-container {
+    transition: all 1.5s ease-in-out; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    pointer-events: none;
+}
+
+#notification-container.show {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+#notification {
+    color: #21b530;
+    transition: all 2s ease-in-out;
+    opacity: 0;
+    border: 5px solid #ebbfbf;
+    border-radius: 1rem;
+    background-color: aliceblue;
+    font-size: x-large;
+    padding: 10px;
+}
+
+#notification.show {
+    opacity: 1;
+}
