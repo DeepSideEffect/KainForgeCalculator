@@ -93,10 +93,7 @@ div.result {
 div.result > span {
     font-style: italic;
     text-decoration: underline;
-}
-
-div.result.left {
-    padding: 0 10px;
+    padding-left: 10px;
 }
 
 #resultatV1 {
