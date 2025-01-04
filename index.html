@@ -9,9 +9,9 @@
     <script src="data.js" defer></script>
 </head>
 <body>
-    <h1 class="title">Calculatrice de la forge de Kain</h1>
+    <h1 class="title center">Calculatrice de la forge de Kain</h1>
     <form>
-        <div class="form-group">
+        <div class="form-group center">
             <label for="type">Type d'objet :</label>
             <select id="type" name="type"></select>
         </div>
@@ -51,10 +51,12 @@
         </div>
         <br>
 
-        <button type="button" id="calculer">Calculer</button>
+        <div class="button-container">
+            <button type="button" id="calculer">Calculer</button>
+        </div>
     </form>
-    <div id="resultat" title="v1"></div>
-    <div id="resultatV2" title="v2">
+    <div id="resultat" title="résultat en ligne (non formaté)"></div>
+    <div id="resultatV2" title="résultat formaté">
         <span>Coût total :</span>
         <ul>
             <li><span class="numberResult" id="coutTotalPE">0</span> points d'évolution</li>
