@@ -95,6 +95,10 @@ div.result > span {
     text-decoration: underline;
 }
 
+div.result.left {
+    padding: 0 10px;
+}
+
 #resultatV1 {
     margin-bottom: 2rem;
 }
@@ -106,6 +110,10 @@ div.result > span {
 
 #resultat {
     visibility: collapse;
+}
+
+#recapModification {
+    padding-top: 10px;
 }
 
 #recapModification > p {
