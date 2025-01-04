@@ -126,7 +126,7 @@ function showNotification(message) {
     setTimeout(() => {
         document.getElementById("notification").classList.remove("show");
         setTimeout(() => document.getElementById("notification-container").classList.remove("show"), 800);
-    }, 3500);
+    }, 2000);
 }
 
 function intro() {
@@ -215,7 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	});
 
-    setTimeout(() => intro(), 500);
+    setTimeout(() => intro(), 75);
 });
 
 //#endregion Evenements et DOM
