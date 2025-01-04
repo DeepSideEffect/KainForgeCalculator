@@ -69,6 +69,20 @@ function nomCompletObjet(objet) {
     return `Epique ${objet?.support?.nom ?? ''} ${objet?.prefixe?.nom ?? ''} ${objet?.suffixe?.nom ?? ''}`;
 }
 
+function replaceDoubleCRLF(text) {
+    return text.replace(/\n\n/g, '\n');
+}
+
+function ajouteSecifiquesDoubleCRLF(text) {
+    return text.replace("Coût total :", "\n\nCoût total :");
+}
+
+function gererLesCRLF(text) {
+    text = replaceDoubleCRLF(text);
+    text = ajouteSecifiquesDoubleCRLF(text);
+    return text;
+}
+
 //#endregion Logique
 
 //#region Evenements et DOM
@@ -94,7 +108,7 @@ function caracteristiqueInit(selectHtmlId) {
 }
 
 function copyToClipboard(htmlId) {
-    const textToCopy = document.getElementById(htmlId).innerText;
+    const textToCopy = gererLesCRLF(document.getElementById(htmlId).innerText);
     navigator.clipboard.writeText(textToCopy).then(() => {
         showNotification("Texte copié dans le presse-papiers !");
     }).catch(err => { 
