@@ -1,11 +1,21 @@
 :root { 
     --default-font-size: 16px;
     --mobile-phone-font-size: calc(var(--default-font-size) - 6px);
+
     --primary-color: #540d11;
-    --secondary-color: #21b530;
+    --secondary-color: #b96167;
+    --secondary-light-color: #ebbfbf;
+    --succes-message-color: #21b530;
+    --highlight-color: #68c5bf;
+    --secondary-highlight-color: aliceblue;
+
     --ease-function: ease-in-out;
     --transition-duration: 1.8s;
     --small-transition-duration: calc(var(--transition-duration) - 0.45s);
+    --standart-transition: all var(--transition-duration) var(--ease-function);
+    --short-transition: all var(--small-transition-duration) var(--ease-function);
+
+    --current-color: var(--secondary-color); 
 }
 
 .center {
@@ -31,18 +41,28 @@ h1.title {
 }
 
 #version {
-    transition: all var(--transition-duration) var(--ease-function); 
+    transition: var(--standart-transition); 
     position: fixed;
     bottom: 2rem;
     right: 2rem;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+#version a {
+    transition: var(--standart-transition);
+    text-decoration: none;
+    color: var(--secondary-color);
     font-style: italic;
     font-size: smaller;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-    color: #b96167;
+}
+
+#version a:hover {
+    text-decoration: underline;
+    color: var(--highlight-color) !important;
 }
 
 #data-sources {
-    transition: all var(--transition-duration) var(--ease-function); 
+    transition: var(--standart-transition); 
     position: fixed;
     bottom: 2rem;
     left: 2rem;
@@ -50,21 +70,22 @@ h1.title {
 }
 
 #data-sources a {
-    transition: all var(--transition-duration) var(--ease-function); 
+    transition: var(--standart-transition);
     text-decoration: none;
-    color: #ebbfbf;
+    color: var(--secondary-light-color);
 }
 
 #data-sources a:hover {
     text-decoration: underline;
-    color: #68c5bf !important;
+    color: var(--highlight-color) !important;
 }
 
 #data-sources a:visited {
-    color: #b96167;
+    color: var(--secondary-color);
 }
 
 button {
+    transition: var(--standart-transition);
     cursor: pointer;
     border-width: thin;
     border-radius: 25px;
@@ -74,8 +95,8 @@ button {
 }
 
 button:not(:disabled) {
-    background-color: #b96167;
-    color: aliceblue;
+    background-color: var(--current-color);
+    color: var(--secondary-highlight-color);
 }
 
 button#calculer {
@@ -100,40 +121,56 @@ span.numberResult {
     font-weight: bold;
 }
 
-div.result {
-    width: 40vw;
-    display: inline-block;
-    background-color: aliceblue;
-    padding-bottom: 10px;
-}
-
-div.result > span {
+span.cout-total {
     font-style: italic;
     text-decoration: underline;
     padding-left: 10px;
+}
+
+div.result {
+    width: 40vw;
+    display: inline-block;
+    background-color: var(--secondary-highlight-color);
+    padding-bottom: 10px;
 }
 
 #resultatV1 {
     margin-bottom: 2rem;
 }
 
-#resultatV2 > span {
-    font-style: italic;
-    text-decoration: underline;
-}
-
 #resultat {
-    visibility: collapse;
+    transition: var(--short-transition);
+    transform: scaleY(0);
 }
 
 #recapModification {
     padding-top: 10px;
 }
 
-#recapModification > p {
-    margin: 0;
+#recapModification p {
+    transition: var(--standart-transition);
+    margin: auto;
     font-size: 1.6rem;
-    color: #b96167;
+    font-weight: bold;
+    color: var(--current-color);
+    transform: rotateZ(90deg);
+    width: fit-content;
+    padding: 10px 0;
+}
+
+#recapModification.init p {
+    transform: rotateZ(0deg);
+}
+
+span.nom-objet-bw {
+    font-family: Verdana, Helvetica, sans-serif;
+    font-weight: bold;
+    padding: 0.25rem;
+    font-size: var(--mobile-phone-font-size);
+    color: #DABA4C;
+    background-color: black;
+    border-radius: 0.45rem;
+    /* cursor: pointer; TODO: en attente transcodage complet avec la page https://r1.fr.bloodwars.net/test_items.php?xxx pour créer un lien hypertext à minima */
 }
 
 body { 
@@ -152,13 +189,17 @@ body {
     body {
         font-size: var(--mobile-phone-font-size);
     }
+
+    span.nom-objet-bw {
+        font-size: calc(var(--mobile-phone-font-size) - 4px);
+    }
 }
 
 #layout {
     max-width: 66%;
     margin-right: auto;
     margin-left: auto;
-    transition: all var(--small-transition-duration) var(--ease-function);
+    transition: var(--short-transition);
     transform: scaleX(1);
     background-color: transparent;
     color: black;
@@ -167,7 +208,7 @@ body {
 /* Notifications */
 
 #notification-container {
-    transition: all var(--small-transition-duration) var(--ease-function); 
+    transition: var(--short-transition); 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -185,12 +226,12 @@ body {
 }
 
 #notification {
-    color: var(--secondary-color);
-    transition: all var(--transition-duration) var(--ease-function);
+    color: var(--succes-message-color);
+    transition: var(--standart-transition);
     opacity: 0;
-    border: 5px solid #ebbfbf;
+    border: 5px solid var(--secondary-light-color);
     border-radius: 1rem;
-    background-color: aliceblue;
+    background-color: var(--secondary-highlight-color);
     font-size: x-large;
     padding: 10px;
 }
