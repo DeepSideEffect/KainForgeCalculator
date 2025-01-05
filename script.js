@@ -87,11 +87,19 @@ function gererLesCRLF(text) {
 
 //#region Evenements et DOM
 
+function couleurThemeEnFonctionDesRunes() {
+    const type = document.getElementById("type").value;
+    const typeObjetCourant = typesObjets[type - 1];
+    changeCurrentColor(typeObjetCourant.color);
+}
+
 function changementCaracteristique(desactiverBtn) {
 	document.getElementById("calculer").disabled = desactiverBtn;
-	document.getElementById("resultat").style.visibility = "collapse";
+    document.getElementById("recapModification").classList.add("init");
+	document.getElementById("resultat").style.transform = "scaleY(0)";
     document.getElementById("ref-audio-applause").pause();
     document.getElementById("ref-audio-kick").play();
+    couleurThemeEnFonctionDesRunes();
 }
 
 function createOption(index, nom, actuelSelect, souhaiteSelect) {
@@ -148,6 +156,17 @@ function declancherSonAuChargement() {
     document.removeEventListener("click", declancherSonAuChargement);
 }
 
+function composantNomObjet(objet) {
+    const span = document.createElement("span");
+	span.classList.add("nom-objet-bw");
+	span.textContent = nomCompletObjet(objet);
+    return span;
+}
+
+function changeCurrentColor(newColor) {
+    document.documentElement.style.setProperty('--current-color', newColor);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const typeSelect = document.getElementById("type");
     typesObjets.forEach(type => {
@@ -197,7 +216,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const objetActuel = new Objet(type, caracteristiques[type].support[supportActuel], caracteristiques[type].prefixe[prefixeActuel], caracteristiques[type].suffixe[suffixeActuel]);
         const objetSouhaite = new Objet(type, caracteristiques[type].support[supportSouhaite], caracteristiques[type].prefixe[prefixeSouhaite], caracteristiques[type].suffixe[suffixeSouhaite]);
-        const recapModification = `${nomCompletObjet(objetActuel)} vers ${nomCompletObjet(objetSouhaite)}`;
 
         const coutTotal = calculerCoutTotal(objetActuel, objetSouhaite, caracteristiques[type].support, caracteristiques[type].prefixe, caracteristiques[type].suffixe);
 		const typeObjetCourant = typesObjets[type - 1];
@@ -208,16 +226,30 @@ document.addEventListener("DOMContentLoaded", () => {
         // Une seule ligne
 		document.getElementById("resultatV1-text").style.color = typeObjetCourant.color;
         document.getElementById("resultatV1-text").textContent = `${coutTotal.coutTotalPE} points d'évolution, ${coutEnPiecesEpiques} pièces épiques et ${nbRunes} rune${nbRunes > 1 ? 's' : ''} ${libelleRunes}.`;
-        document.getElementById("resultatV1-modif").textContent = recapModification;
+        document.getElementById("resultatV1-modif").innerHTML = "";
+        document.getElementById("resultatV1-modif").appendChild(composantNomObjet(objetActuel));
+        const text = document.createElement("text");
+        text.textContent = " vers ";
+        document.getElementById("resultatV1-modif").appendChild(text);
+        document.getElementById("resultatV1-modif").appendChild(composantNomObjet(objetSouhaite));
         // Formaté
-        document.getElementById("recapModification").innerHTML = `${recapModification.replace("vers", "<p>==></p>")}`;
+        document.getElementById("recapModification").innerHTML = "";
+        document.getElementById("recapModification").appendChild(composantNomObjet(objetActuel));
+        const text2 = document.createElement("text");
+        text2.textContent = "==>";
+        const p = document.createElement("p");
+        p.appendChild(text2);
+        document.getElementById("recapModification").appendChild(p);
+        document.getElementById("recapModification").appendChild(composantNomObjet(objetSouhaite));
 		document.getElementById("coutTotalPE").textContent = coutTotal.coutTotalPE;
 		document.getElementById("coutEnPiecesEpiques").textContent = coutEnPiecesEpiques;
 		document.getElementById("nbRunes").textContent = nbRunes;
 		document.getElementById("libelleRunes").textContent = "rune".concat(nbRunes > 1 ? 's' : '').concat(' ').concat(libelleRunes);
 		document.getElementById("libelleRunes").style.color = typeObjetCourant.color;
-		document.getElementById("resultat").style.visibility = "visible";
-        
+        document.getElementById("resultat").style.transform = "scaleY(1)";
+
+        setTimeout(() => document.getElementById("recapModification").classList.remove("init"), 75);
+
         document.getElementById("ref-audio-copy").play();
     });
 
