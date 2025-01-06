@@ -49,6 +49,23 @@ h3,
 .form-row {
 	display: inline-block;
 	margin-right: 20px;
+	margin-bottom: 20px;
+}
+
+.form-row label,
+label[for="type"] {
+	font-family: cursive;
+	color: var(--primary-color);
+}
+
+.form-row label {
+	font-size: 96%;
+	text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+}
+
+label[for="type"] {
+	font-weight: bold;
+	text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
 }
 
 h1,
@@ -104,18 +121,31 @@ span.dancing-label {
 }
 
 button {
-	transition: var(--standart-transition);
+	transition:
+		var(--standart-transition),
+		background-position-y var(--small-transition-duration) ease;
 	cursor: pointer;
 	border-width: thin;
 	border-radius: 25px;
 	border-style: outset;
 	font-weight: bold;
 	font-family: cursive;
+	background-position-y: 200px;
 }
 
 button:not(:disabled) {
 	background-color: var(--current-color);
 	color: var(--secondary-highlight-color);
+	background-image: linear-gradient(var(--current-color), rgba(255, 255, 255, 0));
+	background-position-y: 0;
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+button:not(:disabled):hover,
+button:not(:disabled):focus,
+button:not(:disabled):active {
+	background-color: var(--primary-color);
+	box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.75);
 }
 
 button#calculer {
@@ -153,11 +183,17 @@ div.result {
 	padding-bottom: 10px;
 }
 
+div.result:first-child,
+div.result:nth-child(2) {
+	box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
 #resultatV1 {
 	margin-bottom: 2rem;
 }
 
 #resultat {
+	padding-bottom: 30px;
 	transition: var(--short-transition);
 	transform: scaleY(0);
 }
@@ -200,8 +236,8 @@ body {
 		linear-gradient(to right, var(--primary-color), #ffffff) 0 0 / 16.67% 100% repeat-y,
 		linear-gradient(to right, #ffffff, var(--primary-color)) 100% 0 / 16.67% 100% repeat-y,
 		#ffffff;
-	height: calc(100vh - 2rem); /* Ajuste la hauteur pour éviter le débordement affichant la scroll-bar verticale inutilement tout en gardant la possibilité de scroller */
-	width: 100%; /* Assure que le fond couvre toute la largeur de la fenêtre sans l'épaisseur de la scroll-bar verticale */
+	height: calc(100vh - 2rem);
+	width: 100%;
 	margin: 0 auto;
 	font-size: var(--default-font-size);
 }
@@ -244,7 +280,7 @@ select {
 	box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
 	font-size: 1em;
 	cursor: pointer;
-	transition: filter 0.3s ease;
+	transition: var(--transition-duration);
 }
 
 select:hover {
