@@ -43,7 +43,7 @@ h3,
 }
 
 .form-group {
-	margin: 3rem 0;
+	margin: 2.5rem 0;
 }
 
 .form-row {
@@ -59,7 +59,7 @@ label[for="type"] {
 }
 
 .form-row label {
-	font-size: 96%;
+	font-size: 98%;
 	text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
 }
 
@@ -159,7 +159,7 @@ button.mini-bouton {
 .button-container {
 	display: flex;
 	justify-content: center;
-	margin: 3rem 0;
+	margin: 2.5rem 0;
 }
 
 audio {
