@@ -15,15 +15,28 @@
     --standart-transition: all var(--transition-duration) var(--ease-function);
     --short-transition: all var(--small-transition-duration) var(--ease-function);
 
-    --current-color: var(--secondary-color); 
+    --current-color: var(--secondary-color);
+}
+
+.left {
+    text-align: left;
 }
 
 .center {
     text-align: center;
 }
 
-.left {
-    text-align: left;
+.right {
+    text-align: right;
+}
+
+.d-flex-justify {
+    display: flex;
+    justify-content: space-between;
+}
+
+h1, h3, #version, #data-sources {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .form-group {
@@ -35,9 +48,13 @@
     margin-right: 20px;
 }
 
-h1.title {
+h1, h3 {
     color: var(--primary-color);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    transition: var(--transition-duration);
+}
+
+span.dancing-label {
+    transition: var(--standart-transition);
 }
 
 #version {
@@ -45,7 +62,6 @@ h1.title {
     position: fixed;
     bottom: 2rem;
     right: 2rem;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 #version a {
@@ -66,7 +82,6 @@ h1.title {
     position: fixed;
     bottom: 2rem;
     left: 2rem;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 #data-sources a {
@@ -156,6 +171,7 @@ div.result {
     transform: rotateZ(90deg);
     width: fit-content;
     padding: 10px 0;
+    text-shadow: 4px -4px 5px;
 }
 
 #recapModification.init p {
@@ -171,6 +187,7 @@ span.nom-objet-bw {
     color: #DABA4C;
     background-color: black;
     border-radius: 0.45rem;
+    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.4);
     /* cursor: pointer; TODO: en attente transcodage complet avec la page https://r1.fr.bloodwars.net/test_items.php?xxx pour créer un lien hypertext à minima */
 }
 
@@ -185,17 +202,6 @@ body {
     font-size: var(--default-font-size);
 }
 
-/* Styles spécifiques aux téléphones */
-@media (max-width: 600px) {
-    body {
-        font-size: var(--mobile-phone-font-size);
-    }
-
-    span.nom-objet-bw {
-        font-size: calc(var(--mobile-phone-font-size) - 4px);
-    }
-}
-
 #layout {
     max-width: 66%;
     margin-right: auto;
@@ -206,7 +212,80 @@ body {
     color: black;
 }
 
-/* Notifications */
+#sound-tool-bar {
+    transition: var(--standart-transition); 
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    max-width: 16.67%;
+}
+
+input[type="range"] {
+    accent-color: var(--primary-color);
+    opacity: 0.4;
+    width: 100%;
+    cursor: pointer;
+}
+
+input[type="range"]:hover {
+    opacity: 1;
+}
+
+select {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 0.25em;
+    box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
+    font-size: 1em;
+    cursor: pointer;
+    transition: filter 0.3s ease;
+}
+
+select:hover {
+    filter: sepia(100%);
+}
+
+select option {
+    background-color: white;
+    color: var(--primary-color);
+}
+
+/* --- Styles spécifiques aux téléphones --- */
+@media (max-width: 600px) {
+    body {
+        font-size: var(--mobile-phone-font-size);
+    }
+
+    span.nom-objet-bw {
+        font-size: calc(var(--mobile-phone-font-size) - 4px);
+    }
+
+    #data-sources {
+        left: 1rem;
+    }
+
+    #version {
+        right: 1rem;
+    }
+
+    #data-sources, #version {
+        bottom: 1rem;
+    }
+
+    #sound-tool-bar {
+        transform: rotate(-90deg);
+        right: 0;
+        min-width: 69px;
+    }
+
+    span.dancing-label {
+        transform: rotate(90deg);
+    }
+}
+
+/* --- Notifications --- */
 
 #notification-container {
     transition: var(--short-transition); 
@@ -241,7 +320,7 @@ body {
     opacity: 1;
 }
 
-/* Intro */
+/* --- Intro --- */
 
 #notification-container.intro {
     background-color: var(--primary-color);
@@ -249,23 +328,85 @@ body {
 
 #layout.intro {
     transform: scaleX(0);
+}
+
+#layout.intro, #version.intro, #data-sources.intro, #data-sources.intro a {
     color: var(--primary-color);
+}
+
+h1.intro, h3.intro, #version.intro, #data-sources.intro {
+    text-shadow: none;
 }
 
 #version.intro {
     right: 0;
     bottom: 0;
-    color: var(--primary-color);
-    text-shadow: none;
 }
 
 #data-sources.intro {
     left: 0;
     bottom: 0;
-    color: var(--primary-color);
-    text-shadow: none;
 }
 
-#data-sources.intro a {
-    color: var(--primary-color);
+#sound-tool-bar.intro {
+    top: 0;
+    right: 0;
+}
+
+/* --- bouton on-off (checkbox) --- */
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 3em;
+    height: 1.7em;
+    vertical-align: middle;
+    transform: scale(0.8);
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 1.7em;
+    opacity: 0.4;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 1.3em;
+    width: 1.3em;
+    left: 0.2em;
+    bottom: 0.2em;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(1.3em);
+}
+
+div.mute-unmute {
+    align-items: center;
 }

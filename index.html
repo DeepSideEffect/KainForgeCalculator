@@ -4,10 +4,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Calculatrice de la forge de Kain</title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="src/css/styles.css">
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-        <script src="script.js" defer></script>
-        <script src="data.js" defer></script>
+        <script src="src/js/script/utils.js" defer></script>
+        <script src="src/js/main.js" defer></script>
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-NX8L0J7Z20"></script>
         <script>
@@ -25,7 +25,7 @@
             <audio id="ref-audio-copy2" src="https://cdn.freesound.org/previews/274/274318_97763-lq.mp3" controls></audio>
             <audio id="ref-audio-kick" src="https://cdn.freesound.org/previews/784/784036_3905081-lq.mp3" controls></audio>
 
-            <h1 class="title center">Calculatrice de la forge de Kain</h1>
+            <h1 class="center intro">Calculatrice de la forge de Kain</h1>
 
             <form>
                 <div class="form-group center">
@@ -33,7 +33,7 @@
                     <select id="type" name="type"></select>
                 </div>
 
-                <h3>Caractéristiques Actuelles</h2>
+                <h3 class="intro">Caractéristiques Actuelles</h2>
                 <div class="form-group center">
                     <div class="form-row">
                         <label for="supportActuel">Support actuel :</label>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
 
-                <h3>Caractéristiques Souhaitées</h2>
+                <h3 class="intro">Caractéristiques Souhaitées</h2>
                 <div class="form-group center">
                     <div class="form-row">
                         <label for="supportSouhaite">Support voulu :</label>
@@ -99,12 +99,30 @@
 
         </div>
 
+        <div id="data-sources" class="intro" title="Source des données depuis le wiki Bloodwars"><a target="_blank" href="https://wiki.fr.bloodwars.net/index.php?title=La_Forge_de_Kain_sur_UT">Source des données</a></div>
+        
+        <div id="version" class="intro" title="Changelog"><a target="_blank" href="https://github.com/DeepSideEffect/KainForgeCalculator/activity?ref=main">v1.3.0 © Deep 2025</a></div>
+
+        <div id="sound-tool-bar" class="intro">
+            <label for="volumeControl" class="d-flex-justify">
+                <span class="float-left dancing-label">&#128264;</span>
+                <span class="dancing-label">&#128265;</span>
+                <span class="float-right dancing-label">&#128266;</span>
+            </label>
+            <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="1" title="Contrôle du volume audio">
+
+            <div class="mute-unmute d-flex-justify">
+                <span class="dancing-label">&#128263;</span>
+                <label class="switch" title="Activer ou désactiver le son">
+                    <input type="checkbox" id="soundToggle">
+                    <span class="slider"></span>
+                </label>
+                <span class="dancing-label">&#128266;</span>
+            </div>
+        </div>
+
         <div id="notification-container" class="intro">
             <div id="notification"></div>
         </div>
-
-        <div id="data-sources" class="intro" title="Source des données depuis le wiki Bloodwars"><a target="_blank" href="https://wiki.fr.bloodwars.net/index.php?title=La_Forge_de_Kain_sur_UT">Source des données</a></div>
-        
-        <div id="version" class="intro" title="Changelog"><a target="_blank" href="https://github.com/DeepSideEffect/KainForgeCalculator/activity?ref=main">v1.2.0 © Deep 2025</a></div>
     </body>
 </html>
