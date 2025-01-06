@@ -1,5 +1,5 @@
 function listenToEnterKey() {
-	document.body.addEventListener("keydown", function(event) {
+	document.body.addEventListener("keydown", function (event) {
 		if (event.key === "Enter") {
 			event.preventDefault(); // Empêche le comportement par défaut de la touche "Entrée"
 			document.getElementById("calculer").click();
@@ -8,18 +8,18 @@ function listenToEnterKey() {
 }
 
 function couleurThemeEnFonctionDesRunes() {
-    const type = document.getElementById("type").value;
-    const typeObjetCourant = typesObjets[type - 1];
-    changeCurrentColor(typeObjetCourant.color);
+	const type = document.getElementById("type").value;
+	const typeObjetCourant = typesObjets[type - 1];
+	changeCurrentColor(typeObjetCourant.color);
 }
 
 function changementCaracteristique(desactiverBtn) {
 	document.getElementById("calculer").disabled = desactiverBtn;
-    document.getElementById("recapModification").classList.add("init");
+	document.getElementById("recapModification").classList.add("init");
 	document.getElementById("resultat").style.transform = "scaleY(0)";
-    document.getElementById("ref-audio-applause").pause();
-    document.getElementById("ref-audio-kick").play();
-    couleurThemeEnFonctionDesRunes();
+	document.getElementById("ref-audio-applause").pause();
+	document.getElementById("ref-audio-kick").play();
+	couleurThemeEnFonctionDesRunes();
 }
 
 function createOption(index, nom, actuelSelect, souhaiteSelect) {
@@ -38,26 +38,26 @@ function caracteristiqueInit(selectHtmlId) {
 }
 
 function copyToClipboard(htmlId) {
-    const textToCopy = gererLesCRLF(document.getElementById(htmlId).innerText);
-    navigator.clipboard.writeText(textToCopy).then(() => {
-        showNotification("Texte copié dans le presse-papiers !");
-    }).catch(err => { 
-        console.error("Erreur lors de la copie : ", err);
-        const errMsg = "Erreur lors de la copie : ".concat(err?.message);
-        showNotification(errMsg);
-    });
+	const textToCopy = gererLesCRLF(document.getElementById(htmlId).innerText);
+	navigator.clipboard.writeText(textToCopy).then(() => {
+		showNotification("Texte copié dans le presse-papiers !");
+	}).catch(err => {
+		console.error("Erreur lors de la copie : ", err);
+		const errMsg = "Erreur lors de la copie : ".concat(err?.message);
+		showNotification(errMsg);
+	});
 }
 
 function showNotification(message) {
-    document.getElementById("ref-audio-copy2").play();
-    document.getElementById("notification-container").classList.add("show");
-    document.getElementById("notification").textContent = message;
-    document.getElementById("notification").classList.add("show");
+	document.getElementById("ref-audio-copy2").play();
+	document.getElementById("notification-container").classList.add("show");
+	document.getElementById("notification").textContent = message;
+	document.getElementById("notification").classList.add("show");
 
-    setTimeout(() => {
-        document.getElementById("notification").classList.remove("show");
-        setTimeout(() => document.getElementById("notification-container").classList.remove("show"), 800);
-    }, 2000);
+	setTimeout(() => {
+		document.getElementById("notification").classList.remove("show");
+		setTimeout(() => document.getElementById("notification-container").classList.remove("show"), 800);
+	}, 2000);
 }
 
 function intro() {
@@ -68,23 +68,23 @@ function intro() {
 }
 
 function declancherSonAuChargement() {
-    const audio = document.getElementById("ref-audio-applause");
-    audio.play().catch(error => {
-        console.error("Erreur lors de la lecture de l'audio : ", error);
-    });
+	const audio = document.getElementById("ref-audio-applause");
+	audio.play().catch(error => {
+		console.error("Erreur lors de la lecture de l'audio : ", error);
+	});
 
-    document.removeEventListener("click", declancherSonAuChargement);
+	document.removeEventListener("click", declancherSonAuChargement);
 }
 
 function composantNomObjet(objet) {
-    const span = document.createElement("span");
+	const span = document.createElement("span");
 	span.classList.add("nom-objet-bw");
 	span.textContent = nomCompletObjet(objet);
-    return span;
+	return span;
 }
 
 function changeCurrentColor(newColor) {
-    document.documentElement.style.setProperty('--current-color', newColor);
+	document.documentElement.style.setProperty('--current-color', newColor);
 }
 
 /** Résultat affiché sur une seule (ou deux) ligne(s) */
