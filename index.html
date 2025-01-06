@@ -26,6 +26,7 @@
 		<audio id="ref-audio-copy" src="https://cdn.freesound.org/previews/615/615221_13644415-lq.mp3" controls></audio>
 		<audio id="ref-audio-copy2" src="https://cdn.freesound.org/previews/274/274318_97763-lq.mp3" controls></audio>
 		<audio id="ref-audio-kick" src="https://cdn.freesound.org/previews/784/784036_3905081-lq.mp3" controls></audio>
+		<audio id="ref-audio-slide" src="https://cdn.freesound.org/previews/463/463382_321967-hq.mp3" controls></audio>
 
 		<h1 class="center intro">Calculatrice de la forge de Kain</h1>
 
@@ -33,6 +34,9 @@
 			<div class="form-group center">
 				<label for="type">Type d'objet :</label>
 				<select id="type" name="type"></select>
+				<button type="button" id="scroll-bottom-btn" title="Aller tout en bas" onclick="scrollBoutonBottom()" disabled>
+					<span class="icon">▼</span>
+				</button>
 			</div>
 
 			<h3 class="intro">Caractéristiques Actuelles</h2>
@@ -93,7 +97,7 @@
 			</div>
 
 			<div id="resultatV2" title="Résultat formaté" class="center">
-				<div class="result init" id="recapModification"></div>
+				<div class="result init radius-top" id="recapModification"></div>
 				<div class="result left">
 					<span class="cout-total">Coût total :</span>
 					<ul>
@@ -104,13 +108,20 @@
 				</div>
 			</div>
 			<div class="center">
-				<div class="result">
+				<div class="result radius-bottom">
 					<button type="button"
 						class="result"
 						title="Copier l'affichage formaté dans le presse-papier"
 						onclick="copyToClipboard('resultatV2')"
 					>
 						Copier
+					</button>
+					<button type="button"
+						id="scroll-top-btn"
+						title="Aller tout en haut"
+						onclick="scrollBoutonTop()"
+					>
+						<span class="icon">▲</span>
 					</button>
 				</div>
 			</div>
@@ -123,7 +134,7 @@
 	</div>
 
 	<div id="version" class="intro" title="Changelog">
-		<a target="_blank" href="https://github.com/DeepSideEffect/KainForgeCalculator/activity?ref=main">v1.3.1 © Deep 2025</a>
+		<a target="_blank" href="https://github.com/DeepSideEffect/KainForgeCalculator/activity?ref=main">v1.3.2 © Deep 2025</a>
 	</div>
 
 	<div id="sound-tool-bar" class="intro">

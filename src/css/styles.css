@@ -1,6 +1,7 @@
 :root {
 	--default-font-size: 16px;
 	--mobile-phone-font-size: calc(var(--default-font-size) - 6px);
+	--small-corner-radius: 15px;
 
 	--primary-color: #540d11;
 	--secondary-color: #b96167;
@@ -188,6 +189,16 @@ div.result:nth-child(2) {
 	box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
+.radius-top {
+	border-top-left-radius: var(--small-corner-radius);
+	border-top-right-radius: var(--small-corner-radius);
+}
+
+.radius-bottom {
+	border-bottom-left-radius: var(--small-corner-radius);
+	border-bottom-right-radius: var(--small-corner-radius);
+}
+
 #resultatV1 {
 	margin-bottom: 2rem;
 }
@@ -290,6 +301,18 @@ select:hover {
 select option {
 	background-color: white;
 	color: var(--primary-color);
+}
+
+.icon {
+	padding: 0.2em 0.4em;
+}
+
+button:has(.icon) {
+	margin-left: 0.5rem;
+}
+
+button:not(:disabled) .icon {
+	color: white;
 }
 
 /* --- Styles spécifiques aux téléphones --- */
