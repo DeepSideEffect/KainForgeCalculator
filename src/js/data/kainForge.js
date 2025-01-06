@@ -1,6 +1,6 @@
 // Forge de Kain
 const caracteristiques = {
-    1: casqueCaracteristiques,
+	1: casqueCaracteristiques,
 	2: armureCaracteristiques,
 	3: pantalonCaracteristiques,
 	4: amuletteCaracteristiques,
@@ -9,7 +9,7 @@ const caracteristiques = {
 	7: armeFeuDeuxMainsCaracteristiques,
 	8: armeDistanceCaracteristiques,
 	9: armeCaCUneMainCaracteristiques,
-    10: armeCaCDeuxMainsCaracteristiques
+	10: armeCaCDeuxMainsCaracteristiques
 };
 
 startup();
