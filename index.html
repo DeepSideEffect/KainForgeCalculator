@@ -1,128 +1,140 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Calculatrice de la forge de Kain</title>
-        <link rel="stylesheet" href="src/css/styles.css">
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-        <script src="src/js/script/utils.js" defer></script>
-        <script src="src/js/main.js" defer></script>
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NX8L0J7Z20"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
 
-            gtag('config', 'G-NX8L0J7Z20');
-        </script>
-    </head>
-    <body>
-        <div id="layout" class="intro">
-            <audio id="ref-audio-applause" src="https://cdn.freesound.org/previews/33/33564_56518-lq.mp3" autoplay controls></audio>
-            <audio id="ref-audio-copy" src="https://cdn.freesound.org/previews/615/615221_13644415-lq.mp3" controls></audio>
-            <audio id="ref-audio-copy2" src="https://cdn.freesound.org/previews/274/274318_97763-lq.mp3" controls></audio>
-            <audio id="ref-audio-kick" src="https://cdn.freesound.org/previews/784/784036_3905081-lq.mp3" controls></audio>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Calculatrice de la forge de Kain</title>
+	<link rel="stylesheet" href="src/css/styles.css">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<script src="src/js/script/utils.js" defer></script>
+	<script src="src/js/main.js" defer></script>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-NX8L0J7Z20"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
 
-            <h1 class="center intro">Calculatrice de la forge de Kain</h1>
+		gtag('config', 'G-NX8L0J7Z20');
+	</script>
+</head>
 
-            <form>
-                <div class="form-group center">
-                    <label for="type">Type d'objet :</label>
-                    <select id="type" name="type"></select>
-                </div>
+<body>
+	<div id="layout" class="intro">
+		<audio id="ref-audio-applause" src="https://cdn.freesound.org/previews/33/33564_56518-lq.mp3" autoplay
+			controls></audio>
+		<audio id="ref-audio-copy" src="https://cdn.freesound.org/previews/615/615221_13644415-lq.mp3" controls></audio>
+		<audio id="ref-audio-copy2" src="https://cdn.freesound.org/previews/274/274318_97763-lq.mp3" controls></audio>
+		<audio id="ref-audio-kick" src="https://cdn.freesound.org/previews/784/784036_3905081-lq.mp3" controls></audio>
 
-                <h3 class="intro">Caractéristiques Actuelles</h2>
-                <div class="form-group center">
-                    <div class="form-row">
-                        <label for="supportActuel">Support actuel :</label>
-                        <select id="supportActuel" name="supportActuel"></select>
-                    </div>
-                    <div class="form-row">
-                        <label for="prefixeActuel">Préfixe actuel :</label>
-                        <select id="prefixeActuel" name="prefixeActuel"></select>
-                    </div>
-                    <div class="form-row">
-                        <label for="suffixeActuel">Suffixe actuel :</label>
-                        <select id="suffixeActuel" name="suffixeActuel"></select>
-                    </div>
-                </div>
+		<h1 class="center intro">Calculatrice de la forge de Kain</h1>
 
-                <h3 class="intro">Caractéristiques Souhaitées</h2>
-                <div class="form-group center">
-                    <div class="form-row">
-                        <label for="supportSouhaite">Support voulu :</label>
-                        <select id="supportSouhaite" name="supportSouhaite"></select>
-                    </div>
-                    <div class="form-row">
-                        <label for="prefixeSouhaite">Préfixe voulu :</label>
-                        <select id="prefixeSouhaite" name="prefixeSouhaite"></select>
-                    </div>
-                    <div class="form-row">
-                        <label for="suffixeSouhaite">Suffixe voulu :</label>
-                        <select id="suffixeSouhaite" name="suffixeSouhaite"></select>
-                    </div>
-                </div>
+		<form>
+			<div class="form-group center">
+				<label for="type">Type d'objet :</label>
+				<select id="type" name="type"></select>
+			</div>
 
-                <div class="button-container">
-                    <button type="button" id="calculer" title="Cliquer ou appuyer sur 'entrée' pour calculer le coût total de la modification de l'objet">Calculer</button>
-                </div>
-            </form>
+			<h3 class="intro">Caractéristiques Actuelles</h2>
+				<div class="form-group center">
+					<div class="form-row">
+						<label for="supportActuel">Support actuel :</label>
+						<select id="supportActuel" name="supportActuel"></select>
+					</div>
+					<div class="form-row">
+						<label for="prefixeActuel">Préfixe actuel :</label>
+						<select id="prefixeActuel" name="prefixeActuel"></select>
+					</div>
+					<div class="form-row">
+						<label for="suffixeActuel">Suffixe actuel :</label>
+						<select id="suffixeActuel" name="suffixeActuel"></select>
+					</div>
+				</div>
 
-            <div id="resultat">
-                <div id="resultatV1" title="Résultat en ligne">
-                    <span id="resultatV1-display">
-                        Pour modifier l'objet <span id="resultatV1-modif"></span>,<br />
-                        le coût total est de <span id="resultatV1-text"></span>
-                    </span>
-                    <button type="button" class="mini-bouton" onclick="copyToClipboard('resultatV1-display')" title="Copier l'affichage en ligne dans le presse-papier">Copier</button>
-                </div>
+				<h3 class="intro">Caractéristiques Souhaitées</h2>
+					<div class="form-group center">
+						<div class="form-row">
+							<label for="supportSouhaite">Support voulu :</label>
+							<select id="supportSouhaite" name="supportSouhaite"></select>
+						</div>
+						<div class="form-row">
+							<label for="prefixeSouhaite">Préfixe voulu :</label>
+							<select id="prefixeSouhaite" name="prefixeSouhaite"></select>
+						</div>
+						<div class="form-row">
+							<label for="suffixeSouhaite">Suffixe voulu :</label>
+							<select id="suffixeSouhaite" name="suffixeSouhaite"></select>
+						</div>
+					</div>
 
-                <div id="resultatV2" title="Résultat formaté" class="center">
-                    <div class="result init" id="recapModification"></div>
-                    <div class="result left">
-                        <span class="cout-total">Coût total :</span>
-                        <ul>
-                            <li><span class="numberResult" id="coutTotalPE">0</span> points d'évolution</li>
-                            <li><span class="numberResult" id="coutEnPiecesEpiques">0</span> pièces épiques</li>
-                            <li><span class="numberResult" id="nbRunes">0</span> <span id="libelleRunes">rune.</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="center">
-                    <div class="result">
-                        <button type="button" class="result" onclick="copyToClipboard('resultatV2')" title="Copier l'affichage formaté dans le presse-papier">Copier</button>
-                    </div>
-                </div>
-            </div>
+					<div class="button-container">
+						<button type="button" id="calculer"
+							title="Cliquer ou appuyer sur 'entrée' pour calculer le coût total de la modification de l'objet">Calculer</button>
+					</div>
+		</form>
 
-        </div>
+		<div id="resultat">
+			<div id="resultatV1" title="Résultat en ligne">
+				<span id="resultatV1-display">
+					Pour modifier l'objet <span id="resultatV1-modif"></span>,<br />
+					le coût total est de <span id="resultatV1-text"></span>
+				</span>
+				<button type="button" class="mini-bouton" onclick="copyToClipboard('resultatV1-display')"
+					title="Copier l'affichage en ligne dans le presse-papier">Copier</button>
+			</div>
 
-        <div id="data-sources" class="intro" title="Source des données depuis le wiki Bloodwars"><a target="_blank" href="https://wiki.fr.bloodwars.net/index.php?title=La_Forge_de_Kain_sur_UT">Source des données</a></div>
-        
-        <div id="version" class="intro" title="Changelog"><a target="_blank" href="https://github.com/DeepSideEffect/KainForgeCalculator/activity?ref=main">v1.3.0 © Deep 2025</a></div>
+			<div id="resultatV2" title="Résultat formaté" class="center">
+				<div class="result init" id="recapModification"></div>
+				<div class="result left">
+					<span class="cout-total">Coût total :</span>
+					<ul>
+						<li><span class="numberResult" id="coutTotalPE">0</span> points d'évolution</li>
+						<li><span class="numberResult" id="coutEnPiecesEpiques">0</span> pièces épiques</li>
+						<li><span class="numberResult" id="nbRunes">0</span> <span id="libelleRunes">rune.</span></li>
+					</ul>
+				</div>
+			</div>
+			<div class="center">
+				<div class="result">
+					<button type="button" class="result" onclick="copyToClipboard('resultatV2')"
+						title="Copier l'affichage formaté dans le presse-papier">Copier</button>
+				</div>
+			</div>
+		</div>
 
-        <div id="sound-tool-bar" class="intro">
-            <label for="volumeControl" class="d-flex-justify">
-                <span class="float-left dancing-label">&#128264;</span>
-                <span class="dancing-label">&#128265;</span>
-                <span class="float-right dancing-label">&#128266;</span>
-            </label>
-            <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="1" title="Contrôle du volume audio">
+	</div>
 
-            <div class="mute-unmute d-flex-justify">
-                <span class="dancing-label">&#128263;</span>
-                <label class="switch" title="Activer ou désactiver le son">
-                    <input type="checkbox" id="soundToggle">
-                    <span class="slider"></span>
-                </label>
-                <span class="dancing-label">&#128266;</span>
-            </div>
-        </div>
+	<div id="data-sources" class="intro" title="Source des données depuis le wiki Bloodwars">
+		<a target="_blank" href="https://wiki.fr.bloodwars.net/index.php?title=La_Forge_de_Kain_sur_UT">Source des données</a>
+	</div>
 
-        <div id="notification-container" class="intro">
-            <div id="notification"></div>
-        </div>
-    </body>
+	<div id="version" class="intro" title="Changelog">
+		<a target="_blank" href="https://github.com/DeepSideEffect/KainForgeCalculator/activity?ref=main">v1.3.0 © Deep 2025</a>
+	</div>
+
+	<div id="sound-tool-bar" class="intro">
+		<label for="volumeControl" class="d-flex-justify">
+			<span class="float-left dancing-label">&#128264;</span>
+			<span class="dancing-label">&#128265;</span>
+			<span class="float-right dancing-label">&#128266;</span>
+		</label>
+		<input type="range" id="volumeControl" min="0" max="1" step="0.01" value="1" title="Contrôle du volume audio">
+
+		<div class="mute-unmute d-flex-justify">
+			<span class="dancing-label">&#128263;</span>
+			<label class="switch" title="Activer ou désactiver le son">
+				<input type="checkbox" id="soundToggle">
+				<span class="slider"></span>
+			</label>
+			<span class="dancing-label">&#128266;</span>
+		</div>
+	</div>
+
+	<div id="notification-container" class="intro">
+		<div id="notification"></div>
+	</div>
+
+</body>
+
 </html>

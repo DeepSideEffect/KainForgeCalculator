@@ -1,412 +1,423 @@
-:root { 
-    --default-font-size: 16px;
-    --mobile-phone-font-size: calc(var(--default-font-size) - 6px);
+:root {
+	--default-font-size: 16px;
+	--mobile-phone-font-size: calc(var(--default-font-size) - 6px);
 
-    --primary-color: #540d11;
-    --secondary-color: #b96167;
-    --secondary-light-color: #ebbfbf;
-    --succes-message-color: #21b530;
-    --highlight-color: #68c5bf;
-    --secondary-highlight-color: aliceblue;
+	--primary-color: #540d11;
+	--secondary-color: #b96167;
+	--secondary-light-color: #ebbfbf;
+	--succes-message-color: #21b530;
+	--highlight-color: #68c5bf;
+	--secondary-highlight-color: aliceblue;
 
-    --ease-function: ease-in-out;
-    --transition-duration: 1.8s;
-    --small-transition-duration: calc(var(--transition-duration) - 0.45s);
-    --standart-transition: all var(--transition-duration) var(--ease-function);
-    --short-transition: all var(--small-transition-duration) var(--ease-function);
+	--ease-function: ease-in-out;
+	--transition-duration: 1.8s;
+	--small-transition-duration: calc(var(--transition-duration) - 0.45s);
+	--standart-transition: all var(--transition-duration) var(--ease-function);
+	--short-transition: all var(--small-transition-duration) var(--ease-function);
 
-    --current-color: var(--secondary-color);
+	--current-color: var(--secondary-color);
 }
 
 .left {
-    text-align: left;
+	text-align: left;
 }
 
 .center {
-    text-align: center;
+	text-align: center;
 }
 
 .right {
-    text-align: right;
+	text-align: right;
 }
 
 .d-flex-justify {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
-h1, h3, #version, #data-sources {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+h1,
+h3,
+#version,
+#data-sources {
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .form-group {
-    margin: 3rem 0;
+	margin: 3rem 0;
 }
 
 .form-row {
-    display: inline-block;
-    margin-right: 20px;
+	display: inline-block;
+	margin-right: 20px;
 }
 
-h1, h3 {
-    color: var(--primary-color);
-    transition: var(--transition-duration);
+h1,
+h3 {
+	color: var(--primary-color);
+	transition: var(--transition-duration);
 }
 
 span.dancing-label {
-    transition: var(--standart-transition);
+	transition: var(--standart-transition);
 }
 
 #version {
-    transition: var(--standart-transition); 
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
+	transition: var(--standart-transition);
+	position: fixed;
+	bottom: 2rem;
+	right: 2rem;
 }
 
 #version a {
-    transition: var(--standart-transition);
-    text-decoration: none;
-    color: var(--secondary-color);
-    font-style: italic;
-    font-size: smaller;
+	transition: var(--standart-transition);
+	text-decoration: none;
+	color: var(--secondary-color);
+	font-style: italic;
+	font-size: smaller;
 }
 
 #version a:hover {
-    text-decoration: underline;
-    color: var(--highlight-color) !important;
+	text-decoration: underline;
+	color: var(--highlight-color) !important;
 }
 
 #data-sources {
-    transition: var(--standart-transition); 
-    position: fixed;
-    bottom: 2rem;
-    left: 2rem;
+	transition: var(--standart-transition);
+	position: fixed;
+	bottom: 2rem;
+	left: 2rem;
 }
 
 #data-sources a {
-    transition: var(--standart-transition);
-    text-decoration: none;
-    color: var(--secondary-light-color);
+	transition: var(--standart-transition);
+	text-decoration: none;
+	color: var(--secondary-light-color);
 }
 
 #data-sources a:hover {
-    text-decoration: underline;
-    color: var(--highlight-color) !important;
+	text-decoration: underline;
+	color: var(--highlight-color) !important;
 }
 
 #data-sources a:visited {
-    color: var(--secondary-color);
+	color: var(--secondary-color);
 }
 
 button {
-    transition: var(--standart-transition);
-    cursor: pointer;
-    border-width: thin;
-    border-radius: 25px;
-    border-style: outset;
-    font-weight: bold;
-    font-family: cursive;
+	transition: var(--standart-transition);
+	cursor: pointer;
+	border-width: thin;
+	border-radius: 25px;
+	border-style: outset;
+	font-weight: bold;
+	font-family: cursive;
 }
 
 button:not(:disabled) {
-    background-color: var(--current-color);
-    color: var(--secondary-highlight-color);
+	background-color: var(--current-color);
+	color: var(--secondary-highlight-color);
 }
 
 button#calculer {
-    padding: 5px 50px;
+	padding: 5px 50px;
 }
 
 button.mini-bouton {
-    margin-left: 3rem;
+	margin-left: 3rem;
 }
 
 .button-container {
-    display: flex;
-    justify-content: center;
-    margin: 3rem 0;
+	display: flex;
+	justify-content: center;
+	margin: 3rem 0;
 }
 
 audio {
-    display: none;
+	display: none;
 }
 
 span.numberResult {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 span.cout-total {
-    font-style: italic;
-    text-decoration: underline;
-    padding-left: 10px;
+	font-style: italic;
+	text-decoration: underline;
+	padding-left: 10px;
 }
 
 div.result {
-    width: 40vw;
-    display: inline-block;
-    background-color: var(--secondary-highlight-color);
-    padding-bottom: 10px;
+	width: 40vw;
+	display: inline-block;
+	background-color: var(--secondary-highlight-color);
+	padding-bottom: 10px;
 }
 
 #resultatV1 {
-    margin-bottom: 2rem;
+	margin-bottom: 2rem;
 }
 
 #resultat {
-    transition: var(--short-transition);
-    transform: scaleY(0);
+	transition: var(--short-transition);
+	transform: scaleY(0);
 }
 
 #recapModification {
-    padding-top: 10px;
+	padding-top: 10px;
 }
 
 #recapModification p {
-    transition: var(--standart-transition);
-    margin: auto;
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: var(--current-color);
-    transform: rotateZ(90deg);
-    width: fit-content;
-    padding: 10px 0;
-    text-shadow: 4px -4px 5px;
+	transition: var(--standart-transition);
+	margin: auto;
+	font-size: 1.6rem;
+	font-weight: bold;
+	color: var(--current-color);
+	transform: rotateZ(90deg);
+	width: fit-content;
+	padding: 10px 0;
+	text-shadow: 4px -4px 5px;
 }
 
 #recapModification.init p {
-    transform: rotateZ(0deg);
+	transform: rotateZ(0deg);
 }
 
 span.nom-objet-bw {
-    font-family: Verdana, Helvetica, sans-serif;
-    font-weight: bold;
-    text-wrap-mode: nowrap;
-    padding: 0.25rem;
-    font-size: var(--mobile-phone-font-size);
-    color: #DABA4C;
-    background-color: black;
-    border-radius: 0.45rem;
-    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.4);
-    /* cursor: pointer; TODO: en attente transcodage complet avec la page https://r1.fr.bloodwars.net/test_items.php?xxx pour créer un lien hypertext à minima */
+	font-family: Verdana, Helvetica, sans-serif;
+	font-weight: bold;
+	text-wrap-mode: nowrap;
+	padding: 0.25rem;
+	font-size: var(--mobile-phone-font-size);
+	color: #DABA4C;
+	background-color: black;
+	border-radius: 0.45rem;
+	box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.4);
+	/* cursor: pointer; TODO: en attente transcodage complet avec la page https://r1.fr.bloodwars.net/test_items.php?xxx pour créer un lien hypertext à minima */
 }
 
-body { 
-    background:
-        linear-gradient(to right, var(--primary-color), #ffffff) 0 0 / 16.67% 100% repeat-y,
-        linear-gradient(to right, #ffffff, var(--primary-color)) 100% 0 / 16.67% 100% repeat-y,
-        #ffffff;
-    height: calc(100vh - 2rem); /* Ajuste la hauteur pour éviter le débordement affichant la scroll-bar verticale inutilement tout en gardant la possibilité de scroller */
-    width: 100%; /* Assure que le fond couvre toute la largeur de la fenêtre sans l'épaisseur de la scroll-bar verticale */
-    margin: 0 auto;
-    font-size: var(--default-font-size);
+body {
+	background:
+		linear-gradient(to right, var(--primary-color), #ffffff) 0 0 / 16.67% 100% repeat-y,
+		linear-gradient(to right, #ffffff, var(--primary-color)) 100% 0 / 16.67% 100% repeat-y,
+		#ffffff;
+	height: calc(100vh - 2rem); /* Ajuste la hauteur pour éviter le débordement affichant la scroll-bar verticale inutilement tout en gardant la possibilité de scroller */
+	width: 100%; /* Assure que le fond couvre toute la largeur de la fenêtre sans l'épaisseur de la scroll-bar verticale */
+	margin: 0 auto;
+	font-size: var(--default-font-size);
 }
 
 #layout {
-    max-width: 66%;
-    margin-right: auto;
-    margin-left: auto;
-    transition: var(--short-transition);
-    transform: scaleX(1);
-    background-color: transparent;
-    color: black;
+	max-width: 66%;
+	margin-right: auto;
+	margin-left: auto;
+	transition: var(--short-transition);
+	transform: scaleX(1);
+	background-color: transparent;
+	color: black;
 }
 
 #sound-tool-bar {
-    transition: var(--standart-transition); 
-    position: fixed;
-    top: 2rem;
-    right: 2rem;
-    max-width: 16.67%;
+	transition: var(--standart-transition);
+	position: fixed;
+	top: 2rem;
+	right: 2rem;
+	max-width: 16.67%;
 }
 
 input[type="range"] {
-    accent-color: var(--primary-color);
-    opacity: 0.4;
-    width: 100%;
-    cursor: pointer;
+	accent-color: var(--primary-color);
+	opacity: 0.4;
+	width: 100%;
+	cursor: pointer;
 }
 
 input[type="range"]:hover {
-    opacity: 1;
+	opacity: 1;
 }
 
 select {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 0.5em 1em;
-    border: none;
-    border-radius: 0.25em;
-    box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
-    font-size: 1em;
-    cursor: pointer;
-    transition: filter 0.3s ease;
+	background-color: var(--primary-color);
+	color: white;
+	padding: 0.5em 1em;
+	border: none;
+	border-radius: 0.25em;
+	box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
+	font-size: 1em;
+	cursor: pointer;
+	transition: filter 0.3s ease;
 }
 
 select:hover {
-    filter: sepia(100%);
+	filter: sepia(100%);
 }
 
 select option {
-    background-color: white;
-    color: var(--primary-color);
+	background-color: white;
+	color: var(--primary-color);
 }
 
 /* --- Styles spécifiques aux téléphones --- */
 @media (max-width: 600px) {
-    body {
-        font-size: var(--mobile-phone-font-size);
-    }
+	body {
+		font-size: var(--mobile-phone-font-size);
+	}
 
-    span.nom-objet-bw {
-        font-size: calc(var(--mobile-phone-font-size) - 4px);
-    }
+	span.nom-objet-bw {
+		font-size: calc(var(--mobile-phone-font-size) - 4px);
+	}
 
-    #data-sources {
-        left: 1rem;
-    }
+	#data-sources {
+		left: 1rem;
+	}
 
-    #version {
-        right: 1rem;
-    }
+	#version {
+		right: 1rem;
+	}
 
-    #data-sources, #version {
-        bottom: 1rem;
-    }
+	#data-sources,
+	#version {
+		bottom: 1rem;
+	}
 
-    #sound-tool-bar {
-        transform: rotate(-90deg);
-        right: 0;
-        min-width: 69px;
-    }
+	#sound-tool-bar {
+		transform: rotate(-90deg);
+		right: 0;
+		min-width: 69px;
+	}
 
-    span.dancing-label {
-        transform: rotate(90deg);
-    }
+	span.dancing-label {
+		transform: rotate(90deg);
+	}
 }
 
 /* --- Notifications --- */
 
 #notification-container {
-    transition: var(--short-transition); 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: transparent;
-    pointer-events: none;
+	transition: var(--short-transition);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	width: 100vw;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: transparent;
+	pointer-events: none;
 }
 
 #notification-container.show {
-    background-color: rgba(0, 0, 0, 0.8);
+	background-color: rgba(0, 0, 0, 0.8);
 }
 
 #notification {
-    color: var(--succes-message-color);
-    transition: var(--standart-transition);
-    opacity: 0;
-    border: 5px solid var(--secondary-light-color);
-    border-radius: 1rem;
-    background-color: var(--secondary-highlight-color);
-    font-size: x-large;
-    padding: 10px;
+	color: var(--succes-message-color);
+	transition: var(--standart-transition);
+	opacity: 0;
+	border: 5px solid var(--secondary-light-color);
+	border-radius: 1rem;
+	background-color: var(--secondary-highlight-color);
+	font-size: x-large;
+	padding: 10px;
 }
 
 #notification.show {
-    opacity: 1;
+	opacity: 1;
 }
 
 /* --- Intro --- */
 
 #notification-container.intro {
-    background-color: var(--primary-color);
+	background-color: var(--primary-color);
 }
 
 #layout.intro {
-    transform: scaleX(0);
+	transform: scaleX(0);
 }
 
-#layout.intro, #version.intro, #data-sources.intro, #data-sources.intro a {
-    color: var(--primary-color);
+#layout.intro,
+#version.intro,
+#data-sources.intro,
+#data-sources.intro a {
+	color: var(--primary-color);
 }
 
-h1.intro, h3.intro, #version.intro, #data-sources.intro {
-    text-shadow: none;
+h1.intro,
+h3.intro,
+#version.intro,
+#data-sources.intro {
+	text-shadow: none;
 }
 
 #version.intro {
-    right: 0;
-    bottom: 0;
+	right: 0;
+	bottom: 0;
 }
 
 #data-sources.intro {
-    left: 0;
-    bottom: 0;
+	left: 0;
+	bottom: 0;
 }
 
 #sound-tool-bar.intro {
-    top: 0;
-    right: 0;
+	top: 0;
+	right: 0;
 }
 
 /* --- bouton on-off (checkbox) --- */
 
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 3em;
-    height: 1.7em;
-    vertical-align: middle;
-    transform: scale(0.8);
+	position: relative;
+	display: inline-block;
+	width: 3em;
+	height: 1.7em;
+	vertical-align: middle;
+	transform: scale(0.8);
 }
 
 .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+	opacity: 0;
+	width: 0;
+	height: 0;
 }
 
 .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-    border-radius: 1.7em;
-    opacity: 0.4;
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	transition: .4s;
+	border-radius: 1.7em;
+	opacity: 0.4;
 }
 
 .slider:before {
-    position: absolute;
-    content: "";
-    height: 1.3em;
-    width: 1.3em;
-    left: 0.2em;
-    bottom: 0.2em;
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
+	position: absolute;
+	content: "";
+	height: 1.3em;
+	width: 1.3em;
+	left: 0.2em;
+	bottom: 0.2em;
+	background-color: white;
+	transition: .4s;
+	border-radius: 50%;
 }
 
 .slider:hover {
-    opacity: 1;
+	opacity: 1;
 }
 
-input:checked + .slider {
-    background-color: var(--primary-color);
+input:checked+.slider {
+	background-color: var(--primary-color);
 }
 
-input:checked + .slider:before {
-    transform: translateX(1.3em);
+input:checked+.slider:before {
+	transform: translateX(1.3em);
 }
 
 div.mute-unmute {
-    align-items: center;
+	align-items: center;
 }
