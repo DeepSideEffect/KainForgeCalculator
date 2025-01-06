@@ -39,6 +39,10 @@ function scrollTopAfterDelay(delay) {
 	window.setTimeout(scrollToTop, delay);
 }
 
+function isVerticalScrollbarVisible() {
+	return document.documentElement.scrollHeight > window.innerHeight;
+}
+
 function couleurThemeEnFonctionDesRunes() {
 	const type = document.getElementById("type").value;
 	const typeObjetCourant = typesObjets[type - 1];
@@ -177,6 +181,8 @@ function calculerClick() {
 
 	scrollBottomAfterDelay(150);
 	document.getElementById("ref-audio-copy").play();
+	document.getElementById("scroll-bottom-btn").disabled = false;
+	document.getElementById("scroll-top-btn").style.display = isVerticalScrollbarVisible() ? 'inline-block' : 'none';
 }
 
 /** Réglage du volume de tous les audios */
@@ -211,6 +217,20 @@ function initialiserParamStockes() {
 		document.getElementById('soundToggle').checked = true;
 }
 
+/** Enrobe l'action des boutons de scroll avec un son */
+function scrollBoutonsAction(action) {
+	action();
+	document.getElementById("ref-audio-slide").play();
+}
+
+function scrollBoutonTop() {
+	scrollBoutonsAction(scrollToTop);
+}
+
+function scrollBoutonBottom() {
+	scrollBoutonsAction(scrollToBottom);
+}
+
 function init() {
 	const typeSelect = document.getElementById("type");
 	typesObjets.forEach(type => {
@@ -241,7 +261,10 @@ function init() {
 			createOption(index, caracteristique.nom, suffixeActuelSelect, suffixeSouhaiteSelect);
 		});
 
-		changementCaracteristique(true)
+		changementCaracteristique(true);
+
+		if (!isVerticalScrollbarVisible())
+			document.getElementById("scroll-bottom-btn").disabled = true;
 	};
 
 	typeSelect.addEventListener("change", updateCaracteristiques);
