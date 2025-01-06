@@ -7,6 +7,38 @@ function listenToEnterKey() {
 	});
 }
 
+/** Faire défiler jusqu'en bas de la page */
+function scrollToBottom() {
+	window.scrollTo({
+		top: document.body.scrollHeight,
+		behavior: 'smooth'
+	});
+}
+
+/** Faire défiler jusqu'en haut de la page */
+function scrollToTop() {
+	window.scrollTo({
+		top: 0,
+		behavior: 'smooth'
+	});
+}
+
+/**
+ * Scroll to bottom afer a delay
+ * @param delay Time in ms when the scroll is delayed
+ */
+function scrollBottomAfterDelay(delay) {
+	window.setTimeout(scrollToBottom, delay);
+}
+
+/**
+ * Scroll to top afer a delay
+ * @param delay Time in ms when the scroll is delayed
+ */
+function scrollTopAfterDelay(delay) {
+	window.setTimeout(scrollToTop, delay);
+}
+
 function couleurThemeEnFonctionDesRunes() {
 	const type = document.getElementById("type").value;
 	const typeObjetCourant = typesObjets[type - 1];
@@ -20,6 +52,7 @@ function changementCaracteristique(desactiverBtn) {
 	document.getElementById("ref-audio-applause").pause();
 	document.getElementById("ref-audio-kick").play();
 	couleurThemeEnFonctionDesRunes();
+	scrollTopAfterDelay(150);
 }
 
 function createOption(index, nom, actuelSelect, souhaiteSelect) {
@@ -40,10 +73,11 @@ function caracteristiqueInit(selectHtmlId) {
 function copyToClipboard(htmlId) {
 	const textToCopy = gererLesCRLF(document.getElementById(htmlId).innerText);
 	navigator.clipboard.writeText(textToCopy).then(() => {
-		showNotification("Texte copié dans le presse-papiers !");
+		showNotification('Texte copié dans le presse-papiers !');
 	}).catch(err => {
-		console.error("Erreur lors de la copie : ", err);
-		const errMsg = "Erreur lors de la copie : ".concat(err?.message);
+		const errMsgPrefix = 'Erreur lors de la copie : ';
+		console.error(errMsgPrefix, err);
+		const errMsg = errMsgPrefix.concat(err?.message);
 		showNotification(errMsg);
 	});
 }
@@ -141,6 +175,7 @@ function calculerClick() {
 
 	setTimeout(() => document.getElementById("recapModification").classList.remove("init"), 75);
 
+	scrollBottomAfterDelay(150);
 	document.getElementById("ref-audio-copy").play();
 }
 
