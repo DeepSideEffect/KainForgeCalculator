@@ -55,7 +55,7 @@ Les contributions sont les bienvenues ! Si vous souhaitez contribuer à ce proje
 - Ouvrez une Pull Request.
 
 ## Licence
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
 
 ## Rejoindre la partie sur Bloodwars
 - sur le server créé le 12.09.2007 : [Ultima Thule](https://r1.fr.bloodwars.net/r.php?r=16320)
