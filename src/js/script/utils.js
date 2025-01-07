@@ -32,3 +32,26 @@ async function loadScriptsInOrder(scriptsSrcList) {
 		console.error(error, 'Erreur lors du chargement des scripts :', scriptsSrcList);
 	}
 }
+
+/** Internationalisation */
+function loadTranslations(lang) {
+	fetch(`src/json/i18n/${lang}.json`)
+		.then(response => response.json())
+		.then(translations => {
+			document.querySelectorAll('[data-translate]').forEach(element => {
+				const key = element.getAttribute('data-translate');
+				element.textContent = translations[key];
+				if (key === 'title') {
+					element.setAttribute('title', translations['description']);
+				}
+			});
+
+			document.querySelectorAll('option[data-translate]').forEach(option => {
+				const key = option.getAttribute('data-translate');
+				option.textContent = translations.options[key];
+			});
+
+			document.head.title = translations['title'];
+		})
+		.catch(error => console.error('Error loading translations:', error));
+}

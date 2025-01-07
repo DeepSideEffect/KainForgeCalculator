@@ -231,7 +231,37 @@ function scrollBoutonBottom() {
 	scrollBoutonsAction(scrollToBottom);
 }
 
+function i18n() {
+	var lang = 'fr';
+	var langQuerystring = querystringParamValue('lang');
+	if (!langQuerystring) {
+		var langstored = localStorage.getItem('lang');
+		if (langstored != null)
+			lang = langstored;
+	}
+	else
+		lang = langQuerystring;
+
+	loadTranslations(lang);
+}
+
+/** Vérifier si un paramètre spécifique existe dans le querystring et récupére sa valeur le cas échéant, null sinon */
+function querystringParamValue(parametreName) {
+	const urlParams = new URLSearchParams(window.location.search);
+	var parametre = null;
+
+	if (urlParams.has(parametreName)) {
+		parametre = urlParams.get(parametreName);
+		console.debug(`La valeur du paramètre '${parametreName}' est : ${parametre}`);
+	} else
+		console.debug(`Le paramètre '${parametreName}' n\'existe pas dans la query string.`);
+
+	return parametre;
+}
+
 function init() {
+	i18n();
+
 	const typeSelect = document.getElementById("type");
 	typesObjets.forEach(type => {
 		const option = document.createElement("option");

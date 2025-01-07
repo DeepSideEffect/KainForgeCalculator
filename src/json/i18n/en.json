@@ -1,0 +1,13 @@
+{
+	"title": "Kain's Forge Calculator",
+	"description": "This calculator allows you to calculate the cost of modifying an epic item in the BW game universe on a server like Ultima Thule / Necropolis.",
+	"options": {
+			"Glock": "Glock",
+			"Magnum": "Magnum",
+			"Desert Eagle": "Desert Eagle",
+			"Beretta": "Beretta",
+			"Uzi": "Uzi",
+			"Mp5k": "Mp5k",
+			"Scorpion": "Scorpion"
+	}
+}
