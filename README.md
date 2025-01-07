@@ -58,9 +58,9 @@ Les contributions sont les bienvenues ! Si vous souhaitez contribuer à ce proje
 Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
 
 ## Rejoindre la partie sur Bloodwars
-- sur le server créé le 12.09.2007 : [Ultima Thule](https://r1.fr.bloodwars.net/r.php?r=16320)
-- sur le server créé le 31.03.2008 : [Ultima Thule II](https://r2.fr.bloodwars.net/r.php?r=1504)
-- sur le server créé le 18.01.2010 : [Ultima Thule III](https://r4.fr.bloodwars.net/r.php?r=7244)
+- sur le server créé le *12.09.**2007*** : [Ultima Thule](https://r1.fr.bloodwars.net/r.php?r=16320)
+- sur le server créé le *31.03.**2008*** : [Ultima Thule II](https://r2.fr.bloodwars.net/r.php?r=1504)
+- sur le server créé le *18.01.**2010*** : [Ultima Thule III](https://r4.fr.bloodwars.net/r.php?r=7244)
 
 ## Remerciements
 - Merci à la communauté BW pour leur soutien et leurs retours.
