@@ -49,9 +49,9 @@ Coût total :
 ## Contribuer
 Les contributions sont les bienvenues ! Si vous souhaitez contribuer à ce projet, veuillez suivre les étapes ci-dessous :
 - Forkez le dépôt.
-- Créez une branche pour votre fonctionnalité (git checkout -b fonctionnalite/ma-fonctionnalite).
-- Commitez vos modifications (git commit -m 'Ajout de ma fonctionnalité').
-- Poussez votre branche (git push origin fonctionnalite/ma-fonctionnalite).
+- Créez une branche pour votre fonctionnalité (`git checkout -b fonctionnalite/ma-fonctionnalite`).
+- Commitez vos modifications (`git commit -m 'Ajout de ma fonctionnalité'`).
+- Poussez votre branche (`git push origin fonctionnalite/ma-fonctionnalite`).
 - Ouvrez une Pull Request.
 
 ## Licence
