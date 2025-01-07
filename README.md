@@ -68,3 +68,6 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 
 ## Auteurs
 [Deep](https://r2.fr.bloodwars.net/showmsg.php?a=profile&uid=1504) - Développeur principal - [GitHub profil](https://github.com/DeepSideEffect)
+
+## Autres langues du fichier README
+- [Fichier README anglais](README_EN.md)
