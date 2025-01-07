@@ -1,5 +1,5 @@
 # KainForgeCalculator
-Kain's Forge Calculator.
+Kain's Forge Calculator.  
 This calculator allows you to calculate the cost of modifying an epic item in the [BW](https://bloodwars.net/) game universe on a **Necropolis** like server.
 
 ## Description
