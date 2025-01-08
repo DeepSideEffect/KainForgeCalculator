@@ -33,11 +33,16 @@ async function loadScriptsInOrder(scriptsSrcList) {
 	}
 }
 
-/** Internationalisation */
+//#region  Internationalisation
+
+const supportedLanguages = ['fr', 'en'];
+
 function loadTranslations(lang) {
 	fetch(`src/json/i18n/${lang}.json`)
 		.then(response => response.json())
 		.then(translations => {
+			document.head.querySelector('title').textContent = translations['title'];
+
 			document.querySelectorAll('[data-translate]').forEach(element => {
 				const key = element.getAttribute('data-translate');
 				element.textContent = translations[key];
@@ -50,8 +55,22 @@ function loadTranslations(lang) {
 				const key = option.getAttribute('data-translate');
 				option.textContent = translations.options[key];
 			});
-
-			document.head.title = translations['title'];
 		})
 		.catch(error => console.error('Error loading translations:', error));
 }
+
+function i18n() {
+	var lang = supportedLanguages[0];
+	var langQuerystring = querystringParamValue('lang');
+	if (!langQuerystring) {
+		var langstored = localStorage.getItem('lang');
+		if (langstored != null)
+			lang = langstored;
+	}
+	else
+		lang = supportedLanguages.includes(langQuerystring) ? langQuerystring : 'en';
+
+	loadTranslations(lang);
+}
+
+//#endregion  Internationalisation

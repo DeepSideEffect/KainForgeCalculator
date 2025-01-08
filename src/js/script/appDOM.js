@@ -231,20 +231,6 @@ function scrollBoutonBottom() {
 	scrollBoutonsAction(scrollToBottom);
 }
 
-function i18n() {
-	var lang = 'fr';
-	var langQuerystring = querystringParamValue('lang');
-	if (!langQuerystring) {
-		var langstored = localStorage.getItem('lang');
-		if (langstored != null)
-			lang = langstored;
-	}
-	else
-		lang = langQuerystring;
-
-	loadTranslations(lang);
-}
-
 /** Vérifier si un paramètre spécifique existe dans le querystring et récupére sa valeur le cas échéant, null sinon */
 function querystringParamValue(parametreName) {
 	const urlParams = new URLSearchParams(window.location.search);
