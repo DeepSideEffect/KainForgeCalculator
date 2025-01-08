@@ -13,9 +13,11 @@ Cette calculatrice vise à faciliter les décisions des joueurs en leur fourniss
 - Prise en charge de l'amélioration aussi bien que de la diminution d'un item.
 - Possibilité de copier le résultat dans le presse-papiers selon l'un des deux formats disponibles.
 - Possibilité de traduire la page en plusieurs langues (Français et Anglais implémentés).
+- Possibilité de lancer la page directement dans la langue demandée.
 - Interface utilisateur intuitive et ludique pour faciliter l'utilisation de la calculatrice.
 - Affichage entièrement *responsive* et animé.
 - Utilisation d'effets sonores réglables.
+- Conservation des préférences de l'utilisateur pour la prochaine utilisation.
 
 ## Installation
 Pour installer et exécuter ce projet localement, suivez les étapes ci-dessous :
@@ -25,8 +27,10 @@ Pour installer et exécuter ce projet localement, suivez les étapes ci-dessous 
    git clone https://github.com/DeepSideEffect/KainForgeCalculator.git
 	 ```
 2. Ouvrez la page ***index.html*** sur votre navigateur.
-> ``📝`` Depuis la **v1.4.0** avec la fonctionnalité d'internationalisation, la page pourrait ne plus s'afficher correctement en local, par défaut.  
+>📝<sup>1</sup> Depuis la **v1.4.0** avec la fonctionnalité d'internationalisation, la page pourrait ne plus s'afficher correctement en local, par défaut.  
 Des méthodes possibles pour éviter les problèmes de [CORS](https://fr.wikipedia.org/wiki/Cross-origin_resource_sharing) lors du développement local sont détaillées dans ce [fichier](src/docs/ServeurLocal.md).
+
+>📝<sup>2</sup> Vous pouvez aussi ajouter le choix de la langue en paramètre queryString pour traduire directement à l'affichage, ex : `http://localhost:5500/index.html?lang=en`.
 
 ## Utilisation
 Sélectionnez un item avec ses caractéristiques de départ et d'arrivée.  

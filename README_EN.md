@@ -13,9 +13,11 @@ This calculator aims to facilitate players' decisions by providing precise and d
 - Support for both upgrading and downgrading an item.
 - Ability to copy the result to the clipboard in one of the two available formats.
 - Ability to translate the page into multiple languages (French and English implemented).
+- Ability to launch the page directly in the requested language.
 - Intuitive and playful user interface to facilitate the use of the calculator.
 - Fully responsive and animated display.
 - Adjustable sound effects.
+- Preservation of user preferences for the next use.
 
 ## Installation
 To install and run this project locally, follow the steps below:
@@ -25,8 +27,10 @@ To install and run this project locally, follow the steps below:
    git clone https://github.com/DeepSideEffect/KainForgeCalculator.git
 	 ```
 2. Open the ***index.html*** page in your browser.
-> ``📝`` Since **v1.4.0**, with the internationalization feature, the page may no longer display correctly locally, by default.  
+>📝<sup>1</sup> Since **v1.4.0**, with the internationalization feature, the page may no longer display correctly locally, by default.  
 Possible methods to avoid [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) issues during local development are detailed in this [file](src/docs/LocalServer.md).
+
+>📝<sup>2</sup> You can also add the language choice as a queryString parameter to translate directly on display, e.g.: `http://localhost:5500/index.html?lang=en`.
 
 ## Usage
 Select an item with its starting and ending characteristics.  

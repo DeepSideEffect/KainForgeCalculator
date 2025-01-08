@@ -99,7 +99,7 @@ function translateOptions(translations) {
 		const key = option.getAttribute('data-translate');
 
 		if (!translations?.options) {
-			option.textContent = key;
+			option.textContent = !key.includes('_') ? key : key.replace(/_/g, ' ');
 			return;
 		}
 

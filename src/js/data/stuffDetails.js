@@ -389,7 +389,7 @@ const armeCaCUneMainCaracteristiques = {
 		new Caracteristique("De La Puissance", 20),
 		new Caracteristique("Du Commandant", 20),
 		new Caracteristique("De L'Agilité", 40),
-		new Caracteristique("De La Justesse", 40),
+		new Caracteristique("De_La_Justesse", 40),
 		new Caracteristique("De La Contusion", 40),
 		new Caracteristique("Du Pouvoir", 40),
 		new Caracteristique("De La Douleur", 40),
