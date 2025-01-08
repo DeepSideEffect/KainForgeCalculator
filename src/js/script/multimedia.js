@@ -4,6 +4,8 @@ function setMuteStateAll(mute) {
 	Array.from(medias).forEach(function (media) {
 		media.muted = mute;
 	});
+
+	if (mute) speechSynthesis.cancel();
 }
 
 /** Changer le volume de tous les audios. Le volume va de 0.0 à 1.0 */

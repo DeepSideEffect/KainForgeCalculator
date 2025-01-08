@@ -44,7 +44,7 @@ h3,
 }
 
 .form-group {
-	margin: 2.5rem 0;
+	margin: 2rem 0 2.5rem;
 }
 
 .form-row {
@@ -252,10 +252,15 @@ span.lang-btn:hover,
 span.lang-btn:focus,
 span.lang-btn:active {
 	opacity: 1;
+	box-shadow: 5px 19px 5px rgba(0, 0, 0, 0.4)
 }
 
-span.lang-btn:last-child {
-	margin-left: 5px;
+span.lang-btn:not(:last-child) {
+	margin-right: 5px;
+}
+
+span.lang-btn img {
+	vertical-align: middle;
 }
 
 body {
@@ -296,6 +301,7 @@ body {
 }
 
 input[type="range"] {
+	transition: var(--short-transition);
 	accent-color: var(--primary-color);
 	opacity: 0.4;
 	width: 100%;
@@ -339,6 +345,10 @@ button:not(:disabled) .icon {
 	color: white;
 }
 
+#scroll-bottom-btn {
+	margin-top: 0.5rem;
+}
+
 /* --- Styles spécifiques aux téléphones --- */
 @media (max-width: 600px) {
 	body {
@@ -377,8 +387,8 @@ button:not(:disabled) .icon {
 		transform: rotate(90deg);
 	}
 
-	span.lang-btn:last-child {
-		margin-left: 0;
+	span.lang-btn:not(:last-child) {
+		margin-right: 0;
 	}
 }
 

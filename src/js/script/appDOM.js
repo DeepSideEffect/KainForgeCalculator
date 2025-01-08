@@ -62,7 +62,6 @@ function changementCaracteristique(desactiverBtn) {
 function createOption(index, nom, actuelSelect, souhaiteSelect) {
 	const option = document.createElement("option");
 	option.value = index;
-	option.textContent = nom; // à garder en cas de problème de traduction (ou traduction manquante).
 	option.setAttribute('data-translate', nom);
 	actuelSelect.appendChild(option);
 	souhaiteSelect.appendChild(option.cloneNode(true));
@@ -252,14 +251,32 @@ function removeQueryStringParameter(param) {
 	window.history.replaceState({}, document.title, url.toString());
 }
 
+function getActualSoundSettings() {
+	const soundToggle = document.getElementById('soundToggle');
+	const volumeBar = document.getElementById('volumeControl');
+
+	return { soundOn: soundToggle.checked,	volumeKFC: volumeBar.value };
+}
+
+function speechSynthesizer(lang) {
+	const soundSettings = getActualSoundSettings();
+	const message = new SpeechSynthesisUtterance(cultureLanguages[lang].message);
+	message.lang = cultureLanguages[lang].code;
+	message.volume = soundSettings.soundOn ? soundSettings.volumeKFC : 0.0; // Régle le volume (0.0 à 1.0)
+	message.rate = 1; // Régle la vitesse de la voix (0.1 à 10)
+	speechSynthesis.speak(message);
+}
+
 function listenToLangButtonsClick() {
 	document.querySelectorAll('span.lang-btn').forEach(element => {
 		element.addEventListener('click', (event) => {
+			speechSynthesis.cancel();
 			const clickedElement = event.currentTarget;
 			const chosenLang = clickedElement.getAttribute('data-lang');
 			loadTranslations(chosenLang);
 			localStorage.setItem('lang', chosenLang);
 			removeQueryStringParameter('lang');
+			speechSynthesizer(chosenLang);
 		});
 	});
 }

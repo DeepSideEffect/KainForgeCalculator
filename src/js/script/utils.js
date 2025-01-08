@@ -46,6 +46,17 @@ async function loadScriptsInParallel(scriptsSrcList) {
 //#region Internationalisation
 
 const supportedLanguages = ['fr', 'en'];
+const cultureLanguages = {
+	[supportedLanguages[0]]: {
+		code: 'fr-FR',
+		message: 'Langue choisie : Français'
+	},
+	[supportedLanguages[1]]: {
+		code: 'en-GB',
+		message: 'Language chosen: English'
+	}
+};
+
 let cachedTranslations = null;
 
 function i18n() {
