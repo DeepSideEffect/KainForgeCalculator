@@ -49,11 +49,13 @@ const supportedLanguages = ['fr', 'en'];
 const cultureLanguages = {
 	[supportedLanguages[0]]: {
 		code: 'fr-FR',
-		message: 'Langue choisie : Français'
+		message: 'Langue choisie : Français.',
+		errorMessage: "Le fichier des traductions n'est pas chargé, cette fonctionnalité ne peut donc pas fonctionner.",
 	},
 	[supportedLanguages[1]]: {
 		code: 'en-GB',
-		message: 'Language chosen: English'
+		message: 'Language chosen: English.',
+		errorMessage: 'The translation file is not loaded, so the feature cannot function.',
 	}
 };
 

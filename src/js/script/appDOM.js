@@ -259,8 +259,9 @@ function getActualSoundSettings() {
 }
 
 function speechSynthesizer(lang) {
+	const textMessage = cachedTranslations != null ? cultureLanguages[lang].message : cultureLanguages[lang].errorMessage;
 	const soundSettings = getActualSoundSettings();
-	const message = new SpeechSynthesisUtterance(cultureLanguages[lang].message);
+	const message = new SpeechSynthesisUtterance(textMessage);
 	message.lang = cultureLanguages[lang].code;
 	message.volume = soundSettings.soundOn ? soundSettings.volumeKFC : 0.0; // Régle le volume (0.0 à 1.0)
 	message.rate = 1; // Régle la vitesse de la voix (0.1 à 10)
@@ -288,7 +289,7 @@ function init() {
 	typesObjets.forEach(type => {
 		const option = document.createElement("option");
 		option.value = type.id;
-		option.textContent = type.nom;
+		option.setAttribute('data-translate', type.nom);
 		typeSelect.appendChild(option);
 	});
 
