@@ -3,6 +3,16 @@
 	"description": "This calculator allows you to calculate the cost of modifying an epic item in the BW game universe on a server like Ultima Thule / Necropolis.",
 	"options": {
 		"Casquette": "Cap",
+		"Casque": "Hard hat",
+		"Cagoule": "Balaclava",
+		"Chapeau": "Hat",
+		"Casque Militaire": "Helmet",
+		"Diadème": "Circlet",
+		"Fronteau": "Headband",
+		"Bandana": "Bandanna",
+		"Masque": "Mask",
+		"Couronne": "Couronne???",
+
 		"Scorpion": "Scorpio"
 	}
 }
