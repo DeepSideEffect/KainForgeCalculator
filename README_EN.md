@@ -12,6 +12,7 @@ This calculator aims to facilitate players' decisions by providing precise and d
 - Calculation of the cost of modifying an item from one state to another.
 - Support for both upgrading and downgrading an item.
 - Ability to copy the result to the clipboard in one of the two available formats.
+- Ability to translate the page into multiple languages (French and English implemented).
 - Intuitive and playful user interface to facilitate the use of the calculator.
 - Fully responsive and animated display.
 - Adjustable sound effects.
@@ -22,7 +23,10 @@ To install and run this project locally, follow the steps below:
 1. Clone the repository:
    ```bash
    git clone https://github.com/DeepSideEffect/KainForgeCalculator.git
+	 ```
 2. Open the ***index.html*** page in your browser.
+> ``📝`` Since **v1.4.0**, with the internationalization feature, the page may no longer display correctly locally, by default.  
+Possible methods to avoid [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) issues during local development are detailed in this [file](src/docs/LocalServer.md).
 
 ## Usage
 Select an item with its starting and ending characteristics.  
