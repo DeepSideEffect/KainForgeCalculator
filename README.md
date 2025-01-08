@@ -11,6 +11,7 @@ Cette calculatrice vise à faciliter les décisions des joueurs en leur fourniss
 - Prise en charge des différents états et items de l'univers du jeu BW.
 - Calcul des coûts de modification d'un item d'un état à un autre.
 - Prise en charge de l'amélioration aussi bien que de la diminution d'un item.
+- Possibilité de copier le résultat dans le presse-papiers selon l'un des deux formats disponibles.
 - Interface utilisateur intuitive et ludique pour faciliter l'utilisation de la calculatrice.
 - Affichage entièrement *responsive* et animé.
 - Utilisation d'effets sonores réglables.

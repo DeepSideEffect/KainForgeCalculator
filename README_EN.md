@@ -11,6 +11,7 @@ This calculator aims to facilitate players' decisions by providing precise and d
 - Support for different states and items in the BW game universe.
 - Calculation of the cost of modifying an item from one state to another.
 - Support for both upgrading and downgrading an item.
+- Ability to copy the result to the clipboard in one of the two available formats.
 - Intuitive and playful user interface to facilitate the use of the calculator.
 - Fully responsive and animated display.
 - Adjustable sound effects.
