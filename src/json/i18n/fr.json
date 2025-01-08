@@ -1,13 +1,4 @@
 {
 	"title": "Calculatrice de la forge de Kain",
-	"description": "Cette calculatrice permet de calculer le coût de modification d'un objet épique de l'univers du jeu BW sur un serveur de type Ultima Thule / Nercopolis.",
-	"options": {
-			"Glock": "Glock",
-			"Magnum": "Magnum",
-			"Desert Eagle": "Desert Eagle",
-			"Beretta": "Beretta",
-			"Uzi": "Uzi",
-			"Mp5k": "Mp5k",
-			"Scorpion": "Scorpion"
-	}
+	"description": "Cette calculatrice permet de calculer le coût de modification d'un objet épique de l'univers du jeu BW sur un serveur de type Ultima Thule / Nercopolis."
 }

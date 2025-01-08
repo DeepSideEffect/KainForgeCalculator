@@ -62,7 +62,8 @@ function changementCaracteristique(desactiverBtn) {
 function createOption(index, nom, actuelSelect, souhaiteSelect) {
 	const option = document.createElement("option");
 	option.value = index;
-	option.textContent = nom;
+	option.textContent = nom; // à garder en cas de problème de traduction (ou traduction manquante).
+	option.setAttribute('data-translate', nom);
 	actuelSelect.appendChild(option);
 	souhaiteSelect.appendChild(option.cloneNode(true));
 }

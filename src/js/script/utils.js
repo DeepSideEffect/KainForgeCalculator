@@ -36,28 +36,7 @@ async function loadScriptsInOrder(scriptsSrcList) {
 //#region  Internationalisation
 
 const supportedLanguages = ['fr', 'en'];
-
-function loadTranslations(lang) {
-	fetch(`src/json/i18n/${lang}.json`)
-		.then(response => response.json())
-		.then(translations => {
-			document.head.querySelector('title').textContent = translations['title'];
-
-			document.querySelectorAll('[data-translate]').forEach(element => {
-				const key = element.getAttribute('data-translate');
-				element.textContent = translations[key];
-				if (key === 'title') {
-					element.setAttribute('title', translations['description']);
-				}
-			});
-
-			document.querySelectorAll('option[data-translate]').forEach(option => {
-				const key = option.getAttribute('data-translate');
-				option.textContent = translations.options[key];
-			});
-		})
-		.catch(error => console.error('Error loading translations:', error));
-}
+let cachedTranslations = null;
 
 function i18n() {
 	var lang = supportedLanguages[0];
@@ -71,6 +50,51 @@ function i18n() {
 		lang = supportedLanguages.includes(langQuerystring) ? langQuerystring : 'en';
 
 	loadTranslations(lang);
+	initDomTradListener();
+}
+
+function loadTranslations(lang) {
+	fetch(`src/json/i18n/${lang}.json`)
+		.then(response => response.json())
+		.then(translations => {
+			cachedTranslations = translations;
+			document.head.querySelector('title').textContent = translations['title'];
+
+			document.querySelectorAll('[data-translate]:not(option)').forEach(element => {
+				const key = element.getAttribute('data-translate');
+				element.textContent = translations[key];
+				if (key === 'title') {
+					element.setAttribute('title', translations['description']);
+				}
+			});
+
+			translateOptions(translations);
+		})
+		.catch(error => console.error('Error loading translations:', error));
+}
+
+function translateOptions(translations) {
+	document.querySelectorAll('option[data-translate]').forEach(option => {
+		if (!translations?.options) return;
+
+		const key = option.getAttribute('data-translate');
+		const translation = translations.options[key];
+		if (!!translation)
+			option.textContent = translation;
+	});
+}
+
+function initDomTradListener() {
+	// Observer les changements dans le DOM
+	const observer = new MutationObserver(mutations => {
+		mutations.forEach(mutation => {
+			if (mutation.type === 'childList')
+				translateOptions(cachedTranslations);
+		});
+	});
+
+	// Configurer l'observateur pour surveiller les ajouts d'éléments
+	observer.observe(document.body, { childList: true, subtree: true });
 }
 
 //#endregion  Internationalisation
