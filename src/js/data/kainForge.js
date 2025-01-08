@@ -11,5 +11,3 @@ const caracteristiques = {
 	9: armeCaCUneMainCaracteristiques,
 	10: armeCaCDeuxMainsCaracteristiques
 };
-
-startup();

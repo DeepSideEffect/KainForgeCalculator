@@ -27,13 +27,23 @@ async function loadScriptsInOrder(scriptsSrcList) {
 			await loadScriptAsync(src);
 		}
 
-		console.debug(`Les ${scriptsSrcList.length} scripts sont chargés.`);
+		console.debug(`Les ${scriptsSrcList.length} scripts sont chargés dans l'ordre.`);
 	} catch (error) {
-		console.error(error, 'Erreur lors du chargement des scripts :', scriptsSrcList);
+		console.error(error, 'Erreur lors du chargement en ordre des scripts :', scriptsSrcList);
 	}
 }
 
-//#region  Internationalisation
+async function loadScriptsInParallel(scriptsSrcList) {
+	try {
+			const promises = scriptsSrcList.map(src => loadScriptAsync(src));
+			await Promise.all(promises);
+			console.debug(`Les ${scriptsSrcList.length} scripts sont chargés en parallèle.`);
+	} catch (error) {
+			console.error(error, 'Erreur lors du chargement en parallèle des scripts :', scriptsSrcList);
+	}
+}
+
+//#region Internationalisation
 
 const supportedLanguages = ['fr', 'en'];
 let cachedTranslations = null;
@@ -97,4 +107,4 @@ function initDomTradListener() {
 	observer.observe(document.body, { childList: true, subtree: true });
 }
 
-//#endregion  Internationalisation
+//#endregion Internationalisation

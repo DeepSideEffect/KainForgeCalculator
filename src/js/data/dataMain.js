@@ -3,4 +3,7 @@ const dataScriptsToLoadInOrder = [
 	'src/js/data/stuffDetails.js', // Les détails d'objet
 	'src/js/data/kainForge.js' // Forge de Kain
 ];
-loadScriptsInOrder(dataScriptsToLoadInOrder);
+
+async function loadDataScripts() {
+	await loadScriptsInOrder(dataScriptsToLoadInOrder);
+}
