@@ -85,12 +85,15 @@ function loadTranslations(lang) {
 
 function translateOptions(translations) {
 	document.querySelectorAll('option[data-translate]').forEach(option => {
-		if (!translations?.options) return;
-
 		const key = option.getAttribute('data-translate');
+
+		if (!translations?.options) {
+			option.textContent = key;
+			return;
+		}
+
 		const translation = translations.options[key];
-		if (!!translation)
-			option.textContent = translation;
+		option.textContent = translation ?? key;
 	});
 }
 

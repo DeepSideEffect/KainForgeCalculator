@@ -53,8 +53,8 @@ function changementCaracteristique(desactiverBtn) {
 	document.getElementById("calculer").disabled = desactiverBtn;
 	document.getElementById("recapModification").classList.add("init");
 	document.getElementById("resultat").style.transform = "scaleY(0)";
-	document.getElementById("ref-audio-applause").pause();
-	document.getElementById("ref-audio-kick").play();
+	document.getElementById("ref-audio-applause")?.pause();
+	document.getElementById("ref-audio-kick")?.play();
 	couleurThemeEnFonctionDesRunes();
 	scrollTopAfterDelay(150);
 }
@@ -88,7 +88,7 @@ function copyToClipboard(htmlId) {
 }
 
 function showNotification(message) {
-	document.getElementById("ref-audio-copy2").play();
+	document.getElementById("ref-audio-copy2")?.play();
 	document.getElementById("notification-container").classList.add("show");
 	document.getElementById("notification").textContent = message;
 	document.getElementById("notification").classList.add("show");
@@ -108,7 +108,7 @@ function intro() {
 
 function declancherSonAuChargement() {
 	const audio = document.getElementById("ref-audio-applause");
-	audio.play().catch(error => {
+	audio?.play().catch(error => {
 		console.error("Erreur lors de la lecture de l'audio : ", error);
 	});
 
@@ -181,7 +181,7 @@ function calculerClick() {
 	setTimeout(() => document.getElementById("recapModification").classList.remove("init"), 75);
 
 	scrollBottomAfterDelay(150);
-	document.getElementById("ref-audio-copy").play();
+	document.getElementById("ref-audio-copy")?.play();
 	document.getElementById("scroll-bottom-btn").disabled = false;
 	document.getElementById("scroll-top-btn").style.display = isVerticalScrollbarVisible() ? 'inline-block' : 'none';
 }
@@ -221,7 +221,7 @@ function initialiserParamStockes() {
 /** Enrobe l'action des boutons de scroll avec un son */
 function scrollBoutonsAction(action) {
 	action();
-	document.getElementById("ref-audio-slide").play();
+	document.getElementById("ref-audio-slide")?.play();
 }
 
 function scrollBoutonTop() {
@@ -244,6 +244,24 @@ function querystringParamValue(parametreName) {
 		console.debug(`Le paramètre '${parametreName}' n\'existe pas dans la query string.`);
 
 	return parametre;
+}
+
+function removeQueryStringParameter(param) {
+	const url = new URL(window.location);
+	url.searchParams.delete(param);
+	window.history.replaceState({}, document.title, url.toString());
+}
+
+function listenToLangButtonsClick() {
+	document.querySelectorAll('span.lang-btn').forEach(element => {
+		element.addEventListener('click', (event) => {
+			const clickedElement = event.currentTarget;
+			const chosenLang = clickedElement.getAttribute('data-lang');
+			loadTranslations(chosenLang);
+			localStorage.setItem('lang', chosenLang);
+			removeQueryStringParameter('lang');
+		});
+	});
 }
 
 function init() {
@@ -293,6 +311,7 @@ function init() {
 	document.getElementById('volumeControl').addEventListener('input', volumeControl);
 	document.getElementById('soundToggle').addEventListener('change', muteOrUnmuteAll);
 	initialiserParamStockes();
+	listenToLangButtonsClick()
 
 	setTimeout(() => intro(), 75);
 }

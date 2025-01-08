@@ -242,6 +242,22 @@ span.nom-objet-bw {
 	/* cursor: pointer; TODO: en attente transcodage complet avec la page https://r1.fr.bloodwars.net/test_items.php?xxx pour créer un lien hypertext à minima */
 }
 
+span.lang-btn {
+	opacity: 0.4;
+	cursor: pointer;
+	transition: var(--short-transition);
+}
+
+span.lang-btn:hover,
+span.lang-btn:focus,
+span.lang-btn:active {
+	opacity: 1;
+}
+
+span.lang-btn:last-child {
+	margin-left: 5px;
+}
+
 body {
 	background:
 		linear-gradient(to right, var(--primary-color), #ffffff) 0 0 / 16.67% 100% repeat-y,
@@ -269,6 +285,14 @@ body {
 	top: 2rem;
 	right: 2rem;
 	max-width: 16.67%;
+}
+
+#lang-tool-bar {
+	transition: var(--standart-transition);
+	position: fixed;
+	top: 2rem;
+	left: 2rem;
+	max-width: 14%;
 }
 
 input[type="range"] {
@@ -325,7 +349,8 @@ button:not(:disabled) .icon {
 		font-size: calc(var(--mobile-phone-font-size) - 4px);
 	}
 
-	#data-sources {
+	#data-sources,
+	#lang-tool-bar {
 		left: 1rem;
 	}
 
@@ -344,8 +369,16 @@ button:not(:disabled) .icon {
 		min-width: 69px;
 	}
 
+	#lang-tool-bar {
+		max-width: 33px;
+	}
+
 	span.dancing-label {
 		transform: rotate(90deg);
+	}
+
+	span.lang-btn:last-child {
+		margin-left: 0;
 	}
 }
 
@@ -421,6 +454,11 @@ h3.intro,
 #sound-tool-bar.intro {
 	top: 0;
 	right: 0;
+}
+
+#lang-tool-bar.intro {
+	top: 0;
+	left: 0;
 }
 
 /* --- bouton on-off (checkbox) --- */
