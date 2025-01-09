@@ -86,12 +86,15 @@ function loadTranslations(lang) {
 			document.querySelectorAll('[data-translate]:not(option)').forEach(element => {
 				const key = element.getAttribute('data-translate');
 				element.textContent = translations[key];
-				if (key === 'title') {
-					element.setAttribute('title', translations['description']);
+				if (element.hasAttribute('data-translate-title')) {
+					const description = translations[`${key}-description`];
+					if (description)
+						element.setAttribute('title', description);
 				}
 			});
 
 			translateOptions(translations);
+			translateTitleOfButtonsWithoutLabel(translations);
 		})
 		.catch(error => console.error('Error loading translations:', error));
 }
@@ -121,6 +124,23 @@ function initDomTradListener() {
 
 	// Configurer l'observateur pour surveiller les ajouts d'éléments
 	observer.observe(document.body, { childList: true, subtree: true });
+}
+
+function translateTitleOfButtonsWithoutLabel(translations) {
+	const buttonsIds = [
+		'scroll-bottom-btn',
+		'scroll-top-btn',
+		'volumeControl',
+		'soundToggle-container',
+		'data-sources',
+		'resultatV1',
+		'resultatV2'
+	]
+
+	buttonsIds.forEach(id => {
+		const button = document.getElementById(id);
+		button.setAttribute('title', translations[`${id}-description`]);
+	});
 }
 
 //#endregion Internationalisation

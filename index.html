@@ -28,45 +28,45 @@
 		<audio id="ref-audio-kick" src="https://cdn.freesound.org/previews/784/784036_3905081-lq.mp3" controls></audio>
 		<audio id="ref-audio-slide" src="https://cdn.freesound.org/previews/463/463382_321967-hq.mp3" controls></audio>
 
-		<h1 class="center intro" data-translate="title">Translation file is missing!!!</h1>
+		<h1 class="center intro" data-translate="title" data-translate-title>Translation file is missing!!!</h1>
 
 		<form>
 			<div class="form-group center">
-				<label for="type">Type d'objet :</label>
+				<label for="type" data-translate="equipment-type-label">Type d'objet :</label>
 				<select id="type" name="type"></select>
 				<button type="button" id="scroll-bottom-btn" title="Aller tout en bas" onclick="scrollBoutonBottom()" disabled>
 					<span class="icon">▼</span>
 				</button>
 			</div>
 
-			<h3 class="intro">Caractéristiques Actuelles</h2>
+			<h3 class="intro" data-translate="actual-title-label">Caractéristiques Actuelles</h2>
 				<div class="form-group center">
 					<div class="form-row">
-						<label for="supportActuel">Support actuel :</label>
+						<label for="supportActuel" data-translate="actual-support-label">Support actuel :</label>
 						<select id="supportActuel" name="supportActuel"></select>
 					</div>
 					<div class="form-row">
-						<label for="prefixeActuel">Préfixe actuel :</label>
+						<label for="prefixeActuel" data-translate="actual-prefix-label">Préfixe actuel :</label>
 						<select id="prefixeActuel" name="prefixeActuel"></select>
 					</div>
 					<div class="form-row">
-						<label for="suffixeActuel">Suffixe actuel :</label>
+						<label for="suffixeActuel" data-translate="actual-suffix-label">Suffixe actuel :</label>
 						<select id="suffixeActuel" name="suffixeActuel"></select>
 					</div>
 				</div>
 
-				<h3 class="intro">Caractéristiques Souhaitées</h2>
+				<h3 class="intro" data-translate="desired-title-label">Caractéristiques Souhaitées</h2>
 					<div class="form-group center">
 						<div class="form-row">
-							<label for="supportSouhaite">Support voulu :</label>
+							<label for="supportSouhaite" data-translate="desired-support-label">Support voulu :</label>
 							<select id="supportSouhaite" name="supportSouhaite"></select>
 						</div>
 						<div class="form-row">
-							<label for="prefixeSouhaite">Préfixe voulu :</label>
+							<label for="prefixeSouhaite" data-translate="desired-prefix-label">Préfixe voulu :</label>
 							<select id="prefixeSouhaite" name="prefixeSouhaite"></select>
 						</div>
 						<div class="form-row">
-							<label for="suffixeSouhaite">Suffixe voulu :</label>
+							<label for="suffixeSouhaite" data-translate="desired-suffix-label">Suffixe voulu :</label>
 							<select id="suffixeSouhaite" name="suffixeSouhaite"></select>
 						</div>
 					</div>
@@ -75,6 +75,8 @@
 						<button type="button"
 							id="calculer"
 							title="Cliquer ou appuyer sur 'entrée' pour calculer le coût total de la modification de l'objet"
+							data-translate="calculate-btn-label"
+							data-translate-title
 						>
 							Calculer
 						</button>
@@ -90,6 +92,8 @@
 				<button type="button"
 					class="mini-bouton"
 					title="Copier l'affichage en ligne dans le presse-papier"
+					data-translate="copy-line-btn-label"
+					data-translate-title
 					onclick="copyToClipboard('resultatV1-display')"
 				>
 					Copier
@@ -112,6 +116,8 @@
 					<button type="button"
 						class="result"
 						title="Copier l'affichage formaté dans le presse-papier"
+						data-translate="copy-format-btn-label"
+						data-translate-title
 						onclick="copyToClipboard('resultatV2')"
 					>
 						Copier
@@ -130,7 +136,7 @@
 	</div>
 
 	<div id="data-sources" class="intro" title="Source des données depuis le wiki Bloodwars">
-		<a target="_blank" href="https://wiki.fr.bloodwars.net/index.php?title=La_Forge_de_Kain_sur_UT">Source des données</a>
+		<a target="_blank" href="https://wiki.fr.bloodwars.net/index.php?title=La_Forge_de_Kain_sur_UT" data-translate="data-sources-link-label">Source des données</a>
 	</div>
 
 	<div id="version" class="intro" title="Changelog">
@@ -147,7 +153,7 @@
 
 		<div class="mute-unmute d-flex-justify">
 			<span class="dancing-label">&#128263;</span>
-			<label class="switch" title="Activer ou désactiver le son">
+			<label class="switch" title="Activer ou désactiver le son" id="soundToggle-container">
 				<input type="checkbox" id="soundToggle">
 				<span class="slider"></span>
 			</label>

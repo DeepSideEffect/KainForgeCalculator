@@ -77,7 +77,10 @@ function caracteristiqueInit(selectHtmlId) {
 function copyToClipboard(htmlId) {
 	const textToCopy = gererLesCRLF(document.getElementById(htmlId).innerText);
 	navigator.clipboard.writeText(textToCopy).then(() => {
-		showNotification('Texte copié dans le presse-papiers !');
+		let msg = 'Texte copié dans le presse-papiers !';
+		if (!!cachedTranslations && !!cachedTranslations['text-copied-message'])
+			msg = cachedTranslations['text-copied-message'];
+		showNotification(msg);
 	}).catch(err => {
 		const errMsgPrefix = 'Erreur lors de la copie : ';
 		console.error(errMsgPrefix, err);
