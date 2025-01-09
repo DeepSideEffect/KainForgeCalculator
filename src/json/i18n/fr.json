@@ -30,5 +30,8 @@
 	"resultatV1-label-middle": "le coût total est de",
 	"cout-total-label": "Coût total :",
 	"cout-total-PE-label": "points d'évolution",
-	"cout-total-pieces-label": "pièces épiques"
+	"cout-total-pieces-label": "pièces épiques",
+	"item-quality": "Epique",
+	"entre-items-label": "vers",
+	"et-and": "et"
 }

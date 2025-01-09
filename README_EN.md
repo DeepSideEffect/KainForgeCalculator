@@ -37,22 +37,22 @@ Select an item with its starting and ending characteristics.
 The calculator will display the costs associated with modifying the item after clicking the **Calculate** button.
 
 ## Examples of Use
-Calculate the cost of modifying an ***Epic Chic Cap of the Miss*** to an ***Epic Horned Bandana of Precognition***.  
-In the Desired Characteristics section (= target state):
-- Select "*Bandana*" from the desired Support dropdown menu.
-- Select "*Horned*" from the desired Prefix dropdown menu.
-- Select "*of Precognition*" from the desired Suffix dropdown menu.
+Calculate the cost of modifying an ***Epic Decorative Cap of the Miss*** into an ***Epic Horned Bandana of Precognition***.  
+In the *Desired Characteristics* section (= target state):
+- Select "*Bandana*" from the **Desired type** dropdown menu.
+- Select "*Horned*" from the **Desired prefix** dropdown menu.
+- Select "*of Precognition*" from the **Desired suffix** dropdown menu.
 - Click "**Calculate**" to get the cost.
 - Copying the formatted result via the **Copy** button will give this summary:
 ```Text
-Epique Casquette Chic De La Miss
+Epic Decorative Cap of the Miss
 ==>
-Epique Bandana Cornu De La Précognition 
+Epic Horned Bandanna of Precognition 
 
-Coût total :
-1155 points d'évolution
-465 pièces épiques
-31 runes Verte Niveau 2
+Total cost:
+1155 evolution PTS
+465 epic coins
+31 Green Level 2 runes
 ```
 
 ## Contributing

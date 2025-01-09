@@ -77,9 +77,7 @@ function caracteristiqueInit(selectHtmlId) {
 function copyToClipboard(htmlId) {
 	const textToCopy = gererLesCRLF(document.getElementById(htmlId).innerText);
 	navigator.clipboard.writeText(textToCopy).then(() => {
-		let msg = 'Texte copié dans le presse-papiers !';
-		if (!!cachedTranslations && !!cachedTranslations['text-copied-message'])
-			msg = cachedTranslations['text-copied-message'];
+		const msg = getTranslationWithDefaultValue('text-copied-message', 'Texte copié dans le presse-papiers !');
 		showNotification(msg);
 	}).catch(err => {
 		const errMsgPrefix = 'Erreur lors de la copie : ';
@@ -130,12 +128,16 @@ function changeCurrentColor(newColor) {
 
 /** Résultat affiché sur une seule (ou deux) ligne(s) */
 function inLineResultDisplay(typeObjetCourant, coutTotal, coutEnPiecesEpiques, nbRunes, libelleRunes, objetActuel, objetSouhaite) {
+	const evoPointsLabel = getTranslationWithDefaultValue('cout-total-PE-label', "points d'évolution");
+	const piecesLabel = getTranslationWithDefaultValue('cout-total-pieces-label', 'pièces épiques');
+	const etAnd = getTranslationWithDefaultValue('et-and', 'et');
 	document.getElementById("resultatV1-text").style.color = typeObjetCourant.color;
-	document.getElementById("resultatV1-text").textContent = `${coutTotal.coutTotalPE} points d'évolution, ${coutEnPiecesEpiques} pièces épiques et ${nbRunes} rune${nbRunes > 1 ? 's' : ''} ${libelleRunes}.`;
+	document.getElementById("resultatV1-text").textContent = `${coutTotal.coutTotalPE} ${evoPointsLabel}, ${coutEnPiecesEpiques} ${piecesLabel} ${etAnd} ${nbRunes} ${libelleRunes}.`;
 	document.getElementById("resultatV1-modif").innerHTML = "";
 	document.getElementById("resultatV1-modif").appendChild(composantNomObjet(objetActuel));
+	const inBetweenText = getTranslationWithDefaultValue('entre-items-label', 'vers');
 	const text = document.createElement("text");
-	text.textContent = " vers ";
+	text.textContent = ` ${inBetweenText} `;
 	document.getElementById("resultatV1-modif").appendChild(text);
 	document.getElementById("resultatV1-modif").appendChild(composantNomObjet(objetSouhaite));
 }
@@ -153,13 +155,12 @@ function formattedResultDisplay(typeObjetCourant, coutTotal, coutEnPiecesEpiques
 	document.getElementById("coutTotalPE").textContent = coutTotal.coutTotalPE;
 	document.getElementById("coutEnPiecesEpiques").textContent = coutEnPiecesEpiques;
 	document.getElementById("nbRunes").textContent = nbRunes;
-	document.getElementById("libelleRunes").textContent = "rune".concat(nbRunes > 1 ? 's' : '').concat(' ').concat(libelleRunes);
+	document.getElementById("libelleRunes").textContent = libelleRunes;
 	document.getElementById("libelleRunes").style.color = typeObjetCourant.color;
-	document.getElementById("resultat").style.transform = "scaleY(1)";
 }
 
-/** Méthode déclanchée au click sur le bouton Calculer */
-function calculerClick() {
+/** Calculer et afficher le résultat */
+function calculerPourAfficher() {
 	const type = document.getElementById("type").value;
 	const supportActuel = document.getElementById("supportActuel").value;
 	const prefixeActuel = document.getElementById("prefixeActuel").value;
@@ -175,13 +176,20 @@ function calculerClick() {
 	const typeObjetCourant = typesObjets[type - 1];
 	const coutEnPiecesEpiques = coutTotal.nbMvtsTotal * typeObjetCourant.piecesEpiques;
 	const nbRunes = coutTotal.nbMvtsTotal * typeObjetCourant.nbRunes;
-	const libelleRunes = typeObjetCourant.libelleRunes;
+	const runesLabel = getTranslationWithKeyAsDefault(typeObjetCourant.libelleRunes);
+	const libelleRunesFormat = cultureLanguages[currentLanguage].nameAdjectivePattern;
+	const runesUnitText = 'rune'.concat(nbRunes > 1 ? 's' : '');
+	const libelleRunes = formatString(libelleRunesFormat, runesUnitText, runesLabel);
 
 	inLineResultDisplay(typeObjetCourant, coutTotal, coutEnPiecesEpiques, nbRunes, libelleRunes, objetActuel, objetSouhaite);
 	formattedResultDisplay(typeObjetCourant, coutTotal, coutEnPiecesEpiques, nbRunes, libelleRunes, objetActuel, objetSouhaite);
+}
 
+/** Méthode déclenchée au click sur le bouton Calculer */
+function calculerClick() {
+	calculerPourAfficher();
+	document.getElementById("resultat").style.transform = "scaleY(1)";
 	setTimeout(() => document.getElementById("recapModification").classList.remove("init"), 75);
-
 	scrollBottomAfterDelay(150);
 	document.getElementById("ref-audio-copy")?.play();
 	document.getElementById("scroll-bottom-btn").disabled = false;
@@ -277,7 +285,7 @@ function listenToLangButtonsClick() {
 			speechSynthesis.cancel();
 			const clickedElement = event.currentTarget;
 			const chosenLang = clickedElement.getAttribute('data-lang');
-			loadTranslations(chosenLang);
+			loadTranslations(chosenLang, calculerPourAfficher);
 			localStorage.setItem('lang', chosenLang);
 			removeQueryStringParameter('lang');
 			speechSynthesizer(chosenLang);

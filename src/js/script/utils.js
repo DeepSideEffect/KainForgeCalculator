@@ -43,6 +43,18 @@ async function loadScriptsInParallel(scriptsSrcList) {
 	}
 }
 
+/**
+ * Remplace les espaces réservés dans une chaîne de format par les valeurs correspondantes fournies en paramètres.
+ * @param {string} format Chaîne de format composite contenant des espaces réservés.
+ * @param  {...any} args Un nombre variable d'arguments qui seront utilisés pour remplacer les espaces réservés dans la chaîne `format`.
+ * @returns {string} Une nouvelle chaîne de caractères avec les espaces réservés dans `format` remplacés par les valeurs correspondantes des arguments `args`.
+ */
+function formatString(format, ...args) {
+	return format.replace(/{(\d+)}/g, (match, number) =>
+		typeof args[number] !== 'undefined' ? args[number] : match
+	);
+}
+
 //#region Internationalisation
 
 const supportedLanguages = ['fr', 'en'];
@@ -51,15 +63,20 @@ const cultureLanguages = {
 		code: 'fr-FR',
 		message: 'Langue choisie : Français.',
 		errorMessage: "Le fichier des traductions n'est pas chargé, cette option est donc indisponible.",
+		itemNameDisplayFormat: '{0} {1} {2} {3}',
+		nameAdjectivePattern: '{0} {1}'
 	},
 	[supportedLanguages[1]]: {
 		code: 'en-GB',
 		message: 'Language chosen: English.',
 		errorMessage: 'The translation file is not loaded, this option cannot be used.',
+		itemNameDisplayFormat: '{0} {2} {1} {3}',
+		nameAdjectivePattern: '{1} {0}'
 	}
 };
 
 let cachedTranslations = null;
+let currentLanguage = supportedLanguages[0];
 
 function i18n() {
 	var lang = supportedLanguages[0];
@@ -76,10 +93,11 @@ function i18n() {
 	initDomTradListener();
 }
 
-function loadTranslations(lang) {
+function loadTranslations(lang, successCallback, errorCallback) {
 	fetch(`src/json/i18n/${lang}.json`)
 		.then(response => response.json())
 		.then(translations => {
+			currentLanguage = lang;
 			cachedTranslations = translations;
 			document.head.querySelector('title').textContent = translations['title'];
 
@@ -95,8 +113,13 @@ function loadTranslations(lang) {
 
 			translateOptions(translations);
 			translateTitleOfButtonsWithoutLabel(translations);
+
+			if (successCallback) successCallback();
 		})
-		.catch(error => console.error('Error loading translations:', error));
+		.catch(error => {
+			console.error('Error loading translations:', error);
+			if (errorCallback) errorCallback(error);
+		});
 }
 
 function translateOptions(translations) {
@@ -140,6 +163,18 @@ function translateTitleOfButtonsWithoutLabel(translations) {
 	buttonsIds.forEach(id => {
 		const button = document.getElementById(id);
 		button.setAttribute('title', translations[`${id}-description`]);
+	});
+}
+
+/**
+ * Wrapper pour attendre la fin de loadTranslations de manière synchrone
+ * @param {*} lang langue choisie (du tableau supportedLanguages)
+ * @returns
+ */
+async function loadTranslationsAsync(lang) {
+	return new Promise((resolve, reject) => {
+		loadTranslations(lang);
+		resolve();
 	});
 }
 
