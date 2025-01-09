@@ -86,8 +86,10 @@
 		<div id="resultat">
 			<div id="resultatV1" title="Résultat en ligne">
 				<span id="resultatV1-display">
-					Pour modifier l'objet <span id="resultatV1-modif"></span>,<br />
-					le coût total est de <span id="resultatV1-text"></span>
+					<span data-translate="resultatV1-label-start">Pour modifier l'objet</span>
+					<span id="resultatV1-modif"></span>,<br />
+					<span data-translate="resultatV1-label-middle">le coût total est de</span>
+					<span id="resultatV1-text"></span>
 				</span>
 				<button type="button"
 					class="mini-bouton"
@@ -103,11 +105,17 @@
 			<div id="resultatV2" title="Résultat formaté" class="center">
 				<div class="result init radius-top" id="recapModification"></div>
 				<div class="result left">
-					<span class="cout-total">Coût total :</span>
+					<span class="cout-total" data-translate="cout-total-label">Coût total :</span>
 					<ul>
-						<li><span class="numberResult" id="coutTotalPE">0</span> points d'évolution</li>
-						<li><span class="numberResult" id="coutEnPiecesEpiques">0</span> pièces épiques</li>
-						<li><span class="numberResult" id="nbRunes">0</span> <span id="libelleRunes">rune.</span></li>
+						<li>
+							<span class="numberResult" id="coutTotalPE">0</span> <span data-translate="cout-total-PE-label">points d'évolution</span>
+						</li>
+						<li>
+							<span class="numberResult" id="coutEnPiecesEpiques">0</span> <span data-translate="cout-total-pieces-label">pièces épiques</span>
+						</li>
+						<li>
+							<span class="numberResult" id="nbRunes">0</span> <span id="libelleRunes">rune.</span>
+						</li>
 					</ul>
 				</div>
 			</div>

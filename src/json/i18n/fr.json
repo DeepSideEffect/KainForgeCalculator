@@ -25,5 +25,10 @@
 	"desired-suffix-label": "Suffixe voulu :",
 	"resultatV1-description": "Résultat en ligne",
 	"resultatV2-description": "Résultat formaté",
-	"text-copied-message": "Texte copié dans le presse-papiers !"
+	"text-copied-message": "Texte copié dans le presse-papiers !",
+	"resultatV1-label-start": "Pour modifier l'objet",
+	"resultatV1-label-middle": "le coût total est de",
+	"cout-total-label": "Coût total :",
+	"cout-total-PE-label": "points d'évolution",
+	"cout-total-pieces-label": "pièces épiques"
 }

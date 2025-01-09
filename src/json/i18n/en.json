@@ -26,6 +26,11 @@
 	"resultatV1-description": "Single-line result",
 	"resultatV2-description": "Formatted result",
 	"text-copied-message": "Text copied to the clipboard!",
+	"resultatV1-label-start": "To modify the item",
+	"resultatV1-label-middle": "the total cost is",
+	"cout-total-label": "Total cost:",
+	"cout-total-PE-label": "evolution PTS",
+	"cout-total-pieces-label": "epic coins",
 	"options": {
 		"Les casques": "Helmets",
 		"Les armures": "Armours",
