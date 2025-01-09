@@ -15,7 +15,7 @@ This calculator aims to facilitate players' decisions by providing precise and d
 - Ability to translate the page into multiple languages (French and English implemented).
 - Ability to launch the page directly in the requested language.
 - Intuitive and playful user interface to facilitate the use of the calculator.
-- Fully responsive and animated display.
+- Fully *responsive* and animated display.
 - Adjustable sound effects.
 - Preservation of user preferences for the next use.
 

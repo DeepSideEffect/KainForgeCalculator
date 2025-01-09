@@ -39,9 +39,9 @@ La calculatrice affichera les coûts associés à la modification de l'item apr�
 ## Exemples d'utilisation
 Calculer le coût de modification d'une ***Epique Casquette Chic De La Miss*** vers un ***Epique Bandana Cornu De La Précognition***.  
 Dans la partie *Caractéristiques Souhaitées* (= état d'arrivée) :
-- Sélectionnez "*Bandana*" dans le menu déroulant du *Support voulu*.
-- Sélectionnez "*Cornu*" dans le menu déroulant du *Préfixe voulu*.
-- Sélectionnez "*De La Précognition*" dans le menu déroulant du *Suffixe voulu*.
+- Sélectionnez "*Bandana*" dans le menu déroulant du **Support voulu**.
+- Sélectionnez "*Cornu*" dans le menu déroulant du **Préfixe voulu**.
+- Sélectionnez "*De La Précognition*" dans le menu déroulant du **Suffixe voulu**.
 - Cliquez sur "**Calculer**" pour obtenir le coût.
 - La copie du résultat formaté, via le bouton **Copier** donnera ce récapitulatif :
 ```Text
