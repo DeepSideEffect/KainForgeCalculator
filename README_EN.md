@@ -11,9 +11,13 @@ This calculator aims to facilitate players' decisions by providing precise and d
 - Support for different states and items in the BW game universe.
 - Calculation of the cost of modifying an item from one state to another.
 - Support for both upgrading and downgrading an item.
+- Ability to copy the result to the clipboard in one of the two available formats.
+- Ability to translate the page into multiple languages (French and English implemented).
+- Ability to launch the page directly in the requested language.
 - Intuitive and playful user interface to facilitate the use of the calculator.
-- Fully responsive and animated display.
+- Fully *responsive* and animated display.
 - Adjustable sound effects.
+- Preservation of user preferences for the next use.
 
 ## Installation
 To install and run this project locally, follow the steps below:
@@ -21,29 +25,34 @@ To install and run this project locally, follow the steps below:
 1. Clone the repository:
    ```bash
    git clone https://github.com/DeepSideEffect/KainForgeCalculator.git
+	 ```
 2. Open the ***index.html*** page in your browser.
+>📝<sup>1</sup> Since **v1.4.0**, with the internationalization feature, the page may no longer display correctly locally, by default.  
+Possible methods to avoid [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) issues during local development are detailed in this [file](src/docs/LocalServer.md).
+
+>📝<sup>2</sup> You can also add the language choice as a queryString parameter to translate directly on display, e.g.: `http://localhost:5500/index.html?lang=en`.
 
 ## Usage
 Select an item with its starting and ending characteristics.  
 The calculator will display the costs associated with modifying the item after clicking the **Calculate** button.
 
 ## Examples of Use
-Calculate the cost of modifying an ***Epic Chic Cap of the Miss*** to an ***Epic Horned Bandana of Precognition***.  
-In the Desired Characteristics section (= target state):
-- Select "*Bandana*" from the desired Support dropdown menu.
-- Select "*Horned*" from the desired Prefix dropdown menu.
-- Select "*of Precognition*" from the desired Suffix dropdown menu.
+Calculate the cost of modifying an ***Epic Decorative Cap of the Miss*** into an ***Epic Horned Bandana of Precognition***.  
+In the *Desired Characteristics* section (= target state):
+- Select "*Bandana*" from the **Desired type** dropdown menu.
+- Select "*Horned*" from the **Desired prefix** dropdown menu.
+- Select "*of Precognition*" from the **Desired suffix** dropdown menu.
 - Click "**Calculate**" to get the cost.
 - Copying the formatted result via the **Copy** button will give this summary:
 ```Text
-Epique Casquette Chic De La Miss
+Epic Decorative Cap of the Miss
 ==>
-Epique Bandana Cornu De La Précognition 
+Epic Horned Bandanna of Precognition 
 
-Coût total :
-1155 points d'évolution
-465 pièces épiques
-31 runes Verte Niveau 2
+Total cost:
+1155 evolution PTS
+465 epic coins
+31 Green Level 2 runes
 ```
 
 ## Contributing

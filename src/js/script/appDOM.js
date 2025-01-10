@@ -53,8 +53,8 @@ function changementCaracteristique(desactiverBtn) {
 	document.getElementById("calculer").disabled = desactiverBtn;
 	document.getElementById("recapModification").classList.add("init");
 	document.getElementById("resultat").style.transform = "scaleY(0)";
-	document.getElementById("ref-audio-applause").pause();
-	document.getElementById("ref-audio-kick").play();
+	document.getElementById("ref-audio-applause")?.pause();
+	document.getElementById("ref-audio-kick")?.play();
 	couleurThemeEnFonctionDesRunes();
 	scrollTopAfterDelay(150);
 }
@@ -62,7 +62,7 @@ function changementCaracteristique(desactiverBtn) {
 function createOption(index, nom, actuelSelect, souhaiteSelect) {
 	const option = document.createElement("option");
 	option.value = index;
-	option.textContent = nom;
+	option.setAttribute('data-translate', nom);
 	actuelSelect.appendChild(option);
 	souhaiteSelect.appendChild(option.cloneNode(true));
 }
@@ -77,7 +77,8 @@ function caracteristiqueInit(selectHtmlId) {
 function copyToClipboard(htmlId) {
 	const textToCopy = gererLesCRLF(document.getElementById(htmlId).innerText);
 	navigator.clipboard.writeText(textToCopy).then(() => {
-		showNotification('Texte copié dans le presse-papiers !');
+		const msg = getTranslationWithDefaultValue('text-copied-message', 'Texte copié dans le presse-papiers !');
+		showNotification(msg);
 	}).catch(err => {
 		const errMsgPrefix = 'Erreur lors de la copie : ';
 		console.error(errMsgPrefix, err);
@@ -87,7 +88,7 @@ function copyToClipboard(htmlId) {
 }
 
 function showNotification(message) {
-	document.getElementById("ref-audio-copy2").play();
+	document.getElementById("ref-audio-copy2")?.play();
 	document.getElementById("notification-container").classList.add("show");
 	document.getElementById("notification").textContent = message;
 	document.getElementById("notification").classList.add("show");
@@ -107,7 +108,7 @@ function intro() {
 
 function declancherSonAuChargement() {
 	const audio = document.getElementById("ref-audio-applause");
-	audio.play().catch(error => {
+	audio?.play().catch(error => {
 		console.error("Erreur lors de la lecture de l'audio : ", error);
 	});
 
@@ -127,12 +128,16 @@ function changeCurrentColor(newColor) {
 
 /** Résultat affiché sur une seule (ou deux) ligne(s) */
 function inLineResultDisplay(typeObjetCourant, coutTotal, coutEnPiecesEpiques, nbRunes, libelleRunes, objetActuel, objetSouhaite) {
+	const evoPointsLabel = getTranslationWithDefaultValue('cout-total-PE-label', "points d'évolution");
+	const piecesLabel = getTranslationWithDefaultValue('cout-total-pieces-label', 'pièces épiques');
+	const etAnd = getTranslationWithDefaultValue('et-and', 'et');
 	document.getElementById("resultatV1-text").style.color = typeObjetCourant.color;
-	document.getElementById("resultatV1-text").textContent = `${coutTotal.coutTotalPE} points d'évolution, ${coutEnPiecesEpiques} pièces épiques et ${nbRunes} rune${nbRunes > 1 ? 's' : ''} ${libelleRunes}.`;
+	document.getElementById("resultatV1-text").textContent = `${coutTotal.coutTotalPE} ${evoPointsLabel}, ${coutEnPiecesEpiques} ${piecesLabel} ${etAnd} ${nbRunes} ${libelleRunes}.`;
 	document.getElementById("resultatV1-modif").innerHTML = "";
 	document.getElementById("resultatV1-modif").appendChild(composantNomObjet(objetActuel));
+	const inBetweenText = getTranslationWithDefaultValue('entre-items-label', 'vers');
 	const text = document.createElement("text");
-	text.textContent = " vers ";
+	text.textContent = ` ${inBetweenText} `;
 	document.getElementById("resultatV1-modif").appendChild(text);
 	document.getElementById("resultatV1-modif").appendChild(composantNomObjet(objetSouhaite));
 }
@@ -150,13 +155,12 @@ function formattedResultDisplay(typeObjetCourant, coutTotal, coutEnPiecesEpiques
 	document.getElementById("coutTotalPE").textContent = coutTotal.coutTotalPE;
 	document.getElementById("coutEnPiecesEpiques").textContent = coutEnPiecesEpiques;
 	document.getElementById("nbRunes").textContent = nbRunes;
-	document.getElementById("libelleRunes").textContent = "rune".concat(nbRunes > 1 ? 's' : '').concat(' ').concat(libelleRunes);
+	document.getElementById("libelleRunes").textContent = libelleRunes;
 	document.getElementById("libelleRunes").style.color = typeObjetCourant.color;
-	document.getElementById("resultat").style.transform = "scaleY(1)";
 }
 
-/** Méthode déclanchée au click sur le bouton Calculer */
-function calculerClick() {
+/** Calculer et afficher le résultat */
+function calculerPourAfficher() {
 	const type = document.getElementById("type").value;
 	const supportActuel = document.getElementById("supportActuel").value;
 	const prefixeActuel = document.getElementById("prefixeActuel").value;
@@ -172,15 +176,22 @@ function calculerClick() {
 	const typeObjetCourant = typesObjets[type - 1];
 	const coutEnPiecesEpiques = coutTotal.nbMvtsTotal * typeObjetCourant.piecesEpiques;
 	const nbRunes = coutTotal.nbMvtsTotal * typeObjetCourant.nbRunes;
-	const libelleRunes = typeObjetCourant.libelleRunes;
+	const runesLabel = getTranslationWithKeyAsDefault(typeObjetCourant.libelleRunes);
+	const libelleRunesFormat = cultureLanguages[currentLanguage].nameAdjectivePattern;
+	const runesUnitText = 'rune'.concat(nbRunes > 1 ? 's' : '');
+	const libelleRunes = formatString(libelleRunesFormat, runesUnitText, runesLabel);
 
 	inLineResultDisplay(typeObjetCourant, coutTotal, coutEnPiecesEpiques, nbRunes, libelleRunes, objetActuel, objetSouhaite);
 	formattedResultDisplay(typeObjetCourant, coutTotal, coutEnPiecesEpiques, nbRunes, libelleRunes, objetActuel, objetSouhaite);
+}
 
+/** Méthode déclenchée au click sur le bouton Calculer */
+function calculerClick() {
+	calculerPourAfficher();
+	document.getElementById("resultat").style.transform = "scaleY(1)";
 	setTimeout(() => document.getElementById("recapModification").classList.remove("init"), 75);
-
 	scrollBottomAfterDelay(150);
-	document.getElementById("ref-audio-copy").play();
+	document.getElementById("ref-audio-copy")?.play();
 	document.getElementById("scroll-bottom-btn").disabled = false;
 	document.getElementById("scroll-top-btn").style.display = isVerticalScrollbarVisible() ? 'inline-block' : 'none';
 }
@@ -220,7 +231,7 @@ function initialiserParamStockes() {
 /** Enrobe l'action des boutons de scroll avec un son */
 function scrollBoutonsAction(action) {
 	action();
-	document.getElementById("ref-audio-slide").play();
+	document.getElementById("ref-audio-slide")?.play();
 }
 
 function scrollBoutonTop() {
@@ -231,12 +242,65 @@ function scrollBoutonBottom() {
 	scrollBoutonsAction(scrollToBottom);
 }
 
+/** Vérifier si un paramètre spécifique existe dans le querystring et récupére sa valeur le cas échéant, null sinon */
+function querystringParamValue(parametreName) {
+	const urlParams = new URLSearchParams(window.location.search);
+	var parametre = null;
+
+	if (urlParams.has(parametreName)) {
+		parametre = urlParams.get(parametreName);
+		console.debug(`La valeur du paramètre '${parametreName}' est : ${parametre}`);
+	} else
+		console.debug(`Le paramètre '${parametreName}' n\'existe pas dans la query string.`);
+
+	return parametre;
+}
+
+function removeQueryStringParameter(param) {
+	const url = new URL(window.location);
+	url.searchParams.delete(param);
+	window.history.replaceState({}, document.title, url.toString());
+}
+
+function getActualSoundSettings() {
+	const soundToggle = document.getElementById('soundToggle');
+	const volumeBar = document.getElementById('volumeControl');
+
+	return { soundOn: soundToggle.checked,	volumeKFC: volumeBar.value };
+}
+
+function speechSynthesizer(lang) {
+	const textMessage = cachedTranslations != null ? cultureLanguages[lang].message : cultureLanguages[lang].errorMessage;
+	const soundSettings = getActualSoundSettings();
+	const message = new SpeechSynthesisUtterance(textMessage);
+	message.lang = cultureLanguages[lang].code;
+	message.volume = soundSettings.soundOn ? soundSettings.volumeKFC : 0.0; // Régle le volume (0.0 à 1.0)
+	message.rate = 1; // Régle la vitesse de la voix (0.1 à 10)
+	speechSynthesis.speak(message);
+}
+
+function listenToLangButtonsClick() {
+	document.querySelectorAll('span.lang-btn').forEach(element => {
+		element.addEventListener('click', (event) => {
+			speechSynthesis.cancel();
+			const clickedElement = event.currentTarget;
+			const chosenLang = clickedElement.getAttribute('data-lang');
+			loadTranslations(chosenLang, calculerPourAfficher);
+			localStorage.setItem('lang', chosenLang);
+			removeQueryStringParameter('lang');
+			speechSynthesizer(chosenLang);
+		});
+	});
+}
+
 function init() {
+	i18n();
+
 	const typeSelect = document.getElementById("type");
 	typesObjets.forEach(type => {
 		const option = document.createElement("option");
 		option.value = type.id;
-		option.textContent = type.nom;
+		option.setAttribute('data-translate', type.nom);
 		typeSelect.appendChild(option);
 	});
 
@@ -276,6 +340,7 @@ function init() {
 	document.getElementById('volumeControl').addEventListener('input', volumeControl);
 	document.getElementById('soundToggle').addEventListener('change', muteOrUnmuteAll);
 	initialiserParamStockes();
+	listenToLangButtonsClick()
 
 	setTimeout(() => intro(), 75);
 }

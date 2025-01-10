@@ -2,6 +2,8 @@
 	--default-font-size: 16px;
 	--mobile-phone-font-size: calc(var(--default-font-size) - 6px);
 	--small-corner-radius: 15px;
+	--about-link-bottom: 1.2rem;
+	--about-link-bottom-mobile: 0.8rem;
 
 	--primary-color: #540d11;
 	--secondary-color: #b96167;
@@ -44,7 +46,7 @@ h3,
 }
 
 .form-group {
-	margin: 2.5rem 0;
+	margin: 2rem 0 2.5rem;
 }
 
 .form-row {
@@ -79,26 +81,6 @@ span.dancing-label {
 	transition: var(--standart-transition);
 }
 
-#version {
-	transition: var(--standart-transition);
-	position: fixed;
-	bottom: 2rem;
-	right: 2rem;
-}
-
-#version a {
-	transition: var(--standart-transition);
-	text-decoration: none;
-	color: var(--secondary-color);
-	font-style: italic;
-	font-size: smaller;
-}
-
-#version a:hover {
-	text-decoration: underline;
-	color: var(--highlight-color) !important;
-}
-
 #data-sources {
 	transition: var(--standart-transition);
 	position: fixed;
@@ -119,6 +101,47 @@ span.dancing-label {
 
 #data-sources a:visited {
 	color: var(--secondary-color);
+}
+
+#version {
+	transition: var(--standart-transition);
+	position: fixed;
+	bottom: 2rem;
+	right: 2rem;
+}
+
+#version a {
+	transition: var(--standart-transition);
+	text-decoration: none;
+	color: var(--secondary-color);
+	font-style: italic;
+	font-size: smaller;
+}
+
+#version a:not(.about):hover {
+	text-decoration: underline;
+	color: var(--highlight-color) !important;
+}
+
+#version a.about {
+	position: absolute;
+	bottom: var(--about-link-bottom);
+	right: 0;
+	text-align: center;
+	font-weight: bold;
+	font-style: normal;
+	border-radius: 50%;
+	text-shadow: 1px 1px 2px;
+}
+
+#version a.about:hover,
+#version a.about:active,
+#version a.about:focus {
+	padding: 1px 5px;
+	right: -5px;
+	bottom: calc(var(--about-link-bottom) - 1px);
+	background-color: rgba(255, 255, 255, 0.75);
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 }
 
 button {
@@ -242,6 +265,27 @@ span.nom-objet-bw {
 	/* cursor: pointer; TODO: en attente transcodage complet avec la page https://r1.fr.bloodwars.net/test_items.php?xxx pour créer un lien hypertext à minima */
 }
 
+span.lang-btn {
+	opacity: 0.4;
+	cursor: pointer;
+	transition: var(--short-transition);
+}
+
+span.lang-btn:hover,
+span.lang-btn:focus,
+span.lang-btn:active {
+	opacity: 1;
+	box-shadow: 5px 19px 5px rgba(0, 0, 0, 0.4)
+}
+
+span.lang-btn:not(:last-child) {
+	margin-right: 5px;
+}
+
+span.lang-btn img {
+	vertical-align: middle;
+}
+
 body {
 	background:
 		linear-gradient(to right, var(--primary-color), #ffffff) 0 0 / 16.67% 100% repeat-y,
@@ -271,7 +315,16 @@ body {
 	max-width: 16.67%;
 }
 
+#lang-tool-bar {
+	transition: var(--standart-transition);
+	position: fixed;
+	top: 2rem;
+	left: 2rem;
+	max-width: 14%;
+}
+
 input[type="range"] {
+	transition: var(--short-transition);
 	accent-color: var(--primary-color);
 	opacity: 0.4;
 	width: 100%;
@@ -315,6 +368,10 @@ button:not(:disabled) .icon {
 	color: white;
 }
 
+#scroll-bottom-btn {
+	margin-top: 0.5rem;
+}
+
 /* --- Styles spécifiques aux téléphones --- */
 @media (max-width: 600px) {
 	body {
@@ -325,7 +382,8 @@ button:not(:disabled) .icon {
 		font-size: calc(var(--mobile-phone-font-size) - 4px);
 	}
 
-	#data-sources {
+	#data-sources,
+	#lang-tool-bar {
 		left: 1rem;
 	}
 
@@ -344,8 +402,26 @@ button:not(:disabled) .icon {
 		min-width: 69px;
 	}
 
+	#lang-tool-bar {
+		max-width: 33px;
+	}
+
 	span.dancing-label {
 		transform: rotate(90deg);
+	}
+
+	span.lang-btn:not(:last-child) {
+		margin-right: 0;
+	}
+
+	#version a.about {
+		bottom: var(--about-link-bottom-mobile);
+	}
+
+	#version a.about:hover,
+	#version a.about:active,
+	#version a.about:focus {
+		bottom: calc(var(--about-link-bottom-mobile) - 1px);
 	}
 }
 
@@ -421,6 +497,11 @@ h3.intro,
 #sound-tool-bar.intro {
 	top: 0;
 	right: 0;
+}
+
+#lang-tool-bar.intro {
+	top: 0;
+	left: 0;
 }
 
 /* --- bouton on-off (checkbox) --- */

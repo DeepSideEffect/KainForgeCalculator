@@ -65,7 +65,13 @@ function calculerCoutTotal(objetActuel, objetSouhaite, caracteristiquesSupport, 
  * @returns le nom complet au format texte
  */
 function nomCompletObjet(objet) {
-	return `Epique ${objet?.support?.nom ?? ''} ${objet?.prefixe?.nom ?? ''} ${objet?.suffixe?.nom ?? ''}`;
+	const itemQuality = getTranslationWithDefaultValue('item-quality', 'Epique');
+	const itemSupport = getOptionTranslationWithKeyAsDefault(objet?.support?.nom);
+	const itemPrefix = getOptionTranslationWithKeyAsDefault(objet?.prefixe?.nom);
+	const itemSuffix = getOptionTranslationWithKeyAsDefault(objet?.suffixe?.nom);
+	const format = cultureLanguages[currentLanguage].itemNameDisplayFormat;
+
+	return formatString(format, itemQuality, itemSupport ?? '', itemPrefix ?? '', itemSuffix ?? '');
 }
 
 /** Nettoyage des doubles sauts de ligne */
@@ -74,7 +80,8 @@ function replaceDoubleCRLF(text) {
 }
 
 function ajouteSecifiquesDoubleCRLF(text) {
-	return text.replace("Coût total :", "\n\nCoût total :");
+	const searchText = getTranslationWithDefaultValue('cout-total-label', 'Coût total :');
+	return text.replace(searchText, `\n\n${searchText}`);
 }
 
 function gererLesCRLF(text) {
@@ -82,3 +89,36 @@ function gererLesCRLF(text) {
 	text = ajouteSecifiquesDoubleCRLF(text);
 	return text;
 }
+
+//#region Traductions
+
+function getValueOrDefault(getValueAction, getValueParams, defaultValue) {
+	const value = getValueAction(getValueParams);
+	return !!value ? value : defaultValue;
+}
+
+function getTranslation(translationKey) {
+	return !!cachedTranslations && !!cachedTranslations[translationKey]
+		? cachedTranslations[translationKey]
+		: null;
+}
+
+getTranslationWithDefaultValue = (translationKey, defaultValue) =>
+	getValueOrDefault(getTranslation, translationKey, defaultValue);
+
+getTranslationWithKeyAsDefault = (translationKey) =>
+	getTranslationWithDefaultValue(translationKey, translationKey);
+
+function getOptionTranslation(translationKey) {
+	return !!cachedTranslations?.options && !!cachedTranslations.options[translationKey]
+		? cachedTranslations.options[translationKey]
+		: null;
+}
+
+getOptionTranslationWithDefaultValue = (translationKey, defaultValue) =>
+	getValueOrDefault(getOptionTranslation, translationKey, defaultValue);
+
+getOptionTranslationWithKeyAsDefault = (translationKey) =>
+	getOptionTranslationWithDefaultValue(translationKey, translationKey);
+
+//#endregion Traductions
