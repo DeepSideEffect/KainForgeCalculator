@@ -2,6 +2,8 @@
 	--default-font-size: 16px;
 	--mobile-phone-font-size: calc(var(--default-font-size) - 6px);
 	--small-corner-radius: 15px;
+	--about-link-bottom: 1.2rem;
+	--about-link-bottom-mobile: 0.8rem;
 
 	--primary-color: #540d11;
 	--secondary-color: #b96167;
@@ -79,26 +81,6 @@ span.dancing-label {
 	transition: var(--standart-transition);
 }
 
-#version {
-	transition: var(--standart-transition);
-	position: fixed;
-	bottom: 2rem;
-	right: 2rem;
-}
-
-#version a {
-	transition: var(--standart-transition);
-	text-decoration: none;
-	color: var(--secondary-color);
-	font-style: italic;
-	font-size: smaller;
-}
-
-#version a:hover {
-	text-decoration: underline;
-	color: var(--highlight-color) !important;
-}
-
 #data-sources {
 	transition: var(--standart-transition);
 	position: fixed;
@@ -119,6 +101,47 @@ span.dancing-label {
 
 #data-sources a:visited {
 	color: var(--secondary-color);
+}
+
+#version {
+	transition: var(--standart-transition);
+	position: fixed;
+	bottom: 2rem;
+	right: 2rem;
+}
+
+#version a {
+	transition: var(--standart-transition);
+	text-decoration: none;
+	color: var(--secondary-color);
+	font-style: italic;
+	font-size: smaller;
+}
+
+#version a:not(.about):hover {
+	text-decoration: underline;
+	color: var(--highlight-color) !important;
+}
+
+#version a.about {
+	position: absolute;
+	bottom: var(--about-link-bottom);
+	right: 0;
+	text-align: center;
+	font-weight: bold;
+	font-style: normal;
+	border-radius: 50%;
+	text-shadow: 1px 1px 2px;
+}
+
+#version a.about:hover,
+#version a.about:active,
+#version a.about:focus {
+	padding: 1px 5px;
+	right: -5px;
+	bottom: calc(var(--about-link-bottom) - 1px);
+	background-color: rgba(255, 255, 255, 0.75);
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 }
 
 button {
@@ -389,6 +412,16 @@ button:not(:disabled) .icon {
 
 	span.lang-btn:not(:last-child) {
 		margin-right: 0;
+	}
+
+	#version a.about {
+		bottom: var(--about-link-bottom-mobile);
+	}
+
+	#version a.about:hover,
+	#version a.about:active,
+	#version a.about:focus {
+		bottom: calc(var(--about-link-bottom-mobile) - 1px);
 	}
 }
 

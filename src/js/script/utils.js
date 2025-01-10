@@ -100,6 +100,7 @@ function loadTranslations(lang, successCallback, errorCallback) {
 			currentLanguage = lang;
 			cachedTranslations = translations;
 			document.head.querySelector('title').textContent = translations['title'];
+			document.body.querySelector('.about').href = translations['readMeURL'];
 
 			document.querySelectorAll('[data-translate]:not(option)').forEach(element => {
 				const key = element.getAttribute('data-translate');
