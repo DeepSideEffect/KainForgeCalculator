@@ -80,3 +80,20 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 
 ## Autres langues du fichier README
 - [Fichier README anglais](README_EN.md)
+
+## Problèmes connus
+
+### Problème avec la propriété `.lang` de `SpeechSynthesisUtterance` sous Opera
+
+La propriété `.lang` de `SpeechSynthesisUtterance` ne fonctionne pas correctement sous *Opera*, ce qui entraîne une mauvaise prononciation des textes en anglais avec un accent français.  
+Ce problème n'est pas présent sous *Chrome*, *Edge* et *Firefox*.
+
+#### Suggestions
+
+- Contacter le support d'*Opera* pour signaler le problème.
+- Vérifier les forums pour des solutions ou des mises à jour.
+
+Pour plus d'informations sur la compatibilité des navigateurs, consultez la [documentation MDN](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance/lang#browser_compatibility).  
+Vous pouvez également suivre l'évolution de ce problème sur [notre issue GitHub](https://github.com/mdn/browser-compat-data/issues/25625).
+
+Nous espérons qu'une mise à jour future d'*Opera* corrigera ce problème.
