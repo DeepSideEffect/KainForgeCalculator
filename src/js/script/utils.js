@@ -99,6 +99,7 @@ function loadTranslations(lang, successCallback, errorCallback) {
 		.then(translations => {
 			currentLanguage = lang;
 			cachedTranslations = translations;
+			setDocumentLangAllVersions(lang);
 			document.head.querySelector('title').textContent = translations['title'];
 			document.body.querySelector('.about').href = translations['readMeURL'];
 
@@ -165,6 +166,21 @@ function translateTitleOfButtonsWithoutLabel(translations) {
 		const button = document.getElementById(id);
 		button.setAttribute('title', translations[`${id}-description`]);
 	});
+}
+
+/**
+ * Définir la langue du document HTML quelque soit le navigateur utilisé
+ * @param {*} lang Langue du document
+ */
+function setDocumentLangAllVersions(lang) {
+	if (document.documentElement)
+    document.documentElement.lang = lang;
+	else {
+		// Pour les anciens navigateurs qui ne supportent pas document.documentElement (comme Edge < v12)
+		var htmlTag = document.getElementsByTagName('html')[0];
+		if (htmlTag)
+			htmlTag.setAttribute('lang', lang);
+	}
 }
 
 /**
