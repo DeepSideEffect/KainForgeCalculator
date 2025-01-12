@@ -1,3 +1,5 @@
+//#region Loading Scripts or CSS
+
 function loadCSS(url) {
 	var link = document.createElement('link');
 	link.rel = 'stylesheet';
@@ -43,6 +45,10 @@ async function loadScriptsInParallel(scriptsSrcList) {
 	}
 }
 
+//#endregion Loading Scripts or CSS
+
+//#region Text helpers
+
 /**
  * Remplace les espaces réservés dans une chaîne de format par les valeurs correspondantes fournies en paramètres.
  * @param {string} format Chaîne de format composite contenant des espaces réservés.
@@ -54,6 +60,8 @@ function formatString(format, ...args) {
 		typeof args[number] !== 'undefined' ? args[number] : match
 	);
 }
+
+//#endregion Text helpers
 
 //#region Internationalisation
 
@@ -90,7 +98,7 @@ function i18n() {
 		lang = supportedLanguages.includes(langQuerystring) ? langQuerystring : 'en';
 
 	loadTranslations(lang);
-	initDomTradListener();
+	// initDomTradListener(); /!\ Ne plus utiliser pour éviter le plantage de l'application sous Firefox, mais fonctionne très bien sous Chrome, Edge et Opera.
 }
 
 function loadTranslations(lang, successCallback, errorCallback) {
@@ -139,7 +147,7 @@ function translateOptions(translations) {
 }
 
 function initDomTradListener() {
-	// Observer les changements dans le DOM
+	// Observer les changements dans le DOM --> /!\ Gros soucis avec Firefox, bug rapporté chez eux /!\
 	const observer = new MutationObserver(mutations => {
 		mutations.forEach(mutation => {
 			if (mutation.type === 'childList')

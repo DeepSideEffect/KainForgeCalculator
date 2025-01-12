@@ -1,11 +1,4 @@
-function listenToEnterKey() {
-	document.body.addEventListener("keydown", function (event) {
-		if (event.key === "Enter") {
-			event.preventDefault(); // Empêche le comportement par défaut de la touche "Entrée"
-			document.getElementById("calculer").click();
-		}
-	});
-}
+//#region Scrolling
 
 /** Faire défiler jusqu'en bas de la page */
 function scrollToBottom() {
@@ -43,11 +36,31 @@ function isVerticalScrollbarVisible() {
 	return document.documentElement.scrollHeight > window.innerHeight;
 }
 
+function scrollBoutonTop() {
+	scrollBoutonsAction(scrollToTop);
+}
+
+function scrollBoutonBottom() {
+	scrollBoutonsAction(scrollToBottom);
+}
+
+//#endregion Scrolling
+
+//#region Colors
+
+function changeCurrentColor(newColor) {
+	document.documentElement.style.setProperty('--current-color', newColor);
+}
+
 function couleurThemeEnFonctionDesRunes() {
-	const type = document.getElementById("type").value;
+	const type = document.getElementById('type').value;
 	const typeObjetCourant = typesObjets[type - 1];
 	changeCurrentColor(typeObjetCourant.color);
 }
+
+//#endregion Colors
+
+//#region Caracteristique
 
 function changementCaracteristique(desactiverBtn) {
 	document.getElementById("calculer").disabled = desactiverBtn;
@@ -57,7 +70,6 @@ function changementCaracteristique(desactiverBtn) {
 		document.getElementById("ref-audio-applause")?.pause();
 		document.getElementById("ref-audio-kick")?.play();
 	}
-	couleurThemeEnFonctionDesRunes();
 	scrollTopAfterDelay(150);
 }
 
@@ -75,6 +87,10 @@ function caracteristiqueInit(selectHtmlId) {
 	select.addEventListener("change", () => changementCaracteristique(false));
 	return select;
 }
+
+//#endregion Caracteristique
+
+//#region Actions
 
 function copyToClipboard(htmlId) {
 	const textToCopy = gererLesCRLF(document.getElementById(htmlId).innerText);
@@ -117,15 +133,15 @@ function declancherSonAuChargement() {
 	document.removeEventListener("click", declancherSonAuChargement);
 }
 
+//#endregion Actions
+
+//#region Results
+
 function composantNomObjet(objet) {
 	const span = document.createElement("span");
 	span.classList.add("nom-objet-bw");
 	span.textContent = nomCompletObjet(objet);
 	return span;
-}
-
-function changeCurrentColor(newColor) {
-	document.documentElement.style.setProperty('--current-color', newColor);
 }
 
 /** Résultat affiché sur une seule (ou deux) ligne(s) */
@@ -198,6 +214,10 @@ function calculerClick() {
 	document.getElementById("scroll-top-btn").style.display = isVerticalScrollbarVisible() ? 'inline-block' : 'none';
 }
 
+//#endregion Results
+
+//#region Sounds
+
 /** Réglage du volume de tous les audios */
 function volumeControl() {
 	var volumeBar = document.getElementById('volumeControl');
@@ -230,19 +250,22 @@ function initialiserParamStockes() {
 		document.getElementById('soundToggle').checked = true;
 }
 
+function getActualSoundSettings() {
+	const soundToggle = document.getElementById('soundToggle');
+	const volumeBar = document.getElementById('volumeControl');
+
+	return { soundOn: soundToggle.checked,	volumeKFC: volumeBar.value };
+}
+
 /** Enrobe l'action des boutons de scroll avec un son */
 function scrollBoutonsAction(action) {
 	action();
 	document.getElementById("ref-audio-slide")?.play();
 }
 
-function scrollBoutonTop() {
-	scrollBoutonsAction(scrollToTop);
-}
+//#endregion Sounds
 
-function scrollBoutonBottom() {
-	scrollBoutonsAction(scrollToBottom);
-}
+//#region Querystring
 
 /** Vérifier si un paramètre spécifique existe dans le querystring et récupére sa valeur le cas échéant, null sinon */
 function querystringParamValue(parametreName) {
@@ -264,11 +287,17 @@ function removeQueryStringParameter(param) {
 	window.history.replaceState({}, document.title, url.toString());
 }
 
-function getActualSoundSettings() {
-	const soundToggle = document.getElementById('soundToggle');
-	const volumeBar = document.getElementById('volumeControl');
+//#endregion Querystring
 
-	return { soundOn: soundToggle.checked,	volumeKFC: volumeBar.value };
+//#region Listeners
+
+function listenToEnterKey() {
+	document.body.addEventListener("keydown", function (event) {
+		if (event.key === "Enter") {
+			event.preventDefault(); // Empêche le comportement par défaut de la touche "Entrée"
+			document.getElementById("calculer").click();
+		}
+	});
 }
 
 function listenToLangButtonsClick() {
@@ -286,12 +315,16 @@ function listenToLangButtonsClick() {
 	});
 }
 
+//#endregion Listeners
+
+//#region Initialisation
+
 function init() {
 	i18n();
 
-	const typeSelect = document.getElementById("type");
+	const typeSelect = document.getElementById('type');
 	typesObjets.forEach(type => {
-		const option = document.createElement("option");
+		const option = document.createElement('option');
 		option.value = type.id;
 		option.setAttribute('data-translate', type.nom);
 		typeSelect.appendChild(option);
@@ -318,7 +351,9 @@ function init() {
 			createOption(index, caracteristique.nom, suffixeActuelSelect, suffixeSouhaiteSelect);
 		});
 
+		couleurThemeEnFonctionDesRunes();
 		changementCaracteristique(true);
+		translateOptions(cachedTranslations);
 
 		if (!isVerticalScrollbarVisible())
 			document.getElementById("scroll-bottom-btn").disabled = true;
@@ -344,3 +379,5 @@ function startup() {
 	else
 		init();
 }
+
+//#endregion Initialisation
