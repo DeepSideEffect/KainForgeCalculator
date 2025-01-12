@@ -1,3 +1,5 @@
+//#region Calculs
+
 /**
  * Calculer le coût de la modification pour une seule caractéristique
  * @param {*} actuel la caractéristique dans son état actuel
@@ -59,6 +61,10 @@ function calculerCoutTotal(objetActuel, objetSouhaite, caracteristiquesSupport, 
 	return { coutTotalPE, nbMvtsTotal };
 }
 
+//#endregion Calculs
+
+//#region Formattage
+
 /**
  * Compose le nom d'un objet depuis ses propriétés
  * @param {*} objet objet complet
@@ -89,6 +95,8 @@ function gererLesCRLF(text) {
 	text = ajouteSecifiquesDoubleCRLF(text);
 	return text;
 }
+
+//#endregion Formattage
 
 //#region Traductions
 
@@ -122,3 +130,13 @@ getOptionTranslationWithKeyAsDefault = (translationKey) =>
 	getOptionTranslationWithDefaultValue(translationKey, translationKey);
 
 //#endregion Traductions
+
+//#region Voix
+
+function voiceSpeak(lang, soundOn, volume) {
+	const textMessage = cachedTranslations != null ? cultureLanguages[lang].message : cultureLanguages[lang].errorMessage;
+	const voiceVolume = soundOn ? volume : 0.0;
+	speechSynthesizer(lang, textMessage, voiceVolume, 1);
+}
+
+//#endregion Voix

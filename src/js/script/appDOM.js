@@ -271,26 +271,17 @@ function getActualSoundSettings() {
 	return { soundOn: soundToggle.checked,	volumeKFC: volumeBar.value };
 }
 
-function speechSynthesizer(lang) {
-	const textMessage = cachedTranslations != null ? cultureLanguages[lang].message : cultureLanguages[lang].errorMessage;
-	const soundSettings = getActualSoundSettings();
-	const message = new SpeechSynthesisUtterance(textMessage);
-	message.lang = cultureLanguages[lang].code;
-	message.volume = soundSettings.soundOn ? soundSettings.volumeKFC : 0.0; // Régle le volume (0.0 à 1.0)
-	message.rate = 1; // Régle la vitesse de la voix (0.1 à 10)
-	speechSynthesis.speak(message);
-}
-
 function listenToLangButtonsClick() {
 	document.querySelectorAll('span.lang-btn').forEach(element => {
 		element.addEventListener('click', (event) => {
-			speechSynthesis.cancel();
+			speechSynthesis?.cancel();
 			const clickedElement = event.currentTarget;
 			const chosenLang = clickedElement.getAttribute('data-lang');
 			loadTranslations(chosenLang, calculerPourAfficher);
 			localStorage.setItem('lang', chosenLang);
 			removeQueryStringParameter('lang');
-			speechSynthesizer(chosenLang);
+			const soundSettings = getActualSoundSettings();
+			voiceSpeak(chosenLang, soundSettings.soundOn, soundSettings.volumeKFC);
 		});
 	});
 }
