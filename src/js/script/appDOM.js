@@ -53,8 +53,10 @@ function changementCaracteristique(desactiverBtn) {
 	document.getElementById("calculer").disabled = desactiverBtn;
 	document.getElementById("recapModification").classList.add("init");
 	document.getElementById("resultat").style.transform = "scaleY(0)";
-	document.getElementById("ref-audio-applause")?.pause();
-	document.getElementById("ref-audio-kick")?.play();
+	if (document.readyState === 'complete') {
+		document.getElementById("ref-audio-applause")?.pause();
+		document.getElementById("ref-audio-kick")?.play();
+	}
 	couleurThemeEnFonctionDesRunes();
 	scrollTopAfterDelay(150);
 }
