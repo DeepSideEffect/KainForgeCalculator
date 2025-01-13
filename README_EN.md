@@ -1,6 +1,7 @@
 # KainForgeCalculator
 Kain's Forge Calculator.  
-This calculator allows you to calculate the cost of modifying an epic item in the [BW](https://bloodwars.net/) game universe on a **Necropolis** like server.
+This calculator allows you to calculate the cost of modifying an epic item in the [BW](https://bloodwars.net/) game universe on a **Necropolis** like server.\
+[Try it](https://deepsideeffect.github.io/KainForgeCalculator?lang=en)
 
 ## Description
 This project aims to model the data from the "[data source](https://wiki.fr.bloodwars.net/index.php?title=La_Forge_de_Kain_sur_UT)" page to create a cost calculator for modifying an epic item in the [BW](https://bloodwars.net/) game universe from one state to another.  
@@ -71,7 +72,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Acknowledgements
 - Thanks to the BW community for their support and feedback.  
-- Thanks to everyone who contributed to this project, such as [Burns](https://r2.fr.bloodwars.net/showmsg.php?a=profile&uid=280), [VashTheStampede](https://r1.fr.bloodwars.net/showmsg.php?a=profile&uid=67380) & [Minuit](https://r4.fr.bloodwars.net/?a=profile&uid=5017).
+- Thanks to everyone who contributed to this project, such as [VashTheStampede](https://r1.fr.bloodwars.net/showmsg.php?a=profile&uid=67380), [Burns](https://r2.fr.bloodwars.net/showmsg.php?a=profile&uid=280) & [Minuit](https://r4.fr.bloodwars.net/?a=profile&uid=5017).
 
 ## Authors
 [Deep](https://r2.bloodwars.net/showmsg.php?a=profile&uid=30202) - Lead Developer - [GitHub profil](https://github.com/DeepSideEffect)
