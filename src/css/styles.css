@@ -368,6 +368,10 @@ button:not(:disabled) .icon {
 	color: white;
 }
 
+button:disabled {
+	cursor: not-allowed;
+}
+
 #scroll-bottom-btn {
 	margin-top: 0.5rem;
 }
