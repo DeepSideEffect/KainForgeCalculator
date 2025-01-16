@@ -319,8 +319,13 @@ function listenToLangButtonsClick() {
 
 //#region Initialisation
 
+function displayVersionNumber() {
+	document.getElementById('version-numero').textContent = pageVersion;
+}
+
 function init() {
 	i18n();
+	displayVersionNumber();
 
 	const typeSelect = document.getElementById('type');
 	typesObjets.forEach(type => {

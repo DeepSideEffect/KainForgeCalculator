@@ -12,11 +12,18 @@
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-NX8L0J7Z20"></script>
 	<script>
+		var pageVersion = 'v1.4.2';
+
 		window.dataLayer = window.dataLayer || [];
 		function gtag() { dataLayer.push(arguments); }
-		gtag('js', new Date());
 
+		gtag('js', new Date());
 		gtag('config', 'G-NX8L0J7Z20');
+		gtag('event', 'version_update', {
+			'event_category': 'Version',
+			'event_label': pageVersion,
+			'value': 1
+		});
 	</script>
 </head>
 
@@ -148,7 +155,7 @@
 	</div>
 
 	<div id="version" class="intro">
-		<a target="_blank" title="Changelog" href="https://github.com/DeepSideEffect/KainForgeCalculator/activity?ref=main">v1.4.2 © Deep 2025</a>
+		<a target="_blank" title="Changelog" href="https://github.com/DeepSideEffect/KainForgeCalculator/activity?ref=main"><span id="version-numero"></span> © Deep 2025</a>
 		<a target="_blank" title="Infos"  class="about" href="https://github.com/DeepSideEffect/KainForgeCalculator?tab=readme-ov-file#kainforgecalculator">?</a>
 	</div>
 
