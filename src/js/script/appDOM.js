@@ -73,6 +73,7 @@ function changementCaracteristique(desactiverBtn) {
 		document.getElementById('ref-audio-kick')?.play();
 	}
 	scrollTopAfterDelay(1250);
+	setTimeout(() => document.getElementById('cube-container').classList.add('no-perspective'), 1750);
 }
 
 function createOption(index, nom, actuelSelect, souhaiteSelect) {
@@ -108,31 +109,31 @@ function copyToClipboard(htmlId) {
 }
 
 function showNotification(message) {
-	document.getElementById("ref-audio-copy2")?.play();
-	document.getElementById("notification-container").classList.add("show");
-	document.getElementById("notification").textContent = message;
-	document.getElementById("notification").classList.add("show");
+	document.getElementById('ref-audio-copy2')?.play();
+	document.getElementById('notification-container').classList.add('show');
+	document.getElementById('notification').textContent = message;
+	document.getElementById('notification').classList.add('show');
 
 	setTimeout(() => {
-		document.getElementById("notification").classList.remove("show");
-		setTimeout(() => document.getElementById("notification-container").classList.remove("show"), 800);
+		document.getElementById('notification').classList.remove('show');
+		setTimeout(() => document.getElementById('notification-container').classList.remove('show'), 800);
 	}, 2000);
 }
 
-function intro() {
-	var elements = document.getElementsByClassName("intro");
-	[...elements].forEach(element => {
-		element.classList.remove("intro");
-	});
-}
-
 function declancherSonAuChargement() {
-	const audio = document.getElementById("ref-audio-applause");
+	const audio = document.getElementById('ref-audio-applause');
 	audio?.play().catch(error => {
 		console.error("Erreur lors de la lecture de l'audio : ", error);
 	});
 
-	document.removeEventListener("click", declancherSonAuChargement);
+	document.removeEventListener('click', declancherSonAuChargement);
+}
+
+function removeCssClassForAll(cssClass) {
+	var elements = document.getElementsByClassName(cssClass);
+	[...elements].forEach(element => {
+		element.classList.remove(cssClass);
+	});
 }
 
 //#endregion Actions
@@ -140,8 +141,8 @@ function declancherSonAuChargement() {
 //#region Results
 
 function composantNomObjet(objet) {
-	const span = document.createElement("span");
-	span.classList.add("nom-objet-bw");
+	const span = document.createElement('span');
+	span.classList.add('nom-objet-bw');
 	span.textContent = nomCompletObjet(objet);
 	return span;
 }
@@ -207,6 +208,7 @@ function calculerPourAfficher() {
 
 /** Méthode déclenchée au click sur le bouton Calculer */
 function calculerClick() {
+	document.getElementById('cube-container').classList.remove('no-perspective');
 	calculerPourAfficher();
 	document.getElementById('resultat').classList.remove('init');
 	document.getElementById('poster').classList.add('hidden');
@@ -327,6 +329,14 @@ function displayVersionNumber() {
 	document.getElementById('version-numero').textContent = pageVersion;
 }
 
+function intro() {
+	setTimeout(() => removeCssClassForAll('intro'), 75);
+}
+
+function cubeIntro() {
+	setTimeout(() => removeCssClassForAll('intro-cube'), 2000);
+}
+
 function init() {
 	i18n();
 	displayVersionNumber();
@@ -379,7 +389,8 @@ function init() {
 	initialiserParamStockes();
 	listenToLangButtonsClick()
 
-	setTimeout(() => intro(), 75);
+	intro();
+	cubeIntro();
 }
 
 function startup() {

@@ -396,12 +396,6 @@ button:disabled {
 	height: var(--cube-max-width);
 }
 
-/* TODO: to delete !
-#poster.hidden {
-	height: 0;
-	transform: scaleY(0);
-}*/
-
 /* --- Styles spécifiques aux téléphones --- */
 @media (max-width: 600px) {
 	body {
@@ -535,6 +529,14 @@ h3.intro,
 	left: 0;
 }
 
+body.intro-cube {
+	overflow: hidden;
+}
+
+#cube-element.intro-cube {
+	animation: full-spin 2s linear;
+}
+
 /* --- bouton on-off (checkbox) --- */
 
 .switch {
@@ -634,7 +636,6 @@ div.mute-unmute {
 }
 
 .front {
-	background: rgba(90,90,90,.7); /* TODO: to delete */
 	transform: translateZ(var(--cube-translateZ-val));
 }
 
@@ -646,7 +647,7 @@ div.mute-unmute {
 	rotate: none;
 }
 
-#cube-element:has(#resultat.init) {
+#cube-element:not(.intro-cube):has(#resultat.init) {
 	transform: rotateX(90deg);
 }
 
@@ -674,6 +675,8 @@ div.mute-unmute {
 		margin-top: 3rem;
 	}
 }
+
+/* --- Animations --- */
 
 @keyframes apply-perspective-animation {
 	0% {
@@ -736,5 +739,14 @@ div.mute-unmute {
 
 	100% {
 		perspective: var(--no-perspective);
+	}
+}
+
+@keyframes full-spin {
+	from {
+			transform: rotate3d(1, 1, 1, 0deg);
+	}
+	to {
+			transform: rotate3d(1, 1, 1, 360deg);
 	}
 }
