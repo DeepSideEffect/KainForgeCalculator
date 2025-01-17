@@ -138,6 +138,7 @@ span.dancing-label {
 	font-style: normal;
 	border-radius: 50%;
 	text-shadow: 1px 1px 2px;
+	cursor: help;
 }
 
 #version a.about:hover,
@@ -234,7 +235,7 @@ div.result:nth-child(2) {
 #resultatV1 {
 	margin-bottom: 2rem;
 	position: relative;
-	text-align: right;
+	text-align: left;
 }
 
 #resultat {
