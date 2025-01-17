@@ -750,9 +750,9 @@ div.mute-unmute {
 
 @keyframes full-spin {
 	from {
-			transform: rotate3d(1, 1, 1, 0deg);
+		transform: rotate3d(1, 1, 1, 0deg);
 	}
 	to {
-			transform: rotate3d(1, 1, 1, 360deg);
+		transform: rotate3d(1, 1, 1, 360deg);
 	}
 }
