@@ -598,7 +598,7 @@ div.mute-unmute {
 .cube-output {
 	box-sizing: border-box;
 	width: fit-content;
-	margin-top: 2rem; /* calc(40vh - var(--cube-width)); TODO: to check or delete! */
+	margin-top: 2rem; /* calc(40vh - var(--cube-width)); TODO: to check or delete! --> régler en petit quand le texte déborde */
 	margin-left: auto;
 	margin-right: auto;
 }
