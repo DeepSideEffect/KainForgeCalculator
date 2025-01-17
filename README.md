@@ -1,6 +1,7 @@
 # KainForgeCalculator
 Calculatrice de la forge de Kain.  
-Cette calculatrice permet de calculer le coût de modification d'un objet *épique* de l'univers du jeu [BW](https://fr.bloodwars.net/) sur un serveur de type **Ultima Thule** / **Nercopolis**.
+Cette calculatrice permet de calculer le coût de modification d'un objet *épique* de l'univers du jeu [BW](https://fr.bloodwars.net/) sur un serveur de type **Ultima Thule** / **Nercopolis**.\
+[Essayer](https://deepsideeffect.github.io/KainForgeCalculator)
 
 ## Description
 Ce projet a pour objectif de modéliser les données de la page "[source des données](https://wiki.fr.bloodwars.net/index.php?title=La_Forge_de_Kain_sur_UT)" liée afin de réaliser une calculatrice des coûts de modification d'un item *épique* de l'univers du jeu [BW](https://fr.bloodwars.net/) d'un état donné à un autre état.  
@@ -73,7 +74,7 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 
 ## Remerciements
 - Merci à la communauté BW pour leur soutien et leurs retours.
-- Merci à tous ceux qui ont contribué à ce projet tels que [Burns](https://r2.fr.bloodwars.net/showmsg.php?a=profile&uid=280), [VashTheStampede](https://r1.fr.bloodwars.net/showmsg.php?a=profile&uid=67380) et [Minuit](https://r4.fr.bloodwars.net/?a=profile&uid=5017).
+- Merci à tous ceux qui ont contribué à ce projet tels que [VashTheStampede](https://r1.fr.bloodwars.net/showmsg.php?a=profile&uid=67380), [Burns](https://r2.fr.bloodwars.net/showmsg.php?a=profile&uid=280) et [Minuit](https://r4.fr.bloodwars.net/?a=profile&uid=5017).
 
 ## Auteurs
 [Deep](https://r2.fr.bloodwars.net/showmsg.php?a=profile&uid=1504) - Développeur principal - [GitHub profil](https://github.com/DeepSideEffect)

@@ -12,15 +12,24 @@
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-NX8L0J7Z20"></script>
 	<script>
+		var pageVersion = '1.4.2';
+
 		window.dataLayer = window.dataLayer || [];
 		function gtag() { dataLayer.push(arguments); }
-		gtag('js', new Date());
 
+		gtag('js', new Date());
 		gtag('config', 'G-NX8L0J7Z20');
+
+		gtag('set', { 'app_version': pageVersion });
+		gtag('event', 'version_update', {
+			'event_category': 'Version',
+			'event_label': pageVersion,
+			'value': 1
+		});
 	</script>
 </head>
 
-<body>
+<body class="intro-cube">
 	<div id="layout" class="intro">
 		<audio id="ref-audio-applause" src="src/assets/sounds/applause.mp3"></audio>
 		<audio id="ref-audio-copy" src="src/assets/sounds/copy.mp3"></audio>
@@ -83,62 +92,72 @@
 					</div>
 		</form>
 
-		<div id="resultat">
-			<div id="resultatV1" title="Résultat en ligne">
-				<span id="resultatV1-display">
-					<span data-translate="resultatV1-label-start">Pour modifier l'objet</span>
-					<span id="resultatV1-modif"></span>,<br />
-					<span data-translate="resultatV1-label-middle">le coût total est de</span>
-					<span id="resultatV1-text"></span>
-				</span>
-				<button type="button"
-					class="mini-bouton"
-					title="Copier l'affichage en ligne dans le presse-papier"
-					data-translate="copy-line-btn-label"
-					data-translate-title
-					onclick="copyToClipboard('resultatV1-display')"
-				>
-					Copier
-				</button>
-			</div>
+		<div class="cube-output">
+			<section id="cube-container">
+				<div id="cube-element" class="intro-cube">
+					<div class="face front">
+						<div id="resultat" class="init">
+							<div id="resultatV1" title="Résultat en ligne">
+								<span id="resultatV1-display">
+									<span data-translate="resultatV1-label-start">Pour modifier l'objet</span>
+									<span id="resultatV1-modif"></span>,<br />
+									<span data-translate="resultatV1-label-middle">le coût total est de</span>
+									<span id="resultatV1-text"></span>
+								</span>
+								<button type="button"
+									class="mini-bouton"
+									title="Copier l'affichage en ligne dans le presse-papier"
+									data-translate="copy-line-btn-label"
+									data-translate-title
+									onclick="copyToClipboard('resultatV1-display')"
+								>
+									Copier
+								</button>
+							</div>
 
-			<div id="resultatV2" title="Résultat formaté" class="center">
-				<div class="result init radius-top" id="recapModification"></div>
-				<div class="result left">
-					<span class="cout-total" data-translate="cout-total-label">Coût total :</span>
-					<ul>
-						<li>
-							<span class="numberResult" id="coutTotalPE">0</span> <span data-translate="cout-total-PE-label">points d'évolution</span>
-						</li>
-						<li>
-							<span class="numberResult" id="coutEnPiecesEpiques">0</span> <span data-translate="cout-total-pieces-label">pièces épiques</span>
-						</li>
-						<li>
-							<span class="numberResult" id="nbRunes">0</span> <span id="libelleRunes">rune.</span>
-						</li>
-					</ul>
+							<div id="resultatV2" title="Résultat formaté" class="center">
+								<div class="result init radius-top" id="recapModification"></div>
+								<div class="result left">
+									<span class="cout-total" data-translate="cout-total-label">Coût total :</span>
+									<ul>
+										<li>
+											<span class="numberResult" id="coutTotalPE">0</span> <span data-translate="cout-total-PE-label">points d'évolution</span>
+										</li>
+										<li>
+											<span class="numberResult" id="coutEnPiecesEpiques">0</span> <span data-translate="cout-total-pieces-label">pièces épiques</span>
+										</li>
+										<li>
+											<span class="numberResult" id="nbRunes">0</span> <span id="libelleRunes">rune.</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="center">
+								<div class="result radius-bottom">
+									<button type="button"
+										class="result"
+										title="Copier l'affichage formaté dans le presse-papier"
+										data-translate="copy-format-btn-label"
+										data-translate-title
+										onclick="copyToClipboard('resultatV2')"
+									>
+										Copier
+									</button>
+									<button type="button"
+										id="scroll-top-btn"
+										title="Aller tout en haut"
+										onclick="scrollBoutonTop()"
+									>
+										<span class="icon">▲</span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="poster" class="face bottom hidden"></div>
 				</div>
-			</div>
-			<div class="center">
-				<div class="result radius-bottom">
-					<button type="button"
-						class="result"
-						title="Copier l'affichage formaté dans le presse-papier"
-						data-translate="copy-format-btn-label"
-						data-translate-title
-						onclick="copyToClipboard('resultatV2')"
-					>
-						Copier
-					</button>
-					<button type="button"
-						id="scroll-top-btn"
-						title="Aller tout en haut"
-						onclick="scrollBoutonTop()"
-					>
-						<span class="icon">▲</span>
-					</button>
-				</div>
-			</div>
+			</section>
 		</div>
 
 	</div>
@@ -148,7 +167,7 @@
 	</div>
 
 	<div id="version" class="intro">
-		<a target="_blank" title="Changelog" href="https://github.com/DeepSideEffect/KainForgeCalculator/activity?ref=main">v1.4.1 © Deep 2025</a>
+		<a target="_blank" title="Changelog" href="https://github.com/DeepSideEffect/KainForgeCalculator/activity?ref=main">v<span id="version-numero"></span> © Deep 2025</a>
 		<a target="_blank" title="Infos"  class="about" href="https://github.com/DeepSideEffect/KainForgeCalculator?tab=readme-ov-file#kainforgecalculator">?</a>
 	</div>
 
@@ -184,5 +203,4 @@
 	</div>
 
 </body>
-
 </html>

@@ -63,18 +63,21 @@ function couleurThemeEnFonctionDesRunes() {
 //#region Caracteristique
 
 function changementCaracteristique(desactiverBtn) {
-	document.getElementById("calculer").disabled = desactiverBtn;
-	document.getElementById("recapModification").classList.add("init");
-	document.getElementById("resultat").style.transform = "scaleY(0)";
+	document.getElementById('calculer').disabled = desactiverBtn;
+	document.getElementById('cube-container').classList.remove('no-perspective');
+	document.getElementById('recapModification').classList.add('init');
+	document.getElementById('resultat').classList.add('init');
 	if (document.readyState === 'complete') {
-		document.getElementById("ref-audio-applause")?.pause();
-		document.getElementById("ref-audio-kick")?.play();
+		document.getElementById('poster').classList.remove('hidden');
+		document.getElementById('ref-audio-applause')?.pause();
+		document.getElementById('ref-audio-kick')?.play();
 	}
-	scrollTopAfterDelay(150);
+	scrollTopAfterDelay(1250);
+	setTimeout(() => document.getElementById('cube-container').classList.add('no-perspective'), 1750);
 }
 
 function createOption(index, nom, actuelSelect, souhaiteSelect) {
-	const option = document.createElement("option");
+	const option = document.createElement('option');
 	option.value = index;
 	option.setAttribute('data-translate', nom);
 	actuelSelect.appendChild(option);
@@ -83,8 +86,8 @@ function createOption(index, nom, actuelSelect, souhaiteSelect) {
 
 function caracteristiqueInit(selectHtmlId) {
 	const select = document.getElementById(selectHtmlId);
-	select.innerHTML = "";
-	select.addEventListener("change", () => changementCaracteristique(false));
+	select.innerHTML = '';
+	select.addEventListener('change', () => changementCaracteristique(false));
 	return select;
 }
 
@@ -106,31 +109,31 @@ function copyToClipboard(htmlId) {
 }
 
 function showNotification(message) {
-	document.getElementById("ref-audio-copy2")?.play();
-	document.getElementById("notification-container").classList.add("show");
-	document.getElementById("notification").textContent = message;
-	document.getElementById("notification").classList.add("show");
+	document.getElementById('ref-audio-copy2')?.play();
+	document.getElementById('notification-container').classList.add('show');
+	document.getElementById('notification').textContent = message;
+	document.getElementById('notification').classList.add('show');
 
 	setTimeout(() => {
-		document.getElementById("notification").classList.remove("show");
-		setTimeout(() => document.getElementById("notification-container").classList.remove("show"), 800);
+		document.getElementById('notification').classList.remove('show');
+		setTimeout(() => document.getElementById('notification-container').classList.remove('show'), 800);
 	}, 2000);
 }
 
-function intro() {
-	var elements = document.getElementsByClassName("intro");
-	[...elements].forEach(element => {
-		element.classList.remove("intro");
-	});
-}
-
 function declancherSonAuChargement() {
-	const audio = document.getElementById("ref-audio-applause");
+	const audio = document.getElementById('ref-audio-applause');
 	audio?.play().catch(error => {
 		console.error("Erreur lors de la lecture de l'audio : ", error);
 	});
 
-	document.removeEventListener("click", declancherSonAuChargement);
+	document.removeEventListener('click', declancherSonAuChargement);
+}
+
+function removeCssClassForAll(cssClass) {
+	var elements = document.getElementsByClassName(cssClass);
+	[...elements].forEach(element => {
+		element.classList.remove(cssClass);
+	});
 }
 
 //#endregion Actions
@@ -138,8 +141,8 @@ function declancherSonAuChargement() {
 //#region Results
 
 function composantNomObjet(objet) {
-	const span = document.createElement("span");
-	span.classList.add("nom-objet-bw");
+	const span = document.createElement('span');
+	span.classList.add('nom-objet-bw');
 	span.textContent = nomCompletObjet(objet);
 	return span;
 }
@@ -205,13 +208,16 @@ function calculerPourAfficher() {
 
 /** Méthode déclenchée au click sur le bouton Calculer */
 function calculerClick() {
+	document.getElementById('cube-container').classList.remove('no-perspective');
 	calculerPourAfficher();
-	document.getElementById("resultat").style.transform = "scaleY(1)";
-	setTimeout(() => document.getElementById("recapModification").classList.remove("init"), 75);
-	scrollBottomAfterDelay(150);
-	document.getElementById("ref-audio-copy")?.play();
-	document.getElementById("scroll-bottom-btn").disabled = false;
-	document.getElementById("scroll-top-btn").style.display = isVerticalScrollbarVisible() ? 'inline-block' : 'none';
+	document.getElementById('resultat').classList.remove('init');
+	document.getElementById('poster').classList.add('hidden');
+	setTimeout(() => document.getElementById('recapModification').classList.remove('init'), 75);
+	setTimeout(() => document.getElementById('cube-container').classList.add('no-perspective'), 1750);
+	scrollBottomAfterDelay(1250);
+	document.getElementById('ref-audio-copy')?.play();
+	document.getElementById('scroll-bottom-btn').disabled = false;
+	document.getElementById('scroll-top-btn').style.display = isVerticalScrollbarVisible() ? 'inline-block' : 'none';
 }
 
 //#endregion Results
@@ -319,8 +325,21 @@ function listenToLangButtonsClick() {
 
 //#region Initialisation
 
+function displayVersionNumber() {
+	document.getElementById('version-numero').textContent = pageVersion;
+}
+
+function intro() {
+	setTimeout(() => removeCssClassForAll('intro'), 75);
+}
+
+function cubeIntro() {
+	setTimeout(() => removeCssClassForAll('intro-cube'), 2000);
+}
+
 function init() {
 	i18n();
+	displayVersionNumber();
 
 	const typeSelect = document.getElementById('type');
 	typesObjets.forEach(type => {
@@ -370,7 +389,8 @@ function init() {
 	initialiserParamStockes();
 	listenToLangButtonsClick()
 
-	setTimeout(() => intro(), 75);
+	intro();
+	cubeIntro();
 }
 
 function startup() {
