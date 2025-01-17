@@ -23,7 +23,6 @@
 	--cube-max-width: 32rem; /* always a value divisible by 4 */
 	--half-cube-max-width: calc(var(--cube-max-width) / 2);
 	--cube-perspective: 4000px;
-	/*--cube-translateZ-val: min(12.5vw, var(--half-cube-max-width)); TODO: check to delete ! */
 	--cube-translateZ-val: var(--half-cube-max-width);
 	--no-perspective: 100000px;
 }
@@ -395,7 +394,6 @@ button:disabled {
   background-repeat: no-repeat;
 	transition: var(--short-transition);
 	height: var(--cube-max-width);
-	/* transform: scaleY(1); TODO: to delete ! */
 }
 
 /* TODO: to delete !
@@ -600,7 +598,7 @@ div.mute-unmute {
 .cube-output {
 	box-sizing: border-box;
 	width: fit-content;
-	margin-top: 2rem;/* calc(40vh - var(--cube-width)); TODO: to check or delete! */
+	margin-top: 2rem; /* calc(40vh - var(--cube-width)); TODO: to check or delete! */
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -646,24 +644,19 @@ div.mute-unmute {
 
 #cube-element:has(#poster.hidden) {
 	rotate: none;
-	/*animation: rotate-with-perspective-animation 4s ease; TODO: to check !*/
 }
 
 #cube-element:has(#resultat.init) {
 	transform: rotateX(90deg);
-	/*animation: reverse-rotate-with-perspective-animation 4s ease; TODO: to check !*/
 }
 
 #cube-container.no-perspective {
-	/* perspective: var(--no-perspective); */
 	perspective: none;
-	/*animation: perspective-animation 4s ease; */
 	animation: remove-perspective-animation 1s ease;
 }
 
 #cube-container:not(.no-perspective) {
 	perspective: var(--cube-perspective);
-	/*animation: perspective-animation 4s ease; TODO: to delete */
 	animation: apply-perspective-animation 0.25s ease;
 }
 
@@ -745,157 +738,3 @@ div.mute-unmute {
 		perspective: var(--no-perspective);
 	}
 }
-
-/* TODO: to delete
-@keyframes rotate-with-perspective-animation {
-	0% {
-		perspective: var(--no-perspective);
-		transform: rotateX(90deg);
-	}
-
-	10% {
-		perspective: calc(var(--no-perspective) * 0.9);
-		transform: rotateX(var(90deg) * 0.9);
-	}
-
-	20% {
-		perspective: calc(var(--no-perspective) * 0.8);
-		transform: rotateX(var(90deg) * 0.8);
-	}
-
-	30% {
-		perspective: calc(var(--no-perspective) * 0.7);
-		transform: rotateX(var(90deg) * 0.7);
-	}
-
-	40% {
-		perspective: calc(var(--no-perspective) * 0.6);
-		transform: rotateX(var(90deg) * 0.6);
-	}
-
-	50% {
-		perspective: calc(var(--no-perspective) * 0.5);
-		transform: rotateX(var(90deg) * 0.5);
-	}
-
-	60% {
-		perspective: calc(var(--no-perspective) * 0.4);
-		transform: rotateX(var(90deg) * 0.4);
-	}
-
-	70% {
-		perspective: calc(var(--no-perspective) * 0.3);
-		transform: rotateX(var(90deg) * 0.3);
-	}
-
-	80% {
-		perspective: calc(var(--no-perspective) * 0.2);
-		transform: rotateX(var(90deg) * 0.2);
-	}
-
-	90% {
-		perspective: calc(var(--no-perspective) * 0.1);
-		transform: rotateX(var(90deg) * 0.1);
-	}
-
-	100% {
-		perspective: var(---cube-perspective);
-		rotate: none;
-	}
-}
-*/
-
-/* TODO: check to delete */
-@keyframes perspective-animation {
-	0% {
-		perspective: 14000000px;
-	}
-
-	10% {
-		perspective: 12600000px;
-	}
-
-	20% {
-		perspective: 11200000px;
-	}
-
-	30% {
-		perspective: 9800000px;
-	}
-
-	40% {
-		perspective: 8400000px;
-	}
-
-	50% {
-		perspective: 7000000px;
-	}
-
-	60% {
-		perspective: 5600000px;
-	}
-
-	70% {
-		perspective: 4200000px;
-	}
-
-	80% {
-		perspective: 2800000px;
-	}
-
-	90% {
-		perspective: 1400000px;
-	}
-
-	100% {
-		perspective: 4000px;
-	}
-}
-
-/* TODO: to delete
-@keyframes perspective-animation {
-	0% {
-		perspective: 4000px;
-	}
-
-	10% {
-		perspective: 1400000px;
-	}
-
-	20% {
-		perspective: 2800000px;
-	}
-
-	30% {
-		perspective: 4200000px;
-	}
-
-	40% {
-		perspective: 5600000px;
-	}
-
-	50% {
-		perspective: 7000000px;
-	}
-
-	60% {
-		perspective: 8400000px;
-	}
-
-	70% {
-		perspective: 9800000px;
-	}
-
-	80% {
-		perspective: 11200000px;
-	}
-
-	90% {
-		perspective: 12600000px;
-	}
-
-	100% {
-		perspective: 14000000px;
-	}
-}
-*/
