@@ -63,18 +63,20 @@ function couleurThemeEnFonctionDesRunes() {
 //#region Caracteristique
 
 function changementCaracteristique(desactiverBtn) {
-	document.getElementById("calculer").disabled = desactiverBtn;
-	document.getElementById("recapModification").classList.add("init");
-	document.getElementById("resultat").style.transform = "scaleY(0)";
+	document.getElementById('calculer').disabled = desactiverBtn;
+	document.getElementById('cube-container').classList.remove('no-perspective');
+	document.getElementById('recapModification').classList.add('init');
+	document.getElementById('resultat').classList.add('init');
 	if (document.readyState === 'complete') {
-		document.getElementById("ref-audio-applause")?.pause();
-		document.getElementById("ref-audio-kick")?.play();
+		document.getElementById('poster').classList.remove('hidden');
+		document.getElementById('ref-audio-applause')?.pause();
+		document.getElementById('ref-audio-kick')?.play();
 	}
-	scrollTopAfterDelay(150);
+	scrollTopAfterDelay(1250);
 }
 
 function createOption(index, nom, actuelSelect, souhaiteSelect) {
-	const option = document.createElement("option");
+	const option = document.createElement('option');
 	option.value = index;
 	option.setAttribute('data-translate', nom);
 	actuelSelect.appendChild(option);
@@ -83,8 +85,8 @@ function createOption(index, nom, actuelSelect, souhaiteSelect) {
 
 function caracteristiqueInit(selectHtmlId) {
 	const select = document.getElementById(selectHtmlId);
-	select.innerHTML = "";
-	select.addEventListener("change", () => changementCaracteristique(false));
+	select.innerHTML = '';
+	select.addEventListener('change', () => changementCaracteristique(false));
 	return select;
 }
 
@@ -206,12 +208,14 @@ function calculerPourAfficher() {
 /** Méthode déclenchée au click sur le bouton Calculer */
 function calculerClick() {
 	calculerPourAfficher();
-	document.getElementById("resultat").style.transform = "scaleY(1)";
-	setTimeout(() => document.getElementById("recapModification").classList.remove("init"), 75);
-	scrollBottomAfterDelay(150);
-	document.getElementById("ref-audio-copy")?.play();
-	document.getElementById("scroll-bottom-btn").disabled = false;
-	document.getElementById("scroll-top-btn").style.display = isVerticalScrollbarVisible() ? 'inline-block' : 'none';
+	document.getElementById('resultat').classList.remove('init');
+	document.getElementById('poster').classList.add('hidden');
+	setTimeout(() => document.getElementById('recapModification').classList.remove('init'), 75);
+	setTimeout(() => document.getElementById('cube-container').classList.add('no-perspective'), 1750);
+	scrollBottomAfterDelay(1250);
+	document.getElementById('ref-audio-copy')?.play();
+	document.getElementById('scroll-bottom-btn').disabled = false;
+	document.getElementById('scroll-top-btn').style.display = isVerticalScrollbarVisible() ? 'inline-block' : 'none';
 }
 
 //#endregion Results

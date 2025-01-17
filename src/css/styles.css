@@ -19,6 +19,13 @@
 	--short-transition: all var(--small-transition-duration) var(--ease-function);
 
 	--current-color: var(--secondary-color);
+
+	--cube-max-width: 32rem; /* always a value divisible by 4 */
+	--half-cube-max-width: calc(var(--cube-max-width) / 2);
+	--cube-perspective: 4000px;
+	/*--cube-translateZ-val: min(12.5vw, var(--half-cube-max-width)); TODO: check to delete ! */
+	--cube-translateZ-val: var(--half-cube-max-width);
+	--no-perspective: 100000px;
 }
 
 .left {
@@ -227,9 +234,13 @@ div.result:nth-child(2) {
 }
 
 #resultat {
-	padding-bottom: 30px;
 	transition: var(--short-transition);
-	transform: scaleY(0);
+	max-height: 40vh;
+	opacity: 1;
+}
+
+#resultat.init {
+	opacity: 0;
 }
 
 #recapModification {
@@ -299,6 +310,7 @@ body {
 
 #layout {
 	max-width: 66%;
+	padding-bottom: 30px;
 	margin-right: auto;
 	margin-left: auto;
 	transition: var(--short-transition);
@@ -375,6 +387,22 @@ button:disabled {
 #scroll-bottom-btn {
 	margin-top: 0.5rem;
 }
+
+#poster {
+	background-image: url('../assets/images/logos/KainForgeCalculator_Logo.png');
+	background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+	transition: var(--short-transition);
+	height: var(--cube-max-width);
+	/* transform: scaleY(1); TODO: to delete ! */
+}
+
+/* TODO: to delete !
+#poster.hidden {
+	height: 0;
+	transform: scaleY(0);
+}*/
 
 /* --- Styles spécifiques aux téléphones --- */
 @media (max-width: 600px) {
@@ -566,3 +594,308 @@ input:checked+.slider:before {
 div.mute-unmute {
 	align-items: center;
 }
+
+/* Cube styles */
+
+.cube-output {
+	box-sizing: border-box;
+	width: fit-content;
+	margin-top: 2rem;/* calc(40vh - var(--cube-width)); TODO: to check or delete! */
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#cube-container {
+	perspective: var(--cube-perspective);
+	aspect-ratio: 1 / 1;
+  width: var(--cube-max-width);
+	height: 100%;
+	text-align: center;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	transition: var(--short-transition);
+}
+
+#cube-element {
+	width: 100%;
+	height: 100%;
+	transform-style: preserve-3d;
+	transition: var(--short-transition);
+}
+
+.face {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	backface-visibility: inherit;
+	transition: var(--short-transition);
+}
+
+.front {
+	background: rgba(90,90,90,.7); /* TODO: to delete */
+	transform: translateZ(var(--cube-translateZ-val));
+}
+
+.bottom {
+	transform: rotateX(-90deg) translateZ(var(--cube-translateZ-val));
+}
+
+#cube-element:has(#poster.hidden) {
+	rotate: none;
+	/*animation: rotate-with-perspective-animation 4s ease; TODO: to check !*/
+}
+
+#cube-element:has(#resultat.init) {
+	transform: rotateX(90deg);
+	/*animation: reverse-rotate-with-perspective-animation 4s ease; TODO: to check !*/
+}
+
+#cube-container.no-perspective {
+	/* perspective: var(--no-perspective); */
+	perspective: none;
+	/*animation: perspective-animation 4s ease; */
+	animation: remove-perspective-animation 1s ease;
+}
+
+#cube-container:not(.no-perspective) {
+	perspective: var(--cube-perspective);
+	/*animation: perspective-animation 4s ease; TODO: to delete */
+	animation: apply-perspective-animation 0.25s ease;
+}
+
+/* --- Styles spécifiques au cube sur plus petit écran --- */
+@media (max-width: 800px) {
+	:root {
+		--cube-max-width: 16rem;
+		--cube-perspective: 2000px;
+		--half-cube-max-width: calc(var(--cube-max-width) / 2);
+		--cube-translateZ-val: var(--half-cube-max-width);
+		--no-perspective: 50000px;
+	}
+
+	.cube-output {
+		margin-top: 3rem;
+	}
+}
+
+@keyframes apply-perspective-animation {
+	0% {
+		perspective: none;
+	}
+
+	5% {
+		perspective: var(--no-perspective);
+	}
+
+	20% {
+		perspective: calc(var(--no-perspective) * 0.9);
+	}
+
+	40% {
+		perspective: calc(var(--no-perspective) * 0.75);
+	}
+
+	60% {
+		perspective: calc(var(--no-perspective) * 0.5);
+	}
+
+	80% {
+		perspective: calc(var(--no-perspective) * 0.25);
+	}
+
+	90% {
+		perspective: calc(var(--no-perspective) * 0.1);
+	}
+
+	100% {
+		perspective: var(--cube-perspective);
+	}
+}
+
+@keyframes remove-perspective-animation {
+	0% {
+		perspective: var(--cube-perspective);
+	}
+
+	20% {
+		perspective: calc(var(--cube-perspective) * 5);
+	}
+
+	40% {
+		perspective: calc(var(--cube-perspective) * 10);
+	}
+
+	60% {
+		perspective: calc(var(--cube-perspective) * 15);
+	}
+
+	80% {
+		perspective: calc(var(--cube-perspective) * 20);
+	}
+
+	90% {
+		perspective: calc(var(--cube-perspective) * 25);
+	}
+
+	100% {
+		perspective: var(--no-perspective);
+	}
+}
+
+/* TODO: to delete
+@keyframes rotate-with-perspective-animation {
+	0% {
+		perspective: var(--no-perspective);
+		transform: rotateX(90deg);
+	}
+
+	10% {
+		perspective: calc(var(--no-perspective) * 0.9);
+		transform: rotateX(var(90deg) * 0.9);
+	}
+
+	20% {
+		perspective: calc(var(--no-perspective) * 0.8);
+		transform: rotateX(var(90deg) * 0.8);
+	}
+
+	30% {
+		perspective: calc(var(--no-perspective) * 0.7);
+		transform: rotateX(var(90deg) * 0.7);
+	}
+
+	40% {
+		perspective: calc(var(--no-perspective) * 0.6);
+		transform: rotateX(var(90deg) * 0.6);
+	}
+
+	50% {
+		perspective: calc(var(--no-perspective) * 0.5);
+		transform: rotateX(var(90deg) * 0.5);
+	}
+
+	60% {
+		perspective: calc(var(--no-perspective) * 0.4);
+		transform: rotateX(var(90deg) * 0.4);
+	}
+
+	70% {
+		perspective: calc(var(--no-perspective) * 0.3);
+		transform: rotateX(var(90deg) * 0.3);
+	}
+
+	80% {
+		perspective: calc(var(--no-perspective) * 0.2);
+		transform: rotateX(var(90deg) * 0.2);
+	}
+
+	90% {
+		perspective: calc(var(--no-perspective) * 0.1);
+		transform: rotateX(var(90deg) * 0.1);
+	}
+
+	100% {
+		perspective: var(---cube-perspective);
+		rotate: none;
+	}
+}
+*/
+
+/* TODO: check to delete */
+@keyframes perspective-animation {
+	0% {
+		perspective: 14000000px;
+	}
+
+	10% {
+		perspective: 12600000px;
+	}
+
+	20% {
+		perspective: 11200000px;
+	}
+
+	30% {
+		perspective: 9800000px;
+	}
+
+	40% {
+		perspective: 8400000px;
+	}
+
+	50% {
+		perspective: 7000000px;
+	}
+
+	60% {
+		perspective: 5600000px;
+	}
+
+	70% {
+		perspective: 4200000px;
+	}
+
+	80% {
+		perspective: 2800000px;
+	}
+
+	90% {
+		perspective: 1400000px;
+	}
+
+	100% {
+		perspective: 4000px;
+	}
+}
+
+/* TODO: to delete
+@keyframes perspective-animation {
+	0% {
+		perspective: 4000px;
+	}
+
+	10% {
+		perspective: 1400000px;
+	}
+
+	20% {
+		perspective: 2800000px;
+	}
+
+	30% {
+		perspective: 4200000px;
+	}
+
+	40% {
+		perspective: 5600000px;
+	}
+
+	50% {
+		perspective: 7000000px;
+	}
+
+	60% {
+		perspective: 8400000px;
+	}
+
+	70% {
+		perspective: 9800000px;
+	}
+
+	80% {
+		perspective: 11200000px;
+	}
+
+	90% {
+		perspective: 12600000px;
+	}
+
+	100% {
+		perspective: 14000000px;
+	}
+}
+*/
