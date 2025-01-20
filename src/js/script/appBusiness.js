@@ -74,7 +74,7 @@ function nomCompletObjet(objet) {
 	const itemQuality = getTranslationWithDefaultValue('item-quality', 'Epique');
 	const itemSupport = getOptionTranslationWithKeyAsDefault(objet?.support?.nom);
 	const itemPrefix = getOptionTranslationWithKeyAsDefault(objet?.prefixe?.nom);
-	const itemSuffix = getOptionTranslationWithKeyAsDefault(objet?.suffixe?.nom);
+	const itemSuffix = replaceUnderscores(getOptionTranslationWithKeyAsDefault(objet?.suffixe?.nom));
 	const format = cultureLanguages[currentLanguage].itemNameDisplayFormat;
 
 	return formatString(format, itemQuality, itemSupport ?? '', itemPrefix ?? '', itemSuffix ?? '');

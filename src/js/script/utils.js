@@ -61,6 +61,15 @@ function formatString(format, ...args) {
 	);
 }
 
+/**
+ * Remplace tous les underscores d'un texte par des espaces (de manière optimisée).
+ * @param {string} text Le texte sur lequel on souhaite effectuer le remplacement.
+ * @returns {string} Une nouvelle chaîne de caractères copiée à partir de `text` mais en y remplaçant tous les '_' contenus par des espaces.
+ */
+function replaceUnderscores(text) {
+	return !text?.includes('_') ? text : text.replace(/_/g, ' ');
+}
+
 //#endregion Text helpers
 
 //#region Internationalisation
@@ -137,7 +146,7 @@ function translateOptions(translations) {
 		const key = option.getAttribute('data-translate');
 
 		if (!translations?.options) {
-			option.textContent = !key.includes('_') ? key : key.replace(/_/g, ' ');
+			option.textContent = replaceUnderscores(key);
 			return;
 		}
 
