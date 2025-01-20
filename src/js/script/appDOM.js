@@ -331,9 +331,6 @@ function displayVersionNumber() {
 
 function intro() {
 	setTimeout(() => removeCssClassForAll('intro'), 75);
-}
-
-function cubeIntro() {
 	setTimeout(() => removeCssClassForAll('intro-cube'), 2000);
 }
 
@@ -390,7 +387,6 @@ function init() {
 	listenToLangButtonsClick()
 
 	intro();
-	cubeIntro();
 }
 
 function startup() {
