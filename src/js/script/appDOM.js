@@ -130,7 +130,7 @@ function declancherSonAuChargement() {
 }
 
 function removeCssClassForAll(cssClass) {
-	var elements = document.getElementsByClassName(cssClass);
+	const elements = document.getElementsByClassName(cssClass);
 	[...elements].forEach(element => {
 		element.classList.remove(cssClass);
 	});
@@ -226,22 +226,22 @@ function calculerClick() {
 
 /** Réglage du volume de tous les audios */
 function volumeControl() {
-	var volumeBar = document.getElementById('volumeControl');
+	const volumeBar = document.getElementById('volumeControl');
 	changerVolumeTous(volumeBar.value);
 	localStorage.setItem('volumeKFC', volumeBar.value);
 }
 
 /** Réglage de l'état muet de tous les audios */
 function muteOrUnmuteAll() {
-	var soundToggle = document.getElementById('soundToggle');
+	const soundToggle = document.getElementById('soundToggle');
 	setMuteStateAll(!soundToggle.checked);
 	localStorage.setItem('soundOn', JSON.stringify(soundToggle.checked));
 }
 
 /** Initialise les préférences utilisateur 'son' stockées */
 function initialiserParamStockes() {
-	var volume = localStorage.getItem('volumeKFC');
-	var soundOn = JSON.parse(localStorage.getItem('soundOn'));
+	const volume = localStorage.getItem('volumeKFC');
+	const soundOn = JSON.parse(localStorage.getItem('soundOn'));
 
 	if (volume != null) {
 		document.getElementById('volumeControl').value = volume;
@@ -276,13 +276,13 @@ function scrollBoutonsAction(action) {
 /** Vérifier si un paramètre spécifique existe dans le querystring et récupére sa valeur le cas échéant, null sinon */
 function querystringParamValue(parametreName) {
 	const urlParams = new URLSearchParams(window.location.search);
-	var parametre = null;
+	let parametre = null;
 
 	if (urlParams.has(parametreName)) {
 		parametre = urlParams.get(parametreName);
 		console.debug(`La valeur du paramètre '${parametreName}' est : ${parametre}`);
 	} else
-		console.debug(`Le paramètre '${parametreName}' n\'existe pas dans la query string.`);
+		console.debug(`Le paramètre '${parametreName}' n'existe pas dans la query string.`);
 
 	return parametre;
 }
