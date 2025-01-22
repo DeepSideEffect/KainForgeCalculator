@@ -7,6 +7,12 @@ Cette calculatrice permet de calculer le coût de modification d'un objet *épiq
 Ce projet a pour objectif de modéliser les données de la page "[source des données](https://wiki.fr.bloodwars.net/index.php?title=La_Forge_de_Kain_sur_UT)" liée afin de réaliser une calculatrice des coûts de modification d'un item *épique* de l'univers du jeu [BW](https://fr.bloodwars.net/) d'un état donné à un autre état.  
 Cette calculatrice vise à faciliter les décisions des joueurs en leur fournissant des informations précises et directes, très rapidement, sur les coûts associés aux différentes combinaisons de modification des items.
 
+## Technologies Open Source utilisées
+Ce projet est développé en utilisant uniquement des technologies de base ("*full vanilla*") sans frameworks ou bibliothèques supplémentaires.\
+Cela permet de garantir une compréhension claire et directe du code source et de ses fonctionnalités.\
+Les langages utilisés incluent **HTML**, **CSS** et **JavaScript**.
+De plus, **Git** est utilisé pour le contrôle de version et la gestion des contributions, **GIMP** a été utilisé pour créer une image ainsi que le favicon et **SonarQube** (*édition communautaire*) est utilisé pour l'analyse de code et l'amélioration de la qualité.
+
 ## Fonctionnalités
 - Modélisation des données de la page "[source des données](https://wiki.fr.bloodwars.net/index.php?title=La_Forge_de_Kain_sur_UT)".
 - Prise en charge des différents états et items de l'univers du jeu BW.

@@ -7,6 +7,12 @@ This calculator allows you to calculate the cost of modifying an epic item in th
 This project aims to model the data from the "[data source](https://wiki.fr.bloodwars.net/index.php?title=La_Forge_de_Kain_sur_UT)" page to create a cost calculator for modifying an epic item in the [BW](https://bloodwars.net/) game universe from one state to another.  
 This calculator aims to facilitate players' decisions by providing precise and direct information very quickly on the costs associated with different item modification combinations.
 
+## Open Source technologies used
+This project is developed using only basic technologies ("*full vanilla*") without any additional frameworks or libraries.\
+This ensures a clear and direct understanding of the source code and its functionalities.\
+The languages used include **HTML**, **CSS** and **JavaScript**.
+Additionally, **Git** is used for version control and managing contributions, **GIMP** was used to create an image as well as the favicon and **SonarQube** (*Community Edition*) is used for code analysis and quality improvement.
+
 ## Features
 - Modeling data from the "[data source](https://wiki.fr.bloodwars.net/index.php?title=La_Forge_de_Kain_sur_UT)" page.
 - Support for different states and items in the BW game universe.
