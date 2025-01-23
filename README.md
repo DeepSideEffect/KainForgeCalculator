@@ -10,7 +10,7 @@ Cette calculatrice vise à faciliter les décisions des joueurs en leur fourniss
 ## Technologies Open Source utilisées
 Ce projet est développé en utilisant uniquement des technologies de base ("*full vanilla*") sans frameworks ou bibliothèques supplémentaires.\
 Cela permet de garantir une compréhension claire et directe du code source et de ses fonctionnalités.\
-Les langages utilisés incluent **HTML**, **CSS** et **JavaScript**.
+Les langages utilisés incluent **HTML**, **CSS**, **JavaScript** et **Batch Script**.
 De plus, **Git** est utilisé pour le contrôle de version et la gestion des contributions, **GIMP** a été utilisé pour créer une image ainsi que le favicon et **SonarQube** (*édition communautaire*) est utilisé pour l'analyse de code et l'amélioration de la qualité.
 
 ## Fonctionnalités

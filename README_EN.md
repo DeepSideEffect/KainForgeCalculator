@@ -10,7 +10,7 @@ This calculator aims to facilitate players' decisions by providing precise and d
 ## Open Source technologies used
 This project is developed using only basic technologies ("*full vanilla*") without any additional frameworks or libraries.\
 This ensures a clear and direct understanding of the source code and its functionalities.\
-The languages used include **HTML**, **CSS** and **JavaScript**.
+The languages used include **HTML**, **CSS**, **JavaScript** and **Batch Script**.
 Additionally, **Git** is used for version control and managing contributions, **GIMP** was used to create an image as well as the favicon and **SonarQube** (*Community Edition*) is used for code analysis and quality improvement.
 
 ## Features
