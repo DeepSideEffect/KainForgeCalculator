@@ -111,10 +111,10 @@ function getTranslation(translationKey) {
 		: null;
 }
 
-getTranslationWithDefaultValue = (translationKey, defaultValue) =>
+const getTranslationWithDefaultValue = (translationKey, defaultValue) =>
 	getValueOrDefault(getTranslation, translationKey, defaultValue);
 
-getTranslationWithKeyAsDefault = (translationKey) =>
+const getTranslationWithKeyAsDefault = (translationKey) =>
 	getTranslationWithDefaultValue(translationKey, translationKey);
 
 function getOptionTranslation(translationKey) {
@@ -123,10 +123,10 @@ function getOptionTranslation(translationKey) {
 		: null;
 }
 
-getOptionTranslationWithDefaultValue = (translationKey, defaultValue) =>
+const getOptionTranslationWithDefaultValue = (translationKey, defaultValue) =>
 	getValueOrDefault(getOptionTranslation, translationKey, defaultValue);
 
-getOptionTranslationWithKeyAsDefault = (translationKey) =>
+const getOptionTranslationWithKeyAsDefault = (translationKey) =>
 	getOptionTranslationWithDefaultValue(translationKey, translationKey);
 
 //#endregion Traductions

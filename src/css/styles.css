@@ -271,7 +271,7 @@ div.result:nth-child(2) {
 span.nom-objet-bw {
 	font-family: Verdana, Helvetica, sans-serif;
 	font-weight: bold;
-	text-wrap-mode: nowrap;
+	white-space: nowrap;
 	padding: 0.25rem;
 	font-size: var(--mobile-phone-font-size);
 	color: #DABA4C;

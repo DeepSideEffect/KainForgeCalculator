@@ -1,21 +1,21 @@
 //#region Loading Scripts or CSS
 
 function loadCSS(url) {
-	var link = document.createElement('link');
+	const link = document.createElement('link');
 	link.rel = 'stylesheet';
 	link.href = url;
 	document.head.appendChild(link);
 }
 
 function loadScript(url) {
-	var script = document.createElement('script');
+	const script = document.createElement('script');
 	script.src = url;
 	document.head.appendChild(script);
 }
 
 async function loadScriptAsync(url) {
 	return new Promise((resolve, reject) => {
-		var script = document.createElement('script');
+		const script = document.createElement('script');
 		script.src = url;
 		script.onload = () => resolve(url);
 		script.onerror = () => reject(new Error(`Failed to load script ${url}`));
@@ -96,10 +96,10 @@ let cachedTranslations = null;
 let currentLanguage = supportedLanguages[0];
 
 function i18n() {
-	var lang = supportedLanguages[0];
-	var langQuerystring = querystringParamValue('lang');
+	let lang = supportedLanguages[0];
+	const langQuerystring = querystringParamValue('lang');
 	if (!langQuerystring) {
-		var langstored = localStorage.getItem('lang');
+		const langstored = localStorage.getItem('lang');
 		if (langstored != null)
 			lang = langstored;
 	}
@@ -194,7 +194,7 @@ function setDocumentLangAllVersions(lang) {
     document.documentElement.lang = lang;
 	else {
 		// Pour les anciens navigateurs qui ne supportent pas document.documentElement (comme Edge < v12)
-		var htmlTag = document.getElementsByTagName('html')[0];
+		const htmlTag = document.getElementsByTagName('html')[0];
 		if (htmlTag)
 			htmlTag.setAttribute('lang', lang);
 	}
