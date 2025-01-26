@@ -2,6 +2,7 @@ class Caracteristique {
 	constructor(nom, pe) {
 		this.nom = nom;
 		this.pe = pe;
+		this.baseTypeId = 0;
 	}
 }
 

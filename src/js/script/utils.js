@@ -45,6 +45,22 @@ async function loadScriptsInParallel(scriptsSrcList) {
 	}
 }
 
+function fetchDataFromUrl(url, action) {
+	fetch(url)
+		.then(response => {
+			if (!response.ok)
+				throw new Error("La réponse réseau n'est pas 'ok'.");
+
+			return response.text();
+		})
+		.then(data => {
+			action(data);
+		})
+		.catch(error => {
+			console.error(`Erreur inattendue durant le fetch sur ${url} :`, error);
+		});
+}
+
 //#endregion Loading Scripts or CSS
 
 //#region Text helpers
@@ -81,14 +97,16 @@ const cultureLanguages = {
 		message: 'Langue choisie : Français.',
 		errorMessage: "Le fichier des traductions n'est pas chargé, cette option est donc indisponible.",
 		itemNameDisplayFormat: '{0} {1} {2} {3}',
-		nameAdjectivePattern: '{0} {1}'
+		nameAdjectivePattern: '{0} {1}',
+		infoDataUrl: 'https://r1.fr.bloodwars.net/'
 	},
 	[supportedLanguages[1]]: {
 		code: 'en-GB',
 		message: 'Language chosen: English.',
 		errorMessage: 'The translation file is not loaded, this option cannot be used.',
 		itemNameDisplayFormat: '{0} {2} {1} {3}',
-		nameAdjectivePattern: '{1} {0}'
+		nameAdjectivePattern: '{1} {0}',
+		infoDataUrl: 'https://r2.bloodwars.net/'
 	}
 };
 

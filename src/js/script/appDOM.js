@@ -136,6 +136,34 @@ function removeCssClassForAll(cssClass) {
 	});
 }
 
+function correctPictureSources(pitureTable) {
+	const images = pitureTable.getElementsByTagName('img');
+	[...images].forEach(image => {
+		const newSrc = image.src.replace(getCurrentDomain(), '');
+		image.src = cultureLanguages[currentLanguage].infoDataUrl.concat(newSrc);
+	});
+
+	const div = pitureTable.getElementsByClassName('itemMainImageContainer')[0];
+	let img = div.style.backgroundImage;
+	const imgUrl = extractSourceFromUrlFunction(img);
+	div.style.backgroundImage = `url("${cultureLanguages[currentLanguage].infoDataUrl.concat(imgUrl)}")`;
+}
+
+function afficherInfoItem(itemData) {
+	const doc = parseToHtmlDoc(itemData);
+	const pitureTable = doc.getElementsByClassName('itemImagesContainer')[0];
+	const itemDataInfoDiv = document.getElementById('itemDataInfo');
+
+	correctPictureSources(pitureTable);
+	itemDataInfoDiv.innerHTML = '';
+	itemDataInfoDiv.appendChild(pitureTable);
+	// TODO: continuer d'implémenter ici
+
+	itemDataInfoDiv.top = '500px'; // TODO: changer en fonction de la position du pointeur
+	itemDataInfoDiv.left = '500px'; // TODO: changer en fonction de la position du pointeur
+	itemDataInfoDiv.style.visibility = 'visible';
+}
+
 //#endregion Actions
 
 //#region Results
@@ -144,6 +172,7 @@ function composantNomObjet(objet) {
 	const span = document.createElement('span');
 	span.classList.add('nom-objet-bw');
 	span.textContent = nomCompletObjet(objet);
+	addItemNameClick(span, objet);
 	return span;
 }
 
@@ -318,6 +347,12 @@ function listenToLangButtonsClick() {
 			const soundSettings = getActualSoundSettings();
 			voiceSpeak(chosenLang, soundSettings.soundOn, soundSettings.volumeKFC);
 		});
+	});
+}
+
+function addItemNameClick(element, objet) {
+	element.addEventListener('click', (_event) => {
+		getItemInfoData(objet, afficherInfoItem);
 	});
 }
 

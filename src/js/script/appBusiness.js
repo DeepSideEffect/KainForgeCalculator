@@ -140,3 +140,42 @@ function voiceSpeak(lang, soundOn, volume) {
 }
 
 //#endregion Voix
+
+//#region Collecte infos distantes
+
+function getItemInfoDataUrl(objet, urlPrefix) {
+	const itemSupportId = objet?.support?.baseTypeId ?? 0;
+	const itemPrefixId = objet?.prefixe?.baseTypeId ?? 0;
+	const itemSuffixId = objet?.suffixe?.baseTypeId ?? 0;
+	const proxyUrl = 'http://localhost:3000/proxy?url='; // TODO: variabiliser en récupérant les valeurs de production.
+
+	return `${proxyUrl}${urlPrefix}test_items.php?class=0&baseType=${itemSupportId}&prefix=${itemPrefixId}&sufix=${itemSuffixId}&legendary=2&playerLvl=100`;
+}
+
+function getItemInfoData(objet, action) {
+	const itemInfoDataUrl = getItemInfoDataUrl(objet, cultureLanguages[currentLanguage].infoDataUrl);
+	fetchDataFromUrl(itemInfoDataUrl, action);
+}
+
+const parser = new DOMParser();
+
+function parseToHtmlDoc(html) {
+	return parser.parseFromString(html, 'text/html');
+}
+
+function getCurrentDomain() {
+	const url = new URL(window.location.href);
+	const rootDirectory = url.origin + url.pathname.substring(0, url.pathname.lastIndexOf('/') + 1);
+	return rootDirectory;
+}
+
+function extractSourceFromUrlFunction(urlImg) {
+	const urlMatch = urlImg.match(/url\("(.+?)"\)/);
+
+	if (urlMatch && urlMatch[1])
+		return urlMatch[1];
+
+	return '';
+}
+
+//#endregion Collecte infos distantes
