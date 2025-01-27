@@ -45,7 +45,7 @@ async function loadScriptsInParallel(scriptsSrcList) {
 	}
 }
 
-function fetchDataFromUrl(url, action) {
+function fetchDataFromUrl(url, action, link) {
 	fetch(url)
 		.then(response => {
 			if (!response.ok)
@@ -54,7 +54,7 @@ function fetchDataFromUrl(url, action) {
 			return response.text();
 		})
 		.then(data => {
-			action(data);
+			action(data, link);
 		})
 		.catch(error => {
 			console.error(`Erreur inattendue durant le fetch sur ${url} :`, error);

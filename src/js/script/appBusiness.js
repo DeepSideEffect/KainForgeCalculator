@@ -147,14 +147,16 @@ function getItemInfoDataUrl(objet, urlPrefix) {
 	const itemSupportId = objet?.support?.baseTypeId ?? 0;
 	const itemPrefixId = objet?.prefixe?.baseTypeId ?? 0;
 	const itemSuffixId = objet?.suffixe?.baseTypeId ?? 0;
-	const proxyUrl = 'http://localhost:3000/proxy?url='; // TODO: variabiliser en récupérant les valeurs de production.
 
-	return `${proxyUrl}${urlPrefix}test_items.php?class=0&baseType=${itemSupportId}&prefix=${itemPrefixId}&sufix=${itemSuffixId}&legendary=2&playerLvl=100`;
+	return `${urlPrefix}test_items.php?class=0&baseType=${itemSupportId}&prefix=${itemPrefixId}&sufix=${itemSuffixId}&legendary=2&playerLvl=100`;
 }
 
 function getItemInfoData(objet, action) {
 	const itemInfoDataUrl = getItemInfoDataUrl(objet, cultureLanguages[currentLanguage].infoDataUrl);
-	fetchDataFromUrl(itemInfoDataUrl, action);
+	//const proxyUrl = 'http://localhost:3000/proxy?url='; // TODO: variabiliser en récupérant les valeurs de production.
+	const proxyUrl = 'https://smart-proxy.onrender.com/proxy?url='; // TODO: variabiliser en récupérant les valeurs de production.
+
+	fetchDataFromUrl(`${proxyUrl}${itemInfoDataUrl}`, action, itemInfoDataUrl);
 }
 
 const parser = new DOMParser();

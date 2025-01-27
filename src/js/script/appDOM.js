@@ -149,7 +149,7 @@ function correctPictureSources(pitureTable) {
 	div.style.backgroundImage = `url("${cultureLanguages[currentLanguage].infoDataUrl.concat(imgUrl)}")`;
 }
 
-function afficherInfoItem(itemData) {
+function afficherInfoItem(itemData, link) {
 	const doc = parseToHtmlDoc(itemData);
 	const pitureTable = doc.getElementsByClassName('itemImagesContainer')[0];
 	const itemDataInfoDiv = document.getElementById('itemDataInfo');
@@ -158,6 +158,13 @@ function afficherInfoItem(itemData) {
 	itemDataInfoDiv.innerHTML = '';
 	itemDataInfoDiv.appendChild(pitureTable);
 	// TODO: continuer d'implémenter ici
+
+	// TODO: à affiner
+	const itemLink = document.createElement('a');
+	itemLink.target = '_blank';
+	itemLink.href = link;
+	itemLink.textContent = 'Details'; // TODO: à affiner avec les traductions
+	itemDataInfoDiv.appendChild(itemLink);
 
 	itemDataInfoDiv.top = '500px'; // TODO: changer en fonction de la position du pointeur
 	itemDataInfoDiv.left = '500px'; // TODO: changer en fonction de la position du pointeur
