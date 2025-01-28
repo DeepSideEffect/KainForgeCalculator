@@ -1,8 +1,8 @@
 class Caracteristique {
-	constructor(nom, pe) {
+	constructor(nom, pe, baseTypeId = null) { // TODO: Make the parameter mandatory!
 		this.nom = nom;
 		this.pe = pe;
-		this.baseTypeId = 0;
+		this.baseTypeId = baseTypeId ?? 0; // TODO: Make the parameter mandatory not nullable
 	}
 }
 

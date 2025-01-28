@@ -156,7 +156,7 @@ function getItemInfoData(objet, action) {
 	//const proxyUrl = 'http://localhost:3000/proxy?url='; // TODO: variabiliser en récupérant les valeurs de production.
 	const proxyUrl = 'https://smart-proxy.onrender.com/proxy?url='; // TODO: variabiliser en récupérant les valeurs de production.
 
-	fetchDataFromUrl(`${proxyUrl}${itemInfoDataUrl}`, action, itemInfoDataUrl);
+	fetchDataFromUrl(`${proxyUrl}${encodeURIComponent(itemInfoDataUrl)}`, action, itemInfoDataUrl);
 }
 
 const parser = new DOMParser();

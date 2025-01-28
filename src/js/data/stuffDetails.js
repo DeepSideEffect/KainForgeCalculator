@@ -1,7 +1,7 @@
 //#region Les casques
 const casqueCaracteristiques = {
 	support: [
-		new Caracteristique("Casquette", 15),
+		new Caracteristique("Casquette", 15, 30),
 		new Caracteristique("Casque", 15),
 		new Caracteristique("Cagoule", 30),
 		new Caracteristique("Chapeau", 30),
@@ -13,7 +13,7 @@ const casqueCaracteristiques = {
 		new Caracteristique("Couronne", 75)
 	],
 	prefixe: [
-		new Caracteristique("Chic", 15),
+		new Caracteristique("Chic", 15, 12),
 		new Caracteristique("Endurci", 15),
 		new Caracteristique("Élégant", 15),
 		new Caracteristique("Serviable", 30),
@@ -34,7 +34,7 @@ const casqueCaracteristiques = {
 		new Caracteristique("Rituel", 75)
 	],
 	suffixe: [
-		new Caracteristique("De La Miss", 15),
+		new Caracteristique("De La Miss", 15, 14),
 		new Caracteristique("Du Mister", 15),
 		new Caracteristique("De L'Explorateur", 15),
 		new Caracteristique("De La Précaution", 15),

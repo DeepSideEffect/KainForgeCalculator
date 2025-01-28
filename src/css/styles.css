@@ -69,12 +69,12 @@ label[for="type"] {
 
 .form-row label {
 	font-size: 98%;
-	text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 label[for="type"] {
 	font-weight: bold;
-	text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+	text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 h1,
@@ -396,10 +396,44 @@ button:disabled {
 #poster {
 	background-image: url('../assets/images/logos/KainForgeCalculator_Logo.png');
 	background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+	background-position: center;
+	background-repeat: no-repeat;
 	transition: var(--short-transition);
 	height: var(--cube-max-width);
+}
+
+#itemDataInfo {
+	position: absolute;
+	background-color: black;
+	transition: var(--short-transition);
+	border: var(--current-color) 3px solid;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	transform: translate(-50%, -50%);
+	/* TODO: finalize here */
+}
+
+#itemDataInfo a {
+	align-self: flex-start;
+	color: var(--current-color);
+}
+
+#itemDataInfo.hide {
+	visibility: hidden;
+	background-color: transparent;
+}
+
+.item-info {
+	padding: 5px 10px 0 10px;
+	font-size: smaller;
+	font-family: Verdana, Helvetica, sans-serif;
+	text-align: center;
+	color: white;
+}
+
+.item-info> :first-child {
+	font-style: italic;
 }
 
 /* --- Styles spécifiques aux téléphones --- */
@@ -614,7 +648,7 @@ div.mute-unmute {
 #cube-container {
 	perspective: var(--cube-perspective);
 	aspect-ratio: 1 / 1;
-  width: var(--cube-max-width);
+	width: var(--cube-max-width);
 	height: 100%;
 	text-align: center;
 	align-items: center;
@@ -752,6 +786,7 @@ div.mute-unmute {
 	from {
 		transform: rotate3d(1, 1, 1, 0deg);
 	}
+
 	to {
 		transform: rotate3d(1, 1, 1, 360deg);
 	}

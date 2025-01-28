@@ -152,12 +152,29 @@ function correctPictureSources(pitureTable) {
 function afficherInfoItem(itemData, link) {
 	const doc = parseToHtmlDoc(itemData);
 	const pitureTable = doc.getElementsByClassName('itemImagesContainer')[0];
+	const itemDataFromDiv = pitureTable.parentElement.nextSibling;
 	const itemDataInfoDiv = document.getElementById('itemDataInfo');
 
 	correctPictureSources(pitureTable);
 	itemDataInfoDiv.innerHTML = '';
 	itemDataInfoDiv.appendChild(pitureTable);
 	// TODO: continuer d'implémenter ici
+	itemDataFromDiv.style = '';
+	itemDataFromDiv.classList.add('item-info');
+
+	// Début Test TODO:
+	for (let i = 0; i < 26; i++) {
+		if (itemDataFromDiv.lastChild) {
+			itemDataFromDiv.removeChild(itemDataFromDiv.lastChild);
+		}
+	}
+
+	console.log('avant', itemDataFromDiv.innerHTML); // TODO: to delete
+	itemDataFromDiv.innerHTML = itemDataFromDiv.innerHTML.replace(' ; ', '<br>');
+	console.log('après', itemDataFromDiv.innerHTML); // TODO: to delete
+	// Fin test
+
+	itemDataInfoDiv.appendChild(itemDataFromDiv);
 
 	// TODO: à affiner
 	const itemLink = document.createElement('a');
@@ -166,9 +183,9 @@ function afficherInfoItem(itemData, link) {
 	itemLink.textContent = 'Details'; // TODO: à affiner avec les traductions
 	itemDataInfoDiv.appendChild(itemLink);
 
-	itemDataInfoDiv.top = '500px'; // TODO: changer en fonction de la position du pointeur
-	itemDataInfoDiv.left = '500px'; // TODO: changer en fonction de la position du pointeur
-	itemDataInfoDiv.style.visibility = 'visible';
+	itemDataInfoDiv.style.top = '50%'; // TODO: changer en fonction de la position du pointeur
+	itemDataInfoDiv.style.left = '50%'; // TODO: changer en fonction de la position du pointeur
+	itemDataInfoDiv.classList.remove('hide');
 }
 
 //#endregion Actions
@@ -296,7 +313,7 @@ function getActualSoundSettings() {
 	const soundToggle = document.getElementById('soundToggle');
 	const volumeBar = document.getElementById('volumeControl');
 
-	return { soundOn: soundToggle.checked,	volumeKFC: volumeBar.value };
+	return { soundOn: soundToggle.checked, volumeKFC: volumeBar.value };
 }
 
 /** Enrobe l'action des boutons de scroll avec un son */
