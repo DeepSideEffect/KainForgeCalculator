@@ -149,11 +149,15 @@ function correctPictureSources(pitureTable) {
 	div.style.backgroundImage = `url("${cultureLanguages[currentLanguage].infoDataUrl.concat(imgUrl)}")`;
 }
 
+function closeInfo() {
+	document.getElementById('itemDataInfo').classList.add('hide');
+}
+
 function afficherInfoItem(itemData, link) {
 	const doc = parseToHtmlDoc(itemData);
 	const pitureTable = doc.getElementsByClassName('itemImagesContainer')[0];
 	const itemDataFromDiv = pitureTable.parentElement.nextSibling;
-	const itemDataInfoDiv = document.getElementById('itemDataInfo');
+	const itemDataInfoDiv = document.getElementById('itemDataInfo-details');
 
 	correctPictureSources(pitureTable);
 	itemDataInfoDiv.innerHTML = '';
@@ -169,9 +173,7 @@ function afficherInfoItem(itemData, link) {
 		}
 	}
 
-	console.log('avant', itemDataFromDiv.innerHTML); // TODO: to delete
 	itemDataFromDiv.innerHTML = itemDataFromDiv.innerHTML.replace(' ; ', '<br>');
-	console.log('après', itemDataFromDiv.innerHTML); // TODO: to delete
 	// Fin test
 
 	itemDataInfoDiv.appendChild(itemDataFromDiv);
@@ -183,9 +185,7 @@ function afficherInfoItem(itemData, link) {
 	itemLink.textContent = 'Details'; // TODO: à affiner avec les traductions
 	itemDataInfoDiv.appendChild(itemLink);
 
-	itemDataInfoDiv.style.top = '50%'; // TODO: changer en fonction de la position du pointeur
-	itemDataInfoDiv.style.left = '50%'; // TODO: changer en fonction de la position du pointeur
-	itemDataInfoDiv.classList.remove('hide');
+	document.getElementById('itemDataInfo').classList.remove('hide');
 }
 
 //#endregion Actions
@@ -375,7 +375,8 @@ function listenToLangButtonsClick() {
 }
 
 function addItemNameClick(element, objet) {
-	element.addEventListener('click', (_event) => {
+	element.addEventListener('click', (event) => {
+		document.getElementById('itemDataInfo-header-name').textContent = event.currentTarget.textContent;
 		getItemInfoData(objet, afficherInfoItem);
 	});
 }

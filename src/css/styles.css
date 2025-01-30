@@ -4,6 +4,7 @@
 	--small-corner-radius: 15px;
 	--about-link-bottom: 1.2rem;
 	--about-link-bottom-mobile: 0.8rem;
+	--item-info-border-radius: 10px;
 
 	--primary-color: #540d11;
 	--secondary-color: #b96167;
@@ -42,6 +43,10 @@
 .d-flex-justify {
 	display: flex;
 	justify-content: space-between;
+}
+
+.flex-grow-1 {
+	flex-grow: 1
 }
 
 h1,
@@ -278,7 +283,10 @@ span.nom-objet-bw {
 	background-color: black;
 	border-radius: 0.45rem;
 	box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.4);
-	/* cursor: pointer; TODO: en attente transcodage complet avec la page https://r1.fr.bloodwars.net/test_items.php?xxx pour créer un lien hypertext à minima */
+}
+
+span.nom-objet-bw:not(#itemDataInfo-header-name) {
+  cursor: pointer;
 }
 
 span.lang-btn {
@@ -404,36 +412,63 @@ button:disabled {
 
 #itemDataInfo {
 	position: absolute;
-	background-color: black;
+	background-color: transparent;
 	transition: var(--short-transition);
-	border: var(--current-color) 3px solid;
-	display: flex;
-	align-items: center;
+	box-shadow: 0.25rem 0.25rem 0.5rem var(--current-color);
+	border-radius: var(--item-info-border-radius);
 	width: 100%;
 	transform: translate(-50%, -50%);
-	/* TODO: finalize here */
-}
-
-#itemDataInfo a {
-	align-self: flex-start;
-	color: var(--current-color);
+	top: 50%;
+  left: 50%;
+	max-width: 800px;
 }
 
 #itemDataInfo.hide {
 	visibility: hidden;
-	background-color: transparent;
+	box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+#itemDataInfo-header {
+	transition: var(--short-transition);
+	background-color: var(--current-color);
+  align-items: center;
+	height: 2rem;
+	padding-right: 5px;
+	border-top-left-radius: var(--item-info-border-radius);
+  border-top-right-radius: var(--item-info-border-radius);
+}
+
+#itemDataInfo-details {
+	transition: var(--short-transition);
+	background: linear-gradient(to top left, var(--primary-color), black 45%);
+	display: flex;
+	align-items: center;
+	width: 100%;
+	border-bottom-left-radius: var(--item-info-border-radius);
+  border-bottom-right-radius: var(--item-info-border-radius);
+}
+
+#itemDataInfo-details a {
+	transition: color var(--small-transition-duration) var(--ease-function);
+	align-self: flex-start;
+	color: var(--current-color);
+	padding-right: 5px;
+	padding-top: 10px;
+}
+
+#itemDataInfo.hide #itemDataInfo-header,
+#itemDataInfo.hide #itemDataInfo-details {
+	opacity: 0;
 }
 
 .item-info {
+	transition: var(--short-transition);
 	padding: 5px 10px 0 10px;
 	font-size: smaller;
 	font-family: Verdana, Helvetica, sans-serif;
 	text-align: center;
+	width: 100%;
 	color: white;
-}
-
-.item-info> :first-child {
-	font-style: italic;
 }
 
 /* --- Styles spécifiques aux téléphones --- */
@@ -487,6 +522,10 @@ button:disabled {
 	#version a.about:active,
 	#version a.about:focus {
 		bottom: calc(var(--about-link-bottom-mobile) - 1px);
+	}
+
+	#itemDataInfo {
+		transform: translate(-50%, -50%) scale(0.75);
 	}
 }
 
@@ -792,9 +831,26 @@ div.mute-unmute {
 	}
 }
 
-/* --- External css --- */
+/* --- External css class names --- */
 
 .itemMainImageContainer {
 	position: relative;
 	height: 150px;
+}
+
+table.itemImagesContainer {
+	opacity: 1;
+  transition: var(--standart-transition); /* TODO: vérifier le rendu pour voir si on retarde vraiment un peu les images xD */
+}
+
+.hide table.itemImagesContainer {
+	opacity: 0;
+}
+
+td.itemAffixContainer img {
+	vertical-align: top;
+}
+
+td.itemAffixContainer img:first-of-type {
+  border-bottom-left-radius: var(--item-info-border-radius);
 }

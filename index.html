@@ -159,7 +159,20 @@
 			</section>
 		</div>
 
-		<div id="itemDataInfo" class="hide"></div>
+		<div id="itemDataInfo" class="hide">
+			<div id="itemDataInfo-header" class="d-flex-justify">
+				<div class="flex-grow-1 center">
+					<span id="itemDataInfo-header-name" class="nom-objet-bw"></span>
+				</div>
+				<button onclick="closeInfo();"
+					data-translate="close-item-info-btn-label"
+					data-translate-title
+				>
+					X
+				</button>
+			</div>
+			<div id="itemDataInfo-details"></div>
+		</div>
 
 	</div>
 
