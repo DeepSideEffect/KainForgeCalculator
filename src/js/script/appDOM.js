@@ -136,6 +136,12 @@ function removeCssClassForAll(cssClass) {
 	});
 }
 
+function removeLastNChildren(elment, n) {
+	for (let i = 0; i < n; i++) {
+		if (elment.lastChild) elment.removeChild(elment.lastChild);
+	}
+}
+
 function correctPictureSources(pitureTable) {
 	const images = pitureTable.getElementsByTagName('img');
 	[...images].forEach(image => {
@@ -149,8 +155,28 @@ function correctPictureSources(pitureTable) {
 	div.style.backgroundImage = `url("${cultureLanguages[currentLanguage].infoDataUrl.concat(imgUrl)}")`;
 }
 
+function speakMessage(message) {
+	const soundSettings = getActualSoundSettings();
+	voiceSpeak(currentLanguage, message, soundSettings.soundOn, soundSettings.volumeKFC);
+}
+
 function closeInfo() {
 	document.getElementById('itemDataInfo').classList.add('hide');
+}
+
+function formatItemDataFrom(itemDataFromDiv) {
+	itemDataFromDiv.innerHTML = itemDataFromDiv.innerHTML.replace(' ; ', '<br>');
+	const firstTextNode = itemDataFromDiv.firstChild;
+	const firstElement = itemDataFromDiv.firstElementChild;
+
+	if (firstTextNode && firstElement) {
+		const italicElement = document.createElement('i');
+		italicElement.appendChild(document.createTextNode(firstTextNode.nodeValue));
+		italicElement.appendChild(firstElement.cloneNode(true));
+
+		itemDataFromDiv.replaceChild(italicElement, firstTextNode);
+		itemDataFromDiv.removeChild(firstElement);
+	}
 }
 
 function afficherInfoItem(itemData, link) {
@@ -162,20 +188,10 @@ function afficherInfoItem(itemData, link) {
 	correctPictureSources(pitureTable);
 	itemDataInfoDiv.innerHTML = '';
 	itemDataInfoDiv.appendChild(pitureTable);
-	// TODO: continuer d'implémenter ici
 	itemDataFromDiv.style = '';
 	itemDataFromDiv.classList.add('item-info');
-
-	// Début Test TODO:
-	for (let i = 0; i < 26; i++) {
-		if (itemDataFromDiv.lastChild) {
-			itemDataFromDiv.removeChild(itemDataFromDiv.lastChild);
-		}
-	}
-
-	itemDataFromDiv.innerHTML = itemDataFromDiv.innerHTML.replace(' ; ', '<br>');
-	// Fin test
-
+	removeLastNChildren(itemDataFromDiv, 26);
+	formatItemDataFrom(itemDataFromDiv);
 	itemDataInfoDiv.appendChild(itemDataFromDiv);
 
 	// TODO: à affiner
@@ -196,6 +212,7 @@ function composantNomObjet(objet) {
 	const span = document.createElement('span');
 	span.classList.add('nom-objet-bw');
 	span.textContent = nomCompletObjet(objet);
+	span.title = getTranslationWithDefaultValue('item-click-title', 'Cliquer pour la description');
 	addItemNameClick(span, objet);
 	return span;
 }
@@ -205,43 +222,43 @@ function inLineResultDisplay(typeObjetCourant, coutTotal, coutEnPiecesEpiques, n
 	const evoPointsLabel = getTranslationWithDefaultValue('cout-total-PE-label', "points d'évolution");
 	const piecesLabel = getTranslationWithDefaultValue('cout-total-pieces-label', 'pièces épiques');
 	const etAnd = getTranslationWithDefaultValue('et-and', 'et');
-	document.getElementById("resultatV1-text").style.color = typeObjetCourant.color;
-	document.getElementById("resultatV1-text").textContent = `${coutTotal.coutTotalPE} ${evoPointsLabel}, ${coutEnPiecesEpiques} ${piecesLabel} ${etAnd} ${nbRunes} ${libelleRunes}.`;
-	document.getElementById("resultatV1-modif").innerHTML = "";
-	document.getElementById("resultatV1-modif").appendChild(composantNomObjet(objetActuel));
+	document.getElementById('resultatV1-text').style.color = typeObjetCourant.color;
+	document.getElementById('resultatV1-text').textContent = `${coutTotal.coutTotalPE} ${evoPointsLabel}, ${coutEnPiecesEpiques} ${piecesLabel} ${etAnd} ${nbRunes} ${libelleRunes}.`;
+	document.getElementById('resultatV1-modif').innerHTML = '';
+	document.getElementById('resultatV1-modif').appendChild(composantNomObjet(objetActuel));
 	const inBetweenText = getTranslationWithDefaultValue('entre-items-label', 'vers');
-	const text = document.createElement("text");
+	const text = document.createElement('text');
 	text.textContent = ` ${inBetweenText} `;
-	document.getElementById("resultatV1-modif").appendChild(text);
-	document.getElementById("resultatV1-modif").appendChild(composantNomObjet(objetSouhaite));
+	document.getElementById('resultatV1-modif').appendChild(text);
+	document.getElementById('resultatV1-modif').appendChild(composantNomObjet(objetSouhaite));
 }
 
 /** Résultat formaté à l'affichage */
 function formattedResultDisplay(typeObjetCourant, coutTotal, coutEnPiecesEpiques, nbRunes, libelleRunes, objetActuel, objetSouhaite) {
-	document.getElementById("recapModification").innerHTML = "";
-	document.getElementById("recapModification").appendChild(composantNomObjet(objetActuel));
-	const text2 = document.createElement("text");
-	text2.textContent = "==>";
-	const p = document.createElement("p");
+	document.getElementById('recapModification').innerHTML = '';
+	document.getElementById('recapModification').appendChild(composantNomObjet(objetActuel));
+	const text2 = document.createElement('text');
+	text2.textContent = '==>';
+	const p = document.createElement('p');
 	p.appendChild(text2);
-	document.getElementById("recapModification").appendChild(p);
-	document.getElementById("recapModification").appendChild(composantNomObjet(objetSouhaite));
-	document.getElementById("coutTotalPE").textContent = coutTotal.coutTotalPE;
-	document.getElementById("coutEnPiecesEpiques").textContent = coutEnPiecesEpiques;
-	document.getElementById("nbRunes").textContent = nbRunes;
-	document.getElementById("libelleRunes").textContent = libelleRunes;
-	document.getElementById("libelleRunes").style.color = typeObjetCourant.color;
+	document.getElementById('recapModification').appendChild(p);
+	document.getElementById('recapModification').appendChild(composantNomObjet(objetSouhaite));
+	document.getElementById('coutTotalPE').textContent = coutTotal.coutTotalPE;
+	document.getElementById('coutEnPiecesEpiques').textContent = coutEnPiecesEpiques;
+	document.getElementById('nbRunes').textContent = nbRunes;
+	document.getElementById('libelleRunes').textContent = libelleRunes;
+	document.getElementById('libelleRunes').style.color = typeObjetCourant.color;
 }
 
 /** Calculer et afficher le résultat */
 function calculerPourAfficher() {
-	const type = document.getElementById("type").value;
-	const supportActuel = document.getElementById("supportActuel").value;
-	const prefixeActuel = document.getElementById("prefixeActuel").value;
-	const suffixeActuel = document.getElementById("suffixeActuel").value;
-	const supportSouhaite = document.getElementById("supportSouhaite").value;
-	const prefixeSouhaite = document.getElementById("prefixeSouhaite").value;
-	const suffixeSouhaite = document.getElementById("suffixeSouhaite").value;
+	const type = document.getElementById('type').value;
+	const supportActuel = document.getElementById('supportActuel').value;
+	const prefixeActuel = document.getElementById('prefixeActuel').value;
+	const suffixeActuel = document.getElementById('suffixeActuel').value;
+	const supportSouhaite = document.getElementById('supportSouhaite').value;
+	const prefixeSouhaite = document.getElementById('prefixeSouhaite').value;
+	const suffixeSouhaite = document.getElementById('suffixeSouhaite').value;
 
 	const objetActuel = new Objet(type, caracteristiques[type].support[supportActuel], caracteristiques[type].prefixe[prefixeActuel], caracteristiques[type].suffixe[suffixeActuel]);
 	const objetSouhaite = new Objet(type, caracteristiques[type].support[supportSouhaite], caracteristiques[type].prefixe[prefixeSouhaite], caracteristiques[type].suffixe[suffixeSouhaite]);
@@ -319,7 +336,7 @@ function getActualSoundSettings() {
 /** Enrobe l'action des boutons de scroll avec un son */
 function scrollBoutonsAction(action) {
 	action();
-	document.getElementById("ref-audio-slide")?.play();
+	document.getElementById('ref-audio-slide')?.play();
 }
 
 //#endregion Sounds
@@ -351,10 +368,10 @@ function removeQueryStringParameter(param) {
 //#region Listeners
 
 function listenToEnterKey() {
-	document.body.addEventListener("keydown", function (event) {
-		if (event.key === "Enter") {
+	document.body.addEventListener('keydown', function (event) {
+		if (event.key === 'Enter') {
 			event.preventDefault(); // Empêche le comportement par défaut de la touche "Entrée"
-			document.getElementById("calculer").click();
+			document.getElementById('calculer').click();
 		}
 	});
 }
@@ -369,15 +386,17 @@ function listenToLangButtonsClick() {
 			localStorage.setItem('lang', chosenLang);
 			removeQueryStringParameter('lang');
 			const soundSettings = getActualSoundSettings();
-			voiceSpeak(chosenLang, soundSettings.soundOn, soundSettings.volumeKFC);
+			voiceSpeakLanguageSelect(chosenLang, soundSettings.soundOn, soundSettings.volumeKFC);
 		});
 	});
 }
 
 function addItemNameClick(element, objet) {
 	element.addEventListener('click', (event) => {
+		speechSynthesis?.cancel();
 		document.getElementById('itemDataInfo-header-name').textContent = event.currentTarget.textContent;
 		getItemInfoData(objet, afficherInfoItem);
+		speakMessage(event.currentTarget.textContent);
 	});
 }
 
@@ -408,12 +427,12 @@ function init() {
 
 	const updateCaracteristiques = () => {
 		const typeId = typeSelect.value;
-		const supportActuelSelect = caracteristiqueInit("supportActuel");
-		const prefixeActuelSelect = caracteristiqueInit("prefixeActuel");
-		const suffixeActuelSelect = caracteristiqueInit("suffixeActuel");
-		const supportSouhaiteSelect = caracteristiqueInit("supportSouhaite");
-		const prefixeSouhaiteSelect = caracteristiqueInit("prefixeSouhaite");
-		const suffixeSouhaiteSelect = caracteristiqueInit("suffixeSouhaite");
+		const supportActuelSelect = caracteristiqueInit('supportActuel');
+		const prefixeActuelSelect = caracteristiqueInit('prefixeActuel');
+		const suffixeActuelSelect = caracteristiqueInit('suffixeActuel');
+		const supportSouhaiteSelect = caracteristiqueInit('supportSouhaite');
+		const prefixeSouhaiteSelect = caracteristiqueInit('prefixeSouhaite');
+		const suffixeSouhaiteSelect = caracteristiqueInit('suffixeSouhaite');
 
 		caracteristiques[typeId].support.forEach((caracteristique, index) => {
 			createOption(index, caracteristique.nom, supportActuelSelect, supportSouhaiteSelect);
@@ -432,15 +451,15 @@ function init() {
 		translateOptions(cachedTranslations);
 
 		if (!isVerticalScrollbarVisible())
-			document.getElementById("scroll-bottom-btn").disabled = true;
+			document.getElementById('scroll-bottom-btn').disabled = true;
 	};
 
-	typeSelect.addEventListener("change", updateCaracteristiques);
-	typeSelect.dispatchEvent(new Event("change")); // Déclencher l'événement change lors du chargement de la page
+	typeSelect.addEventListener('change', updateCaracteristiques);
+	typeSelect.dispatchEvent(new Event('change')); // Déclencher l'événement change lors du chargement de la page
 
-	document.getElementById("calculer").addEventListener("click", calculerClick);
+	document.getElementById('calculer').addEventListener('click', calculerClick);
 	listenToEnterKey();
-	document.addEventListener("click", declancherSonAuChargement);
+	document.addEventListener('click', declancherSonAuChargement);
 	document.getElementById('volumeControl').addEventListener('input', volumeControl);
 	document.getElementById('soundToggle').addEventListener('change', muteOrUnmuteAll);
 	initialiserParamStockes();

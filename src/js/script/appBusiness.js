@@ -133,8 +133,12 @@ const getOptionTranslationWithKeyAsDefault = (translationKey) =>
 
 //#region Voix
 
-function voiceSpeak(lang, soundOn, volume) {
+function voiceSpeakLanguageSelect(lang, soundOn, volume) {
 	const textMessage = cachedTranslations != null ? cultureLanguages[lang].message : cultureLanguages[lang].errorMessage;
+	voiceSpeak(lang, textMessage, soundOn, volume);
+}
+
+function voiceSpeak(lang, textMessage, soundOn, volume) {
 	const voiceVolume = soundOn ? volume : 0.0;
 	speechSynthesizer(lang, textMessage, voiceVolume, 1);
 }
