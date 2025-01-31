@@ -49,6 +49,10 @@
 	flex-grow: 1
 }
 
+.on-top {
+	z-index: 2;
+}
+
 h1,
 h3,
 #version,
@@ -287,6 +291,13 @@ span.nom-objet-bw {
 
 span.nom-objet-bw:not(#itemDataInfo-header-name) {
   cursor: pointer;
+	transition: color calc(var(--small-transition-duration) / 2) var(--ease-function);
+}
+
+span.nom-objet-bw:not(#itemDataInfo-header-name):hover,
+span.nom-objet-bw:not(#itemDataInfo-header-name):focus,
+span.nom-objet-bw:not(#itemDataInfo-header-name):active {
+  color: white;
 }
 
 span.lang-btn {
@@ -438,6 +449,18 @@ button:disabled {
   border-top-right-radius: var(--item-info-border-radius);
 }
 
+#itemDataInfo-header::before {
+	pointer-events: none;
+	position: absolute;
+	content: '';
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 128%);
+	height: inherit;
+}
+
 #itemDataInfo-details {
 	transition: var(--short-transition);
 	background: linear-gradient(to top left, var(--primary-color), black 45%);
@@ -454,6 +477,14 @@ button:disabled {
 	color: var(--current-color);
 	padding-right: 5px;
 	padding-top: 10px;
+	text-decoration: none;
+}
+
+#itemDataInfo-details a:hover,
+#itemDataInfo-details a:focus,
+#itemDataInfo-details a:active {
+	text-decoration: underline;
+	color: white;
 }
 
 #itemDataInfo.hide #itemDataInfo-header,
@@ -840,7 +871,7 @@ div.mute-unmute {
 
 table.itemImagesContainer {
 	opacity: 1;
-  transition: var(--standart-transition); /* TODO: vérifier le rendu pour voir si on retarde vraiment un peu les images xD */
+  transition: var(--short-transition);
 }
 
 .hide table.itemImagesContainer {

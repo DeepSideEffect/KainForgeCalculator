@@ -35,6 +35,7 @@
 		<audio id="ref-audio-copy2" src="src/assets/sounds/copy-that.mp3"></audio>
 		<audio id="ref-audio-kick" src="src/assets/sounds/fall.mp3"></audio>
 		<audio id="ref-audio-slide" src="src/assets/sounds/lazer.mp3"></audio>
+		<audio id="ref-audio-close" src="src/assets/sounds/close.mp3"></audio>
 
 		<h1 class="center intro" data-translate="title" data-translate-title>Translation file is missing!!!</h1>
 
@@ -161,10 +162,11 @@
 
 		<div id="itemDataInfo" class="hide">
 			<div id="itemDataInfo-header" class="d-flex-justify">
-				<div class="flex-grow-1 center">
+				<div class="flex-grow-1 center on-top">
 					<span id="itemDataInfo-header-name" class="nom-objet-bw"></span>
 				</div>
-				<button onclick="closeInfo();"
+				<button class="on-top"
+					onclick="closeInfo();"
 					data-translate="close-item-info-btn-label"
 					data-translate-title
 				>

@@ -91,6 +91,12 @@ function caracteristiqueInit(selectHtmlId) {
 	return select;
 }
 
+const hasClass = (element, className) =>
+	element.classList.contains(className);
+
+const isDescriptionDisplayed = () =>
+	!hasClass(document.getElementById('itemDataInfo'), 'hide');
+
 //#endregion Caracteristique
 
 //#region Actions
@@ -162,6 +168,7 @@ function speakMessage(message) {
 
 function closeInfo() {
 	document.getElementById('itemDataInfo').classList.add('hide');
+	document.getElementById('ref-audio-close')?.play();
 }
 
 function formatItemDataFrom(itemDataFromDiv) {
@@ -179,6 +186,17 @@ function formatItemDataFrom(itemDataFromDiv) {
 	}
 }
 
+function genererHyperLien(link, textContent, title) {
+	const itemLink = document.createElement('a');
+	itemLink.setAttribute('rel', 'noopener');
+	itemLink.target = '_blank';
+	itemLink.href = link;
+	itemLink.textContent = textContent;
+	itemLink.title = title;
+
+	return itemLink;
+}
+
 function afficherInfoItem(itemData, link) {
 	const doc = parseToHtmlDoc(itemData);
 	const pitureTable = doc.getElementsByClassName('itemImagesContainer')[0];
@@ -194,14 +212,16 @@ function afficherInfoItem(itemData, link) {
 	formatItemDataFrom(itemDataFromDiv);
 	itemDataInfoDiv.appendChild(itemDataFromDiv);
 
-	// TODO: à affiner
-	const itemLink = document.createElement('a');
-	itemLink.target = '_blank';
-	itemLink.href = link;
-	itemLink.textContent = 'Details'; // TODO: à affiner avec les traductions
+	const itemLinkLabel = getTranslationWithDefaultValue('item-link-label', 'Details');
+	const itemLinkTitle = getTranslationWithDefaultValue('item-link-title', 'Voir détails');
+	const itemLink = genererHyperLien(link, itemLinkLabel, itemLinkTitle);
 	itemDataInfoDiv.appendChild(itemLink);
 
 	document.getElementById('itemDataInfo').classList.remove('hide');
+}
+
+function fermerInfoSiAffiche() {
+	if (isDescriptionDisplayed()) closeInfo();
 }
 
 //#endregion Actions
@@ -387,6 +407,7 @@ function listenToLangButtonsClick() {
 			removeQueryStringParameter('lang');
 			const soundSettings = getActualSoundSettings();
 			voiceSpeakLanguageSelect(chosenLang, soundSettings.soundOn, soundSettings.volumeKFC);
+			fermerInfoSiAffiche();
 		});
 	});
 }

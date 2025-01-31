@@ -152,15 +152,12 @@ function getItemInfoDataUrl(objet, urlPrefix) {
 	const itemPrefixId = objet?.prefixe?.baseTypeId ?? 0;
 	const itemSuffixId = objet?.suffixe?.baseTypeId ?? 0;
 
-	return `${urlPrefix}test_items.php?class=0&baseType=${itemSupportId}&prefix=${itemPrefixId}&sufix=${itemSuffixId}&legendary=2&playerLvl=100`;
+	return `${urlPrefix}test_items.php?class=0&baseType=${itemSupportId}&prefix=${itemPrefixId}&sufix=${itemSuffixId}&legendary=2&playerLvl=${globalConfig.playerLvl}`;
 }
 
 function getItemInfoData(objet, action) {
 	const itemInfoDataUrl = getItemInfoDataUrl(objet, cultureLanguages[currentLanguage].infoDataUrl);
-	//const proxyUrl = 'http://localhost:3000/proxy?url='; // TODO: variabiliser en récupérant les valeurs de production.
-	const proxyUrl = 'https://smart-proxy.onrender.com/proxy?url='; // TODO: variabiliser en récupérant les valeurs de production.
-
-	fetchDataFromUrl(`${proxyUrl}${encodeURIComponent(itemInfoDataUrl)}`, action, itemInfoDataUrl);
+	fetchDataFromUrl(`${globalConfig.proxyUrl}${encodeURIComponent(itemInfoDataUrl)}`, action, itemInfoDataUrl);
 }
 
 const parser = new DOMParser();

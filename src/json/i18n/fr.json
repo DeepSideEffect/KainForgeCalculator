@@ -33,5 +33,10 @@
 	"cout-total-pieces-label": "pièces épiques",
 	"item-quality": "Epique",
 	"entre-items-label": "vers",
-	"et-and": "et"
+	"et-and": "et",
+	"close-item-info-btn-label": "Fermer",
+	"close-item-info-btn-label-description": "Fermer la description",
+	"item-click-title": "Cliquer pour afficher la description",
+	"item-link-label": "Détails",
+	"item-link-title": "Naviguer vers les détails d'item"
 }
