@@ -10,8 +10,8 @@ const scriptsToLoadInOrder = [
 ];
 
 const globalConfig = {
-  proxyUrl: 'https://smart-proxy.onrender.com/proxy?url=',
-  playerLvl: 100
+	proxyUrl: 'https://smart-proxy.onrender.com/proxy?url=',
+	playerLvl: 100
 };
 
 async function main() {

@@ -37,11 +37,11 @@ async function loadScriptsInOrder(scriptsSrcList) {
 
 async function loadScriptsInParallel(scriptsSrcList) {
 	try {
-			const promises = scriptsSrcList.map(src => loadScriptAsync(src));
-			await Promise.all(promises);
-			console.debug(`Les ${scriptsSrcList.length} scripts sont chargés en parallèle.`);
+		const promises = scriptsSrcList.map(src => loadScriptAsync(src));
+		await Promise.all(promises);
+		console.debug(`Les ${scriptsSrcList.length} scripts sont chargés en parallèle.`);
 	} catch (error) {
-			console.error(error, 'Erreur lors du chargement en parallèle des scripts :', scriptsSrcList);
+		console.error(error, 'Erreur lors du chargement en parallèle des scripts :', scriptsSrcList);
 	}
 }
 
@@ -209,7 +209,7 @@ function translateTitleOfButtonsWithoutLabel(translations) {
  */
 function setDocumentLangAllVersions(lang) {
 	if (document.documentElement)
-    document.documentElement.lang = lang;
+		document.documentElement.lang = lang;
 	else {
 		// Pour les anciens navigateurs qui ne supportent pas document.documentElement (comme Edge < v12)
 		const htmlTag = document.getElementsByTagName('html')[0];

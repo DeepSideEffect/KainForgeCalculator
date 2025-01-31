@@ -290,14 +290,14 @@ span.nom-objet-bw {
 }
 
 span.nom-objet-bw:not(#itemDataInfo-header-name) {
-  cursor: pointer;
+	cursor: pointer;
 	transition: color calc(var(--small-transition-duration) / 2) var(--ease-function);
 }
 
 span.nom-objet-bw:not(#itemDataInfo-header-name):hover,
 span.nom-objet-bw:not(#itemDataInfo-header-name):focus,
 span.nom-objet-bw:not(#itemDataInfo-header-name):active {
-  color: white;
+	color: white;
 }
 
 span.lang-btn {
@@ -430,7 +430,7 @@ button:disabled {
 	width: 100%;
 	transform: translate(-50%, -50%);
 	top: 50%;
-  left: 50%;
+	left: 50%;
 	max-width: 800px;
 }
 
@@ -442,11 +442,11 @@ button:disabled {
 #itemDataInfo-header {
 	transition: var(--short-transition);
 	background-color: var(--current-color);
-  align-items: center;
+	align-items: center;
 	height: 2rem;
 	padding-right: 5px;
 	border-top-left-radius: var(--item-info-border-radius);
-  border-top-right-radius: var(--item-info-border-radius);
+	border-top-right-radius: var(--item-info-border-radius);
 }
 
 #itemDataInfo-header::before {
@@ -468,7 +468,7 @@ button:disabled {
 	align-items: center;
 	width: 100%;
 	border-bottom-left-radius: var(--item-info-border-radius);
-  border-bottom-right-radius: var(--item-info-border-radius);
+	border-bottom-right-radius: var(--item-info-border-radius);
 }
 
 #itemDataInfo-details a {
@@ -871,7 +871,7 @@ div.mute-unmute {
 
 table.itemImagesContainer {
 	opacity: 1;
-  transition: var(--short-transition);
+	transition: var(--short-transition);
 }
 
 .hide table.itemImagesContainer {
@@ -883,5 +883,5 @@ td.itemAffixContainer img {
 }
 
 td.itemAffixContainer img:first-of-type {
-  border-bottom-left-radius: var(--item-info-border-radius);
+	border-bottom-left-radius: var(--item-info-border-radius);
 }
