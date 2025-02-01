@@ -208,12 +208,12 @@ function formatItemDataFrom(itemDataFromDiv) {
 	itemDataFromDiv.classList.add('item-info');
 	const nbNodesToRemove = 26;
 
-	if (itemDataFromDiv.childNodes.length > nbNodesToRemove)
-		removeLastNChildren(itemDataFromDiv, nbNodesToRemove);
-	else if (containsInactiveItemSetEffect(itemDataFromDiv)) {
+	if (containsInactiveItemSetEffect(itemDataFromDiv)) {
 		const span = getLastInactiveItemSetEffect(itemDataFromDiv);
 		removeLastNChildren(span, nbNodesToRemove);
 	}
+	else if (itemDataFromDiv.childNodes.length > nbNodesToRemove)
+		removeLastNChildren(itemDataFromDiv, nbNodesToRemove);
 
 	changeDisplayFrom(itemDataFromDiv);
 }
