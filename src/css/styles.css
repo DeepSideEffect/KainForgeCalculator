@@ -494,7 +494,7 @@ button:disabled {
 
 .item-info {
 	transition: var(--short-transition);
-	padding: 5px 10px 0 10px;
+	padding: 5px;
 	font-size: smaller;
 	font-family: Verdana, Helvetica, sans-serif;
 	text-align: center;
@@ -558,6 +558,10 @@ button:disabled {
 	#itemDataInfo {
 		transform: translate(-50%, -50%) scale(0.75);
 	}
+
+	.item-info {
+		padding: 2px;
+	}
 }
 
 /* --- Notifications --- */
@@ -574,6 +578,7 @@ button:disabled {
 	left: 0;
 	background-color: transparent;
 	pointer-events: none;
+	z-index: 3;
 }
 
 #notification-container.show {
@@ -589,6 +594,7 @@ button:disabled {
 	background-color: var(--secondary-highlight-color);
 	font-size: x-large;
 	padding: 10px;
+	z-index: 4;
 }
 
 #notification.show {

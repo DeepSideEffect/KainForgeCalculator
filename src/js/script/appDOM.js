@@ -142,9 +142,9 @@ function removeCssClassForAll(cssClass) {
 	});
 }
 
-function removeLastNChildren(elment, n) {
+function removeLastNChildren(element, n) {
 	for (let i = 0; i < n; i++) {
-		if (elment.lastChild) elment.removeChild(elment.lastChild);
+		if (element.lastChild) element.removeChild(element.lastChild);
 	}
 }
 
@@ -171,7 +171,7 @@ function closeInfo() {
 	document.getElementById('ref-audio-close')?.play();
 }
 
-function formatItemDataFrom(itemDataFromDiv) {
+function changeDisplayFrom(itemDataFromDiv) {
 	itemDataFromDiv.innerHTML = itemDataFromDiv.innerHTML.replace(' ; ', '<br>');
 	const firstTextNode = itemDataFromDiv.firstChild;
 	const firstElement = itemDataFromDiv.firstElementChild;
@@ -184,6 +184,38 @@ function formatItemDataFrom(itemDataFromDiv) {
 		itemDataFromDiv.replaceChild(italicElement, firstTextNode);
 		itemDataFromDiv.removeChild(firstElement);
 	}
+}
+
+function getInactiveItemSetEffect(element) {
+	return element.querySelector('span.inactiveItemSetEffect');
+}
+
+function containsInactiveItemSetEffect(element) {
+	return getInactiveItemSetEffect(element) !== null;
+}
+
+function getLastInactiveItemSetEffect(element) {
+	let current = getInactiveItemSetEffect(element);
+	while (current && containsInactiveItemSetEffect(current)) {
+		current = getInactiveItemSetEffect(current);
+	}
+
+	return current;
+}
+
+function formatItemDataFrom(itemDataFromDiv) {
+	itemDataFromDiv.style = '';
+	itemDataFromDiv.classList.add('item-info');
+	const nbNodesToRemove = 26;
+
+	if (itemDataFromDiv.childNodes.length > nbNodesToRemove)
+		removeLastNChildren(itemDataFromDiv, nbNodesToRemove);
+	else if (containsInactiveItemSetEffect(itemDataFromDiv)) {
+		const span = getLastInactiveItemSetEffect(itemDataFromDiv);
+		removeLastNChildren(span, nbNodesToRemove);
+	}
+
+	changeDisplayFrom(itemDataFromDiv);
 }
 
 function genererHyperLien(link, textContent, title) {
@@ -206,9 +238,7 @@ function afficherInfoItem(itemData, link) {
 	correctPictureSources(pitureTable);
 	itemDataInfoDiv.innerHTML = '';
 	itemDataInfoDiv.appendChild(pitureTable);
-	itemDataFromDiv.style = '';
-	itemDataFromDiv.classList.add('item-info');
-	removeLastNChildren(itemDataFromDiv, 26);
+
 	formatItemDataFrom(itemDataFromDiv);
 	itemDataInfoDiv.appendChild(itemDataFromDiv);
 
