@@ -440,9 +440,25 @@ function intro() {
 	setTimeout(() => removeCssClassForAll('intro-cube'), 2000);
 }
 
+function getAndSetPlayerLvlParam() {
+	const playerLvlParamName = 'playerLvl';
+	const playerLvlParam = querystringParamValue(playerLvlParamName);
+
+	if (!playerLvlParam) return;
+
+	const numPlayerLvl = Number(playerLvlParam);
+	if (isNaN(numPlayerLvl))
+		removeQueryStringParameter(playerLvlParamName);
+	else if (numPlayerLvl > 0 && numPlayerLvl <= 1000)
+		globalConfig.playerLvl = numPlayerLvl;
+	else
+		updateQueryStringParameter(playerLvlParamName, globalConfig.playerLvl);
+}
+
 function init() {
 	i18n();
 	displayVersionNumber();
+	getAndSetPlayerLvlParam();
 
 	const typeSelect = document.getElementById('type');
 	typesObjets.forEach(type => {

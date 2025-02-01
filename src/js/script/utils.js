@@ -107,7 +107,13 @@ function querystringParamValue(parametreName) {
 function removeQueryStringParameter(param) {
 	const url = new URL(window.location);
 	url.searchParams.delete(param);
-	window.history.replaceState({}, document.title, url.toString());
+	window.history.replaceState(window.history.state, document.title, url.toString());
+}
+
+function updateQueryStringParameter(param, value) {
+  const url = new URL(window.location);
+  url.searchParams.set(param, value);
+  window.history.replaceState(window.history.state, document.title, url.toString());
 }
 
 //#endregion Querystring
