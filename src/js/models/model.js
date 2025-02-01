@@ -1,7 +1,8 @@
 class Caracteristique {
-	constructor(nom, pe) {
+	constructor(nom, pe, baseTypeId) {
 		this.nom = nom;
 		this.pe = pe;
+		this.baseTypeId = baseTypeId;
 	}
 }
 

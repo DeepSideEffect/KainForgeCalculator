@@ -37,12 +37,28 @@ async function loadScriptsInOrder(scriptsSrcList) {
 
 async function loadScriptsInParallel(scriptsSrcList) {
 	try {
-			const promises = scriptsSrcList.map(src => loadScriptAsync(src));
-			await Promise.all(promises);
-			console.debug(`Les ${scriptsSrcList.length} scripts sont chargés en parallèle.`);
+		const promises = scriptsSrcList.map(src => loadScriptAsync(src));
+		await Promise.all(promises);
+		console.debug(`Les ${scriptsSrcList.length} scripts sont chargés en parallèle.`);
 	} catch (error) {
-			console.error(error, 'Erreur lors du chargement en parallèle des scripts :', scriptsSrcList);
+		console.error(error, 'Erreur lors du chargement en parallèle des scripts :', scriptsSrcList);
 	}
+}
+
+function fetchDataFromUrl(url, action, link) {
+	fetch(url)
+		.then(response => {
+			if (!response.ok)
+				throw new Error("La réponse réseau n'est pas 'ok'.");
+
+			return response.text();
+		})
+		.then(data => {
+			action(data, link);
+		})
+		.catch(error => {
+			console.error(`Erreur inattendue durant le fetch sur ${url} :`, error);
+		});
 }
 
 //#endregion Loading Scripts or CSS
@@ -72,6 +88,36 @@ function replaceUnderscores(text) {
 
 //#endregion Text helpers
 
+//#region Querystring
+
+/** Vérifier si un paramètre spécifique existe dans le querystring et récupére sa valeur le cas échéant, null sinon */
+function querystringParamValue(parametreName) {
+	const urlParams = new URLSearchParams(window.location.search);
+	let parametre = null;
+
+	if (urlParams.has(parametreName)) {
+		parametre = urlParams.get(parametreName);
+		console.debug(`La valeur du paramètre '${parametreName}' est : ${parametre}`);
+	} else
+		console.debug(`Le paramètre '${parametreName}' n'existe pas dans la query string.`);
+
+	return parametre;
+}
+
+function removeQueryStringParameter(param) {
+	const url = new URL(window.location);
+	url.searchParams.delete(param);
+	window.history.replaceState(window.history.state, document.title, url.toString());
+}
+
+function updateQueryStringParameter(param, value) {
+  const url = new URL(window.location);
+  url.searchParams.set(param, value);
+  window.history.replaceState(window.history.state, document.title, url.toString());
+}
+
+//#endregion Querystring
+
 //#region Internationalisation
 
 const supportedLanguages = ['fr', 'en'];
@@ -81,14 +127,16 @@ const cultureLanguages = {
 		message: 'Langue choisie : Français.',
 		errorMessage: "Le fichier des traductions n'est pas chargé, cette option est donc indisponible.",
 		itemNameDisplayFormat: '{0} {1} {2} {3}',
-		nameAdjectivePattern: '{0} {1}'
+		nameAdjectivePattern: '{0} {1}',
+		infoDataUrl: 'https://r1.fr.bloodwars.net/'
 	},
 	[supportedLanguages[1]]: {
 		code: 'en-GB',
 		message: 'Language chosen: English.',
 		errorMessage: 'The translation file is not loaded, this option cannot be used.',
 		itemNameDisplayFormat: '{0} {2} {1} {3}',
-		nameAdjectivePattern: '{1} {0}'
+		nameAdjectivePattern: '{1} {0}',
+		infoDataUrl: 'https://r2.bloodwars.net/'
 	}
 };
 
@@ -191,7 +239,7 @@ function translateTitleOfButtonsWithoutLabel(translations) {
  */
 function setDocumentLangAllVersions(lang) {
 	if (document.documentElement)
-    document.documentElement.lang = lang;
+		document.documentElement.lang = lang;
 	else {
 		// Pour les anciens navigateurs qui ne supportent pas document.documentElement (comme Edge < v12)
 		const htmlTag = document.getElementsByTagName('html')[0];

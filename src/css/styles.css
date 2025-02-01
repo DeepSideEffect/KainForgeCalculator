@@ -4,6 +4,7 @@
 	--small-corner-radius: 15px;
 	--about-link-bottom: 1.2rem;
 	--about-link-bottom-mobile: 0.8rem;
+	--item-info-border-radius: 10px;
 
 	--primary-color: #540d11;
 	--secondary-color: #b96167;
@@ -44,6 +45,14 @@
 	justify-content: space-between;
 }
 
+.flex-grow-1 {
+	flex-grow: 1
+}
+
+.on-top {
+	z-index: 2;
+}
+
 h1,
 h3,
 #version,
@@ -69,12 +78,12 @@ label[for="type"] {
 
 .form-row label {
 	font-size: 98%;
-	text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 label[for="type"] {
 	font-weight: bold;
-	text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+	text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 h1,
@@ -278,7 +287,17 @@ span.nom-objet-bw {
 	background-color: black;
 	border-radius: 0.45rem;
 	box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.4);
-	/* cursor: pointer; TODO: en attente transcodage complet avec la page https://r1.fr.bloodwars.net/test_items.php?xxx pour créer un lien hypertext à minima */
+}
+
+span.nom-objet-bw:not(#itemDataInfo-header-name) {
+	cursor: pointer;
+	transition: color calc(var(--small-transition-duration) / 2) var(--ease-function);
+}
+
+span.nom-objet-bw:not(#itemDataInfo-header-name):hover,
+span.nom-objet-bw:not(#itemDataInfo-header-name):focus,
+span.nom-objet-bw:not(#itemDataInfo-header-name):active {
+	color: white;
 }
 
 span.lang-btn {
@@ -396,10 +415,96 @@ button:disabled {
 #poster {
 	background-image: url('../assets/images/logos/KainForgeCalculator_Logo.png');
 	background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+	background-position: center;
+	background-repeat: no-repeat;
 	transition: var(--short-transition);
 	height: var(--cube-max-width);
+}
+
+#itemDataInfo {
+	position: absolute;
+	background-color: transparent;
+	transition: var(--short-transition);
+	box-shadow: 0.25rem 0.25rem 0.5rem var(--current-color);
+	border-radius: var(--item-info-border-radius);
+	width: 100%;
+	transform: translate(-50%, -50%);
+	top: 50%;
+	left: 50%;
+	max-width: 800px;
+}
+
+#itemDataInfo.hide {
+	visibility: hidden;
+	box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+#itemDataInfo-header {
+	transition: var(--short-transition);
+	background-color: var(--current-color);
+	align-items: center;
+	height: 2rem;
+	padding-right: 5px;
+	border-top-left-radius: var(--item-info-border-radius);
+	border-top-right-radius: var(--item-info-border-radius);
+}
+
+#itemDataInfo-header::before {
+	pointer-events: none;
+	position: absolute;
+	content: '';
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 128%);
+	height: inherit;
+}
+
+#itemDataInfo-details {
+	transition: var(--short-transition);
+	background: linear-gradient(to top left, var(--primary-color), black 45%);
+	display: flex;
+	align-items: center;
+	width: 100%;
+	border-bottom-left-radius: var(--item-info-border-radius);
+	border-bottom-right-radius: var(--item-info-border-radius);
+}
+
+#itemDataInfo-details a {
+	transition: color var(--small-transition-duration) var(--ease-function);
+	align-self: flex-start;
+	color: var(--current-color);
+	padding-right: 5px;
+	padding-top: 10px;
+	text-decoration: none;
+}
+
+#itemDataInfo-details a:hover,
+#itemDataInfo-details a:focus,
+#itemDataInfo-details a:active {
+	text-decoration: underline;
+	color: white;
+}
+
+#itemDataInfo.hide #itemDataInfo-header,
+#itemDataInfo.hide #itemDataInfo-details {
+	opacity: 0;
+}
+
+.item-info {
+	transition: var(--short-transition);
+	padding: 5px;
+	font-size: smaller;
+	font-family: Verdana, Helvetica, sans-serif;
+	text-align: center;
+	width: 100%;
+	color: white;
+}
+
+form {
+	transition: max-height var(--transition-duration) ease-out;
+	max-height: 99vh;
 }
 
 /* --- Styles spécifiques aux téléphones --- */
@@ -454,6 +559,14 @@ button:disabled {
 	#version a.about:focus {
 		bottom: calc(var(--about-link-bottom-mobile) - 1px);
 	}
+
+	#itemDataInfo {
+		transform: translate(-50%, -50%) scale(0.75);
+	}
+
+	.item-info {
+		padding: 2px;
+	}
 }
 
 /* --- Notifications --- */
@@ -470,6 +583,7 @@ button:disabled {
 	left: 0;
 	background-color: transparent;
 	pointer-events: none;
+	z-index: 3;
 }
 
 #notification-container.show {
@@ -485,6 +599,7 @@ button:disabled {
 	background-color: var(--secondary-highlight-color);
 	font-size: x-large;
 	padding: 10px;
+	z-index: 4;
 }
 
 #notification.show {
@@ -541,6 +656,10 @@ body.intro-cube {
 
 #cube-element.intro-cube {
 	animation: full-spin 2s linear;
+}
+
+form.intro-form {
+	max-height: 0;
 }
 
 /* --- bouton on-off (checkbox) --- */
@@ -614,7 +733,7 @@ div.mute-unmute {
 #cube-container {
 	perspective: var(--cube-perspective);
 	aspect-ratio: 1 / 1;
-  width: var(--cube-max-width);
+	width: var(--cube-max-width);
 	height: 100%;
 	text-align: center;
 	align-items: center;
@@ -752,7 +871,32 @@ div.mute-unmute {
 	from {
 		transform: rotate3d(1, 1, 1, 0deg);
 	}
+
 	to {
 		transform: rotate3d(1, 1, 1, 360deg);
 	}
+}
+
+/* --- External css class names --- */
+
+.itemMainImageContainer {
+	position: relative;
+	height: 150px;
+}
+
+table.itemImagesContainer {
+	opacity: 1;
+	transition: var(--short-transition);
+}
+
+.hide table.itemImagesContainer {
+	opacity: 0;
+}
+
+td.itemAffixContainer img {
+	vertical-align: top;
+}
+
+td.itemAffixContainer img:first-of-type {
+	border-bottom-left-radius: var(--item-info-border-radius);
 }

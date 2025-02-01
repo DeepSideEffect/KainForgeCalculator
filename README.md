@@ -5,7 +5,7 @@ Cette calculatrice permet de calculer le coût de modification d'un objet *épiq
 
 ## Description
 Ce projet a pour objectif de modéliser les données de la page "[source des données](https://wiki.fr.bloodwars.net/index.php?title=La_Forge_de_Kain_sur_UT)" liée afin de réaliser une calculatrice des coûts de modification d'un item *épique* de l'univers du jeu [BW](https://fr.bloodwars.net/) d'un état donné à un autre état.  
-Cette calculatrice vise à faciliter les décisions des joueurs en leur fournissant des informations précises et directes, très rapidement, sur les coûts associés aux différentes combinaisons de modification des items.
+Cette calculatrice vise à faciliter les décisions des joueurs en leur fournissant des informations précises et directes, très rapidement, sur les coûts associés aux différentes combinaisons de modification des items ainsi qu'à leur description.
 
 ## Technologies Open Source utilisées
 Ce projet est développé en utilisant uniquement des technologies de base ("*full vanilla*") sans frameworks ou bibliothèques supplémentaires.\
@@ -25,6 +25,9 @@ De plus, **Git** est utilisé pour le contrôle de version et la gestion des con
 - Affichage entièrement *responsive* et animé.
 - Utilisation d'effets sonores réglables.
 - Conservation des préférences de l'utilisateur pour la prochaine utilisation.
+- Possibilité d'afficher directement la description d'un item et son lien d'origine.
+- Possibilité de régler le niveau du joueur pour la requête de récupération de la description avec un nouveau paramètre *querystring* nommé `playerLvl`\
+*(avec une valeur numérique comprise entre `1` et `1000` et ayant la valeur `100` par défaut)*.
 
 ## Installation
 Pour installer et exécuter ce projet localement, suivez les étapes ci-dessous :
@@ -37,11 +40,15 @@ Pour installer et exécuter ce projet localement, suivez les étapes ci-dessous 
 >📝<sup>1</sup> Depuis la **v1.4.0** avec la fonctionnalité d'internationalisation, la page pourrait ne plus s'afficher correctement en local, par défaut.  
 Des méthodes possibles pour éviter les problèmes de [CORS](https://fr.wikipedia.org/wiki/Cross-origin_resource_sharing) lors du développement local sont détaillées dans ce [fichier](src/docs/ServeurLocal.md).
 
->📝<sup>2</sup> Vous pouvez aussi ajouter le choix de la langue en paramètre queryString pour traduire directement à l'affichage, ex : `http://localhost:5500/index.html?lang=en`.
+>📝<sup>2</sup> Vous pouvez aussi ajouter le choix de la langue en paramètre *queryString* pour traduire directement à l'affichage, ex : `http://localhost:5500/index.html?lang=en`.
+
+>📝<sup>3</sup> Depuis la **v1.5.0** avec la fonctionnalité d'affichage de la description, vous pouvez choisir le niveau en l'ajoutant en paramètre *queryString* pour la récupération des descriptions,\
+ex : `http://localhost:5500?lang=en&playerLvl=457` ou `http://localhost:5500?playerLvl=754`.
 
 ## Utilisation
 Sélectionnez un item avec ses caractéristiques de départ et d'arrivée.  
-La calculatrice affichera les coûts associés à la modification de l'item après avoir cliqué sur le bouton **Calculer**.
+La calculatrice affichera les coûts associés à la modification de l'item après avoir cliqué sur le bouton **Calculer**.  
+On peut accèder à la description d'un item en cliquant sur son nom dans les résultats affichés.
 
 ## Exemples d'utilisation
 Calculer le coût de modification d'une ***Epique Casquette Chic De La Miss*** vers un ***Epique Bandana Cornu De La Précognition***.  
@@ -61,6 +68,7 @@ Coût total :
 465 pièces épiques
 31 runes Verte Niveau 2
 ```
+- Vous pouvez aussi afficher la description de l'un des items en cliquant sur son nom.
 
 ## Contribuer
 Les contributions sont les bienvenues ! Si vous souhaitez contribuer à ce projet, veuillez suivre les étapes ci-dessous :

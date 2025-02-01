@@ -91,6 +91,12 @@ function caracteristiqueInit(selectHtmlId) {
 	return select;
 }
 
+const hasClass = (element, className) =>
+	element.classList.contains(className);
+
+const isDescriptionDisplayed = () =>
+	!hasClass(document.getElementById('itemDataInfo'), 'hide');
+
 //#endregion Caracteristique
 
 //#region Actions
@@ -136,6 +142,118 @@ function removeCssClassForAll(cssClass) {
 	});
 }
 
+function removeLastNChildren(element, n) {
+	for (let i = 0; i < n; i++) {
+		if (element.lastChild) element.removeChild(element.lastChild);
+	}
+}
+
+function correctPictureSources(pitureTable) {
+	const images = pitureTable.getElementsByTagName('img');
+	[...images].forEach(image => {
+		const newSrc = image.src.replace(getCurrentDomain(), '');
+		image.src = cultureLanguages[currentLanguage].infoDataUrl.concat(newSrc);
+	});
+
+	const div = pitureTable.getElementsByClassName('itemMainImageContainer')[0];
+	let img = div.style.backgroundImage;
+	const imgUrl = extractSourceFromUrlFunction(img);
+	div.style.backgroundImage = `url("${cultureLanguages[currentLanguage].infoDataUrl.concat(imgUrl)}")`;
+}
+
+function speakMessage(message) {
+	const soundSettings = getActualSoundSettings();
+	voiceSpeak(currentLanguage, message, soundSettings.soundOn, soundSettings.volumeKFC);
+}
+
+function closeInfo() {
+	document.getElementById('itemDataInfo').classList.add('hide');
+	document.getElementById('ref-audio-close')?.play();
+}
+
+function changeDisplayFrom(itemDataFromDiv) {
+	itemDataFromDiv.innerHTML = itemDataFromDiv.innerHTML.replace(' ; ', '<br>');
+	const firstTextNode = itemDataFromDiv.firstChild;
+	const firstElement = itemDataFromDiv.firstElementChild;
+
+	if (firstTextNode && firstElement) {
+		const italicElement = document.createElement('i');
+		italicElement.appendChild(document.createTextNode(firstTextNode.nodeValue));
+		italicElement.appendChild(firstElement.cloneNode(true));
+
+		itemDataFromDiv.replaceChild(italicElement, firstTextNode);
+		itemDataFromDiv.removeChild(firstElement);
+	}
+}
+
+function getInactiveItemSetEffect(element) {
+	return element.querySelector('span.inactiveItemSetEffect');
+}
+
+function containsInactiveItemSetEffect(element) {
+	return getInactiveItemSetEffect(element) !== null;
+}
+
+function getLastInactiveItemSetEffect(element) {
+	let current = getInactiveItemSetEffect(element);
+	while (current && containsInactiveItemSetEffect(current)) {
+		current = getInactiveItemSetEffect(current);
+	}
+
+	return current;
+}
+
+function formatItemDataFrom(itemDataFromDiv) {
+	itemDataFromDiv.style = '';
+	itemDataFromDiv.classList.add('item-info');
+	const nbNodesToRemove = 26;
+
+	if (containsInactiveItemSetEffect(itemDataFromDiv)) {
+		const span = getLastInactiveItemSetEffect(itemDataFromDiv);
+		removeLastNChildren(span, nbNodesToRemove);
+	}
+	else if (itemDataFromDiv.childNodes.length > nbNodesToRemove)
+		removeLastNChildren(itemDataFromDiv, nbNodesToRemove);
+
+	changeDisplayFrom(itemDataFromDiv);
+}
+
+function genererHyperLien(link, textContent, title) {
+	const itemLink = document.createElement('a');
+	itemLink.setAttribute('rel', 'noopener');
+	itemLink.target = '_blank';
+	itemLink.href = link;
+	itemLink.textContent = textContent;
+	itemLink.title = title;
+
+	return itemLink;
+}
+
+function afficherInfoItem(itemData, link) {
+	const doc = parseToHtmlDoc(itemData);
+	const pitureTable = doc.getElementsByClassName('itemImagesContainer')[0];
+	const itemDataFromDiv = pitureTable.parentElement.nextSibling;
+	const itemDataInfoDiv = document.getElementById('itemDataInfo-details');
+
+	correctPictureSources(pitureTable);
+	itemDataInfoDiv.innerHTML = '';
+	itemDataInfoDiv.appendChild(pitureTable);
+
+	formatItemDataFrom(itemDataFromDiv);
+	itemDataInfoDiv.appendChild(itemDataFromDiv);
+
+	const itemLinkLabel = getTranslationWithDefaultValue('item-link-label', 'Details');
+	const itemLinkTitle = getTranslationWithDefaultValue('item-link-title', 'Voir détails');
+	const itemLink = genererHyperLien(link, itemLinkLabel, itemLinkTitle);
+	itemDataInfoDiv.appendChild(itemLink);
+
+	document.getElementById('itemDataInfo').classList.remove('hide');
+}
+
+function fermerInfoSiAffiche() {
+	if (isDescriptionDisplayed()) closeInfo();
+}
+
 //#endregion Actions
 
 //#region Results
@@ -144,6 +262,8 @@ function composantNomObjet(objet) {
 	const span = document.createElement('span');
 	span.classList.add('nom-objet-bw');
 	span.textContent = nomCompletObjet(objet);
+	span.title = getTranslationWithDefaultValue('item-click-title', 'Cliquer pour la description');
+	addItemNameClick(span, objet);
 	return span;
 }
 
@@ -152,43 +272,43 @@ function inLineResultDisplay(typeObjetCourant, coutTotal, coutEnPiecesEpiques, n
 	const evoPointsLabel = getTranslationWithDefaultValue('cout-total-PE-label', "points d'évolution");
 	const piecesLabel = getTranslationWithDefaultValue('cout-total-pieces-label', 'pièces épiques');
 	const etAnd = getTranslationWithDefaultValue('et-and', 'et');
-	document.getElementById("resultatV1-text").style.color = typeObjetCourant.color;
-	document.getElementById("resultatV1-text").textContent = `${coutTotal.coutTotalPE} ${evoPointsLabel}, ${coutEnPiecesEpiques} ${piecesLabel} ${etAnd} ${nbRunes} ${libelleRunes}.`;
-	document.getElementById("resultatV1-modif").innerHTML = "";
-	document.getElementById("resultatV1-modif").appendChild(composantNomObjet(objetActuel));
+	document.getElementById('resultatV1-text').style.color = typeObjetCourant.color;
+	document.getElementById('resultatV1-text').textContent = `${coutTotal.coutTotalPE} ${evoPointsLabel}, ${coutEnPiecesEpiques} ${piecesLabel} ${etAnd} ${nbRunes} ${libelleRunes}.`;
+	document.getElementById('resultatV1-modif').innerHTML = '';
+	document.getElementById('resultatV1-modif').appendChild(composantNomObjet(objetActuel));
 	const inBetweenText = getTranslationWithDefaultValue('entre-items-label', 'vers');
-	const text = document.createElement("text");
+	const text = document.createElement('text');
 	text.textContent = ` ${inBetweenText} `;
-	document.getElementById("resultatV1-modif").appendChild(text);
-	document.getElementById("resultatV1-modif").appendChild(composantNomObjet(objetSouhaite));
+	document.getElementById('resultatV1-modif').appendChild(text);
+	document.getElementById('resultatV1-modif').appendChild(composantNomObjet(objetSouhaite));
 }
 
 /** Résultat formaté à l'affichage */
 function formattedResultDisplay(typeObjetCourant, coutTotal, coutEnPiecesEpiques, nbRunes, libelleRunes, objetActuel, objetSouhaite) {
-	document.getElementById("recapModification").innerHTML = "";
-	document.getElementById("recapModification").appendChild(composantNomObjet(objetActuel));
-	const text2 = document.createElement("text");
-	text2.textContent = "==>";
-	const p = document.createElement("p");
+	document.getElementById('recapModification').innerHTML = '';
+	document.getElementById('recapModification').appendChild(composantNomObjet(objetActuel));
+	const text2 = document.createElement('text');
+	text2.textContent = '==>';
+	const p = document.createElement('p');
 	p.appendChild(text2);
-	document.getElementById("recapModification").appendChild(p);
-	document.getElementById("recapModification").appendChild(composantNomObjet(objetSouhaite));
-	document.getElementById("coutTotalPE").textContent = coutTotal.coutTotalPE;
-	document.getElementById("coutEnPiecesEpiques").textContent = coutEnPiecesEpiques;
-	document.getElementById("nbRunes").textContent = nbRunes;
-	document.getElementById("libelleRunes").textContent = libelleRunes;
-	document.getElementById("libelleRunes").style.color = typeObjetCourant.color;
+	document.getElementById('recapModification').appendChild(p);
+	document.getElementById('recapModification').appendChild(composantNomObjet(objetSouhaite));
+	document.getElementById('coutTotalPE').textContent = coutTotal.coutTotalPE;
+	document.getElementById('coutEnPiecesEpiques').textContent = coutEnPiecesEpiques;
+	document.getElementById('nbRunes').textContent = nbRunes;
+	document.getElementById('libelleRunes').textContent = libelleRunes;
+	document.getElementById('libelleRunes').style.color = typeObjetCourant.color;
 }
 
 /** Calculer et afficher le résultat */
 function calculerPourAfficher() {
-	const type = document.getElementById("type").value;
-	const supportActuel = document.getElementById("supportActuel").value;
-	const prefixeActuel = document.getElementById("prefixeActuel").value;
-	const suffixeActuel = document.getElementById("suffixeActuel").value;
-	const supportSouhaite = document.getElementById("supportSouhaite").value;
-	const prefixeSouhaite = document.getElementById("prefixeSouhaite").value;
-	const suffixeSouhaite = document.getElementById("suffixeSouhaite").value;
+	const type = document.getElementById('type').value;
+	const supportActuel = document.getElementById('supportActuel').value;
+	const prefixeActuel = document.getElementById('prefixeActuel').value;
+	const suffixeActuel = document.getElementById('suffixeActuel').value;
+	const supportSouhaite = document.getElementById('supportSouhaite').value;
+	const prefixeSouhaite = document.getElementById('prefixeSouhaite').value;
+	const suffixeSouhaite = document.getElementById('suffixeSouhaite').value;
 
 	const objetActuel = new Objet(type, caracteristiques[type].support[supportActuel], caracteristiques[type].prefixe[prefixeActuel], caracteristiques[type].suffixe[suffixeActuel]);
 	const objetSouhaite = new Objet(type, caracteristiques[type].support[supportSouhaite], caracteristiques[type].prefixe[prefixeSouhaite], caracteristiques[type].suffixe[suffixeSouhaite]);
@@ -260,48 +380,24 @@ function getActualSoundSettings() {
 	const soundToggle = document.getElementById('soundToggle');
 	const volumeBar = document.getElementById('volumeControl');
 
-	return { soundOn: soundToggle.checked,	volumeKFC: volumeBar.value };
+	return { soundOn: soundToggle.checked, volumeKFC: volumeBar.value };
 }
 
 /** Enrobe l'action des boutons de scroll avec un son */
 function scrollBoutonsAction(action) {
 	action();
-	document.getElementById("ref-audio-slide")?.play();
+	document.getElementById('ref-audio-slide')?.play();
 }
 
 //#endregion Sounds
 
-//#region Querystring
-
-/** Vérifier si un paramètre spécifique existe dans le querystring et récupére sa valeur le cas échéant, null sinon */
-function querystringParamValue(parametreName) {
-	const urlParams = new URLSearchParams(window.location.search);
-	let parametre = null;
-
-	if (urlParams.has(parametreName)) {
-		parametre = urlParams.get(parametreName);
-		console.debug(`La valeur du paramètre '${parametreName}' est : ${parametre}`);
-	} else
-		console.debug(`Le paramètre '${parametreName}' n'existe pas dans la query string.`);
-
-	return parametre;
-}
-
-function removeQueryStringParameter(param) {
-	const url = new URL(window.location);
-	url.searchParams.delete(param);
-	window.history.replaceState({}, document.title, url.toString());
-}
-
-//#endregion Querystring
-
 //#region Listeners
 
 function listenToEnterKey() {
-	document.body.addEventListener("keydown", function (event) {
-		if (event.key === "Enter") {
+	document.body.addEventListener('keydown', function (event) {
+		if (event.key === 'Enter') {
 			event.preventDefault(); // Empêche le comportement par défaut de la touche "Entrée"
-			document.getElementById("calculer").click();
+			document.getElementById('calculer').click();
 		}
 	});
 }
@@ -316,8 +412,18 @@ function listenToLangButtonsClick() {
 			localStorage.setItem('lang', chosenLang);
 			removeQueryStringParameter('lang');
 			const soundSettings = getActualSoundSettings();
-			voiceSpeak(chosenLang, soundSettings.soundOn, soundSettings.volumeKFC);
+			voiceSpeakLanguageSelect(chosenLang, soundSettings.soundOn, soundSettings.volumeKFC);
+			fermerInfoSiAffiche();
 		});
+	});
+}
+
+function addItemNameClick(element, objet) {
+	element.addEventListener('click', (event) => {
+		speechSynthesis?.cancel();
+		document.getElementById('itemDataInfo-header-name').textContent = event.currentTarget.textContent;
+		getItemInfoData(objet, afficherInfoItem);
+		speakMessage(event.currentTarget.textContent);
 	});
 }
 
@@ -332,11 +438,28 @@ function displayVersionNumber() {
 function intro() {
 	setTimeout(() => removeCssClassForAll('intro'), 75);
 	setTimeout(() => removeCssClassForAll('intro-cube'), 2000);
+	setTimeout(() => removeCssClassForAll('intro-form'), 3350);
+}
+
+function getAndSetPlayerLvlParam() {
+	const playerLvlParamName = 'playerLvl';
+	const playerLvlParam = querystringParamValue(playerLvlParamName);
+
+	if (!playerLvlParam) return;
+
+	const numPlayerLvl = Number(playerLvlParam);
+	if (isNaN(numPlayerLvl))
+		removeQueryStringParameter(playerLvlParamName);
+	else if (numPlayerLvl > 0 && numPlayerLvl <= 1000)
+		globalConfig.playerLvl = numPlayerLvl;
+	else
+		updateQueryStringParameter(playerLvlParamName, globalConfig.playerLvl);
 }
 
 function init() {
 	i18n();
 	displayVersionNumber();
+	getAndSetPlayerLvlParam();
 
 	const typeSelect = document.getElementById('type');
 	typesObjets.forEach(type => {
@@ -348,12 +471,12 @@ function init() {
 
 	const updateCaracteristiques = () => {
 		const typeId = typeSelect.value;
-		const supportActuelSelect = caracteristiqueInit("supportActuel");
-		const prefixeActuelSelect = caracteristiqueInit("prefixeActuel");
-		const suffixeActuelSelect = caracteristiqueInit("suffixeActuel");
-		const supportSouhaiteSelect = caracteristiqueInit("supportSouhaite");
-		const prefixeSouhaiteSelect = caracteristiqueInit("prefixeSouhaite");
-		const suffixeSouhaiteSelect = caracteristiqueInit("suffixeSouhaite");
+		const supportActuelSelect = caracteristiqueInit('supportActuel');
+		const prefixeActuelSelect = caracteristiqueInit('prefixeActuel');
+		const suffixeActuelSelect = caracteristiqueInit('suffixeActuel');
+		const supportSouhaiteSelect = caracteristiqueInit('supportSouhaite');
+		const prefixeSouhaiteSelect = caracteristiqueInit('prefixeSouhaite');
+		const suffixeSouhaiteSelect = caracteristiqueInit('suffixeSouhaite');
 
 		caracteristiques[typeId].support.forEach((caracteristique, index) => {
 			createOption(index, caracteristique.nom, supportActuelSelect, supportSouhaiteSelect);
@@ -372,15 +495,15 @@ function init() {
 		translateOptions(cachedTranslations);
 
 		if (!isVerticalScrollbarVisible())
-			document.getElementById("scroll-bottom-btn").disabled = true;
+			document.getElementById('scroll-bottom-btn').disabled = true;
 	};
 
-	typeSelect.addEventListener("change", updateCaracteristiques);
-	typeSelect.dispatchEvent(new Event("change")); // Déclencher l'événement change lors du chargement de la page
+	typeSelect.addEventListener('change', updateCaracteristiques);
+	typeSelect.dispatchEvent(new Event('change')); // Déclencher l'événement change lors du chargement de la page
 
-	document.getElementById("calculer").addEventListener("click", calculerClick);
+	document.getElementById('calculer').addEventListener('click', calculerClick);
 	listenToEnterKey();
-	document.addEventListener("click", declancherSonAuChargement);
+	document.addEventListener('click', declancherSonAuChargement);
 	document.getElementById('volumeControl').addEventListener('input', volumeControl);
 	document.getElementById('soundToggle').addEventListener('change', muteOrUnmuteAll);
 	initialiserParamStockes();
