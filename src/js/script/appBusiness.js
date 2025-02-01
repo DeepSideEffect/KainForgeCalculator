@@ -174,11 +174,7 @@ function getCurrentDomain() {
 
 function extractSourceFromUrlFunction(urlImg) {
 	const urlMatch = urlImg.match(/url\("(.+?)"\)/);
-
-	if (urlMatch && urlMatch[1])
-		return urlMatch[1];
-
-	return '';
+	return urlMatch?.[1] ?? '';
 }
 
 //#endregion Collecte infos distantes
