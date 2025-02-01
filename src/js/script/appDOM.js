@@ -391,30 +391,6 @@ function scrollBoutonsAction(action) {
 
 //#endregion Sounds
 
-//#region Querystring
-
-/** Vérifier si un paramètre spécifique existe dans le querystring et récupére sa valeur le cas échéant, null sinon */
-function querystringParamValue(parametreName) {
-	const urlParams = new URLSearchParams(window.location.search);
-	let parametre = null;
-
-	if (urlParams.has(parametreName)) {
-		parametre = urlParams.get(parametreName);
-		console.debug(`La valeur du paramètre '${parametreName}' est : ${parametre}`);
-	} else
-		console.debug(`Le paramètre '${parametreName}' n'existe pas dans la query string.`);
-
-	return parametre;
-}
-
-function removeQueryStringParameter(param) {
-	const url = new URL(window.location);
-	url.searchParams.delete(param);
-	window.history.replaceState({}, document.title, url.toString());
-}
-
-//#endregion Querystring
-
 //#region Listeners
 
 function listenToEnterKey() {
