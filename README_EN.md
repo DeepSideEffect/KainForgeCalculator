@@ -5,7 +5,7 @@ This calculator allows you to calculate the cost of modifying an epic item in th
 
 ## Description
 This project aims to model the data from the "[data source](https://wiki.fr.bloodwars.net/index.php?title=La_Forge_de_Kain_sur_UT)" page to create a cost calculator for modifying an epic item in the [BW](https://bloodwars.net/) game universe from one state to another.  
-This calculator aims to facilitate players' decisions by providing precise and direct information very quickly on the costs associated with different item modification combinations.
+This calculator aims to facilitate players' decisions by providing precise and direct information very quickly on the costs associated with different item modification combinations as well as their descriptions.
 
 ## Open Source technologies used
 This project is developed using only basic technologies ("*full vanilla*") without any additional frameworks or libraries.\
@@ -25,6 +25,9 @@ Additionally, **Git** is used for version control and managing contributions, **
 - Fully *responsive* and animated display.
 - Adjustable sound effects.
 - Preservation of user preferences for the next use.
+- Ability to directly display the description of an item and its original link.
+- Ability to set the player's level for the description retrieval with a new *querystring* parameter named `playerLvl`\
+*(with a numeric value between `1` and `1000` and a default value of `100`)*.
 
 ## Installation
 To install and run this project locally, follow the steps below:
@@ -37,11 +40,15 @@ To install and run this project locally, follow the steps below:
 >📝<sup>1</sup> Since **v1.4.0**, with the internationalization feature, the page may no longer display correctly locally, by default.  
 Possible methods to avoid [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) issues during local development are detailed in this [file](src/docs/LocalServer.md).
 
->📝<sup>2</sup> You can also add the language choice as a queryString parameter to translate directly on display, e.g.: `http://localhost:5500/index.html?lang=en`.
+>📝<sup>2</sup> You can also add the language choice as a *queryString* parameter to translate directly on display, e.g.: `http://localhost:5500/index.html?lang=en`.
+
+>📝<sup>3</sup> Since **v1.5.0** with the description display feature, you can choose the level by adding it as a *queryString* parameter for description retrieval,\
+e.g., `http://localhost:5500?lang=en&playerLvl=457` or `http://localhost:5500?playerLvl=754`.
 
 ## Usage
 Select an item with its starting and ending characteristics.  
-The calculator will display the costs associated with modifying the item after clicking the **Calculate** button.
+The calculator will display the costs associated with modifying the item after clicking the **Calculate** button.  
+You can access an item's description by clicking on its name in the displayed results.
 
 ## Examples of Use
 Calculate the cost of modifying an ***Epic Decorative Cap of the Miss*** into an ***Epic Horned Bandana of Precognition***.  
@@ -61,6 +68,7 @@ Total cost:
 465 epic coins
 31 Green Level 2 runes
 ```
+- You can also display the description of an item by clicking on its name.
 
 ## Contributing
 Contributions are welcome! If you wish to contribute to this project, please follow the steps below:
