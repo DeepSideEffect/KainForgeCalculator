@@ -438,6 +438,7 @@ function displayVersionNumber() {
 function intro() {
 	setTimeout(() => removeCssClassForAll('intro'), 75);
 	setTimeout(() => removeCssClassForAll('intro-cube'), 2000);
+	setTimeout(() => removeCssClassForAll('intro-form'), 3350);
 }
 
 function getAndSetPlayerLvlParam() {

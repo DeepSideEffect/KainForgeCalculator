@@ -502,6 +502,11 @@ button:disabled {
 	color: white;
 }
 
+form {
+	transition: max-height var(--transition-duration) ease-out;
+	max-height: 99vh;
+}
+
 /* --- Styles spécifiques aux téléphones --- */
 @media (max-width: 600px) {
 	body {
@@ -651,6 +656,10 @@ body.intro-cube {
 
 #cube-element.intro-cube {
 	animation: full-spin 2s linear;
+}
+
+form.intro-form {
+	max-height: 0;
 }
 
 /* --- bouton on-off (checkbox) --- */
