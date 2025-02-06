@@ -504,7 +504,7 @@ button:disabled {
 
 form {
 	transition: max-height var(--transition-duration) ease-out;
-	max-height: 99vh;
+	max-height: 300vh;
 }
 
 /* --- Styles spécifiques aux téléphones --- */
