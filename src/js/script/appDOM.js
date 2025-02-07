@@ -1,5 +1,18 @@
 //#region Scrolling
 
+function scrollToElement(element) {
+	if (!element) {
+		console.error('element is not defined, not possible to scroll to it.');
+		return;
+	}
+
+	element.scrollIntoView({
+		behavior: 'smooth',
+		block: 'start',
+		inline: 'nearest'
+	});
+}
+
 /** Faire défiler jusqu'en bas de la page */
 function scrollToBottom() {
 	window.scrollTo({
@@ -268,7 +281,9 @@ function afficherInfoItem(itemData, link) {
 	const itemLink = genererHyperLien(link, itemLinkLabel, itemLinkTitle);
 	itemDataInfoDiv.appendChild(itemLink);
 
-	document.getElementById('itemDataInfo').classList.remove('hide');
+	const itemDataContainerDiv = document.getElementById('itemDataInfo');
+	itemDataContainerDiv.classList.remove('hide');
+	scrollToElement(itemDataContainerDiv);
 }
 
 function fermerInfoSiAffiche() {
