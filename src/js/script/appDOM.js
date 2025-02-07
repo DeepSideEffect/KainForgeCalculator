@@ -1,11 +1,26 @@
 //#region Scrolling
 
+function scrollToElement(element) {
+	if (!element) {
+		console.error('element is not defined, not possible to scroll to it.');
+		return;
+	}
+
+	element.scrollIntoView({
+		behavior: 'smooth',
+		block: 'start',
+		inline: 'nearest'
+	});
+}
+
 /** Faire défiler jusqu'en bas de la page */
 function scrollToBottom() {
 	window.scrollTo({
 		top: document.body.scrollHeight,
 		behavior: 'smooth'
 	});
+
+	envoyerUsage('scroll_bottom_click', 'Clic scroller tout en bas');
 }
 
 /** Faire défiler jusqu'en haut de la page */
@@ -14,6 +29,8 @@ function scrollToTop() {
 		top: 0,
 		behavior: 'smooth'
 	});
+
+	envoyerUsage('scroll_top_click', 'Clic scroller tout en haut');
 }
 
 /**
@@ -62,18 +79,29 @@ function couleurThemeEnFonctionDesRunes() {
 
 //#region Caracteristique
 
-function changementCaracteristique(desactiverBtn) {
+function envoyerUsageCarac(select, desactiverBtn) {
+	const selected = select.options[select.selectedIndex].text;
+	if (selected) {
+		const selectionEvtName = desactiverBtn ? 'selectionner_type' : 'selectionner_carac';
+		envoyerUsage(selectionEvtName, selected);
+	}
+}
+
+function changementCaracteristique(select, desactiverBtn) {
 	document.getElementById('calculer').disabled = desactiverBtn;
 	document.getElementById('cube-container').classList.remove('no-perspective');
 	document.getElementById('recapModification').classList.add('init');
 	document.getElementById('resultat').classList.add('init');
+
 	if (document.readyState === 'complete') {
 		document.getElementById('poster').classList.remove('hidden');
 		document.getElementById('ref-audio-applause')?.pause();
 		document.getElementById('ref-audio-kick')?.play();
 	}
+
 	scrollTopAfterDelay(1250);
 	setTimeout(() => document.getElementById('cube-container').classList.add('no-perspective'), 1750);
+	envoyerUsageCarac(select, desactiverBtn);
 }
 
 function createOption(index, nom, actuelSelect, souhaiteSelect) {
@@ -87,7 +115,7 @@ function createOption(index, nom, actuelSelect, souhaiteSelect) {
 function caracteristiqueInit(selectHtmlId) {
 	const select = document.getElementById(selectHtmlId);
 	select.innerHTML = '';
-	select.addEventListener('change', () => changementCaracteristique(false));
+	select.addEventListener('change', () => changementCaracteristique(select, false));
 	return select;
 }
 
@@ -106,11 +134,13 @@ function copyToClipboard(htmlId) {
 	navigator.clipboard.writeText(textToCopy).then(() => {
 		const msg = getTranslationWithDefaultValue('text-copied-message', 'Texte copié dans le presse-papiers !');
 		showNotification(msg);
+		envoyerUsage('copy_click', 'Copier');
 	}).catch(err => {
 		const errMsgPrefix = 'Erreur lors de la copie : ';
 		console.error(errMsgPrefix, err);
 		const errMsg = errMsgPrefix.concat(err?.message);
 		showNotification(errMsg);
+		envoyerUsage('copy_click_fail', `Copie erreur : ${err?.message}`);
 	});
 }
 
@@ -226,6 +256,10 @@ function genererHyperLien(link, textContent, title) {
 	itemLink.textContent = textContent;
 	itemLink.title = title;
 
+	itemLink.addEventListener('click', function (_event) {
+		envoyerUsage('details_link_click', `Lien pour ${textContent}`);
+	});
+
 	return itemLink;
 }
 
@@ -247,11 +281,30 @@ function afficherInfoItem(itemData, link) {
 	const itemLink = genererHyperLien(link, itemLinkLabel, itemLinkTitle);
 	itemDataInfoDiv.appendChild(itemLink);
 
-	document.getElementById('itemDataInfo').classList.remove('hide');
+	const itemDataContainerDiv = document.getElementById('itemDataInfo');
+	itemDataContainerDiv.classList.remove('hide');
+	scrollToElement(itemDataContainerDiv);
 }
 
 function fermerInfoSiAffiche() {
 	if (isDescriptionDisplayed()) closeInfo();
+}
+
+function updatePlayerLevel(paramName, numLvl) {
+	globalConfig.playerLvl = numLvl;
+	localStorage.setItem(paramName, numLvl);
+	envoyerUsage('playerLvl_update', `Level ${numLvl}`);
+}
+
+function setSavedPlayerLevel(paramName) {
+	const playerLvlRecorded = localStorage.getItem(paramName);
+
+	if (playerLvlRecorded) {
+		const numLvl = Number(playerLvlRecorded);
+		if (!isNaN(numLvl) && numLvl > 0 && numLvl <= 1000) {
+			globalConfig.playerLvl = numLvl;
+		}
+	}
 }
 
 //#endregion Actions
@@ -338,6 +391,7 @@ function calculerClick() {
 	document.getElementById('ref-audio-copy')?.play();
 	document.getElementById('scroll-bottom-btn').disabled = false;
 	document.getElementById('scroll-top-btn').style.display = isVerticalScrollbarVisible() ? 'inline-block' : 'none';
+	envoyerUsage('calculer_click', 'Calculer');
 }
 
 //#endregion Results
@@ -349,6 +403,7 @@ function volumeControl() {
 	const volumeBar = document.getElementById('volumeControl');
 	changerVolumeTous(volumeBar.value);
 	localStorage.setItem('volumeKFC', volumeBar.value);
+	envoyerUsage('volume_click', `Volume is ${volumeBar.value}`);
 }
 
 /** Réglage de l'état muet de tous les audios */
@@ -356,6 +411,7 @@ function muteOrUnmuteAll() {
 	const soundToggle = document.getElementById('soundToggle');
 	setMuteStateAll(!soundToggle.checked);
 	localStorage.setItem('soundOn', JSON.stringify(soundToggle.checked));
+	envoyerUsage('mute_click', `Mute is ${soundToggle.checked ? 'off' : 'on'}`);
 }
 
 /** Initialise les préférences utilisateur 'son' stockées */
@@ -414,6 +470,7 @@ function listenToLangButtonsClick() {
 			const soundSettings = getActualSoundSettings();
 			voiceSpeakLanguageSelect(chosenLang, soundSettings.soundOn, soundSettings.volumeKFC);
 			fermerInfoSiAffiche();
+			envoyerUsage('langue_click', chosenLang);
 		});
 	});
 }
@@ -424,6 +481,7 @@ function addItemNameClick(element, objet) {
 		document.getElementById('itemDataInfo-header-name').textContent = event.currentTarget.textContent;
 		getItemInfoData(objet, afficherInfoItem);
 		speakMessage(event.currentTarget.textContent);
+		envoyerUsage('consulter_click', `Consulter ${event.currentTarget.textContent}`);
 	});
 }
 
@@ -444,6 +502,7 @@ function intro() {
 function getAndSetPlayerLvlParam() {
 	const playerLvlParamName = 'playerLvl';
 	const playerLvlParam = querystringParamValue(playerLvlParamName);
+	setSavedPlayerLevel(playerLvlParamName);
 
 	if (!playerLvlParam) return;
 
@@ -451,7 +510,7 @@ function getAndSetPlayerLvlParam() {
 	if (isNaN(numPlayerLvl))
 		removeQueryStringParameter(playerLvlParamName);
 	else if (numPlayerLvl > 0 && numPlayerLvl <= 1000)
-		globalConfig.playerLvl = numPlayerLvl;
+		updatePlayerLevel(playerLvlParamName, numPlayerLvl);
 	else
 		updateQueryStringParameter(playerLvlParamName, globalConfig.playerLvl);
 }
@@ -491,7 +550,7 @@ function init() {
 		});
 
 		couleurThemeEnFonctionDesRunes();
-		changementCaracteristique(true);
+		changementCaracteristique(typeSelect, true);
 		translateOptions(cachedTranslations);
 
 		if (!isVerticalScrollbarVisible())

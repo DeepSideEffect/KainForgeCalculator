@@ -504,7 +504,7 @@ button:disabled {
 
 form {
 	transition: max-height var(--transition-duration) ease-out;
-	max-height: 99vh;
+	max-height: 300vh;
 }
 
 /* --- Styles spécifiques aux téléphones --- */
@@ -561,7 +561,7 @@ form {
 	}
 
 	#itemDataInfo {
-		transform: translate(-50%, -50%) scale(0.75);
+		transform: translate(-50%, -50%) scale(0.90);
 	}
 
 	.item-info {

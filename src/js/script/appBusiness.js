@@ -178,3 +178,18 @@ function extractSourceFromUrlFunction(urlImg) {
 }
 
 //#endregion Collecte infos distantes
+
+//#region Evenements GA
+
+function envoyerEvtGA(eventName, eventCategory, eventLabel, eventValue = 1) {
+	gtag('event', eventName, {
+		'event_category': eventCategory,
+		'event_label': eventLabel,
+		'value': eventValue
+	});
+}
+
+const envoyerUsage = (eventName, eventTextValue) =>
+	envoyerEvtGA(eventName, 'Usage', eventTextValue);
+
+//#endregion Evenements GA
