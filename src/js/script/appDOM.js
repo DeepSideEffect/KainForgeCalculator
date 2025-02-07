@@ -275,6 +275,23 @@ function fermerInfoSiAffiche() {
 	if (isDescriptionDisplayed()) closeInfo();
 }
 
+function updatePlayerLevel(paramName, numLvl) {
+	globalConfig.playerLvl = numLvl;
+	localStorage.setItem(paramName, numLvl);
+	envoyerUsage('playerLvl_update', `Level ${numLvl}`);
+}
+
+function setSavedPlayerLevel(paramName) {
+	const playerLvlRecorded = localStorage.getItem(paramName);
+
+	if (playerLvlRecorded) {
+		const numLvl = Number(playerLvlRecorded);
+		if (!isNaN(numLvl) && numLvl > 0 && numLvl <= 1000) {
+			globalConfig.playerLvl = numLvl;
+		}
+	}
+}
+
 //#endregion Actions
 
 //#region Results
@@ -470,6 +487,7 @@ function intro() {
 function getAndSetPlayerLvlParam() {
 	const playerLvlParamName = 'playerLvl';
 	const playerLvlParam = querystringParamValue(playerLvlParamName);
+	setSavedPlayerLevel(playerLvlParamName);
 
 	if (!playerLvlParam) return;
 
@@ -477,7 +495,7 @@ function getAndSetPlayerLvlParam() {
 	if (isNaN(numPlayerLvl))
 		removeQueryStringParameter(playerLvlParamName);
 	else if (numPlayerLvl > 0 && numPlayerLvl <= 1000)
-		globalConfig.playerLvl = numPlayerLvl;
+		updatePlayerLevel(playerLvlParamName, numPlayerLvl);
 	else
 		updateQueryStringParameter(playerLvlParamName, globalConfig.playerLvl);
 }
