@@ -69,7 +69,7 @@ function couleurThemeEnFonctionDesRunes() {
 function envoyerUsageCarac(select, desactiverBtn) {
 	const selected = select.options[select.selectedIndex].text;
 	if (selected) {
-		selectionEvtName = desactiverBtn ? 'selectionner_type' : 'selectionner_carac';
+		const selectionEvtName = desactiverBtn ? 'selectionner_type' : 'selectionner_carac';
 		envoyerUsage(selectionEvtName, selected);
 	}
 }
