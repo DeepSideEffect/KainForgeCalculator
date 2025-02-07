@@ -422,6 +422,9 @@ function initialiserParamStockes() {
 	if (volume != null) {
 		document.getElementById('volumeControl').value = volume;
 		volumeControl();
+	} else {
+		const volumeBar = document.getElementById('volumeControl');
+		changerVolumeTous(volumeBar.value);
 	}
 
 	if (soundOn != null) {
