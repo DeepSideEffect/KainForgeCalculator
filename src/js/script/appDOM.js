@@ -19,8 +19,6 @@ function scrollToBottom() {
 		top: document.body.scrollHeight,
 		behavior: 'smooth'
 	});
-
-	envoyerUsage('scroll_bottom_click', 'Clic scroller tout en bas');
 }
 
 /** Faire défiler jusqu'en haut de la page */
@@ -29,8 +27,6 @@ function scrollToTop() {
 		top: 0,
 		behavior: 'smooth'
 	});
-
-	envoyerUsage('scroll_top_click', 'Clic scroller tout en haut');
 }
 
 /**
@@ -55,10 +51,12 @@ function isVerticalScrollbarVisible() {
 
 function scrollBoutonTop() {
 	scrollBoutonsAction(scrollToTop);
+	envoyerUsage('scroll_top_click', 'Clic scroller tout en haut');
 }
 
 function scrollBoutonBottom() {
 	scrollBoutonsAction(scrollToBottom);
+	envoyerUsage('scroll_bottom_click', 'Clic scroller tout en bas');
 }
 
 //#endregion Scrolling
@@ -257,7 +255,7 @@ function genererHyperLien(link, textContent, title) {
 	itemLink.title = title;
 
 	itemLink.addEventListener('click', function (_event) {
-		envoyerUsage('details_link_click', `Lien pour ${textContent}`);
+		envoyerUsage('details_link_click', `Lien pour ${document.getElementById('itemDataInfo-header-name').textContent}`);
 	});
 
 	return itemLink;
